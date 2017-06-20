@@ -1,0 +1,1 @@
+# itsh-szotar-java
