@@ -13,9 +13,10 @@ public class Main {
 		
 
 		// 	SAJÁT FELHASZNÁLÓ + JELSZÓ INTERNET HOZZÁFÉRÉSHEZ
-		setSystemProxy("qhub03.hu.t-internal.com", 3128, "USER", "PASSWORD");
+		setSystemProxy("qhub03.hu.t-internal.com", 3128, "user", "password");
 		
-		String s = new OnlineSzotar().translate("test", OnlineSzotar.ENGLISH);
+		String s = OnlineSzotar().translate("do", OnlineSzotar.HUNGARIAN)
+		System.out.println(s);
 		
 	}
 	
