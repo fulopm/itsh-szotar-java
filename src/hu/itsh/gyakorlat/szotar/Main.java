@@ -12,10 +12,10 @@ public class Main {
 	public static void main(String[] args) throws URISyntaxException, IOException {
 		
 
-		
+		// 	SAJÁT FELHASZNÁLÓ + JELSZÓ INTERNET HOZZÁFÉRÉSHEZ
 		setSystemProxy("qhub03.hu.t-internal.com", 3128, "USER", "PASSWORD");
 		
-		String s = new OnlineSzotar().translateToEnglish("ddd");
+		String s = new OnlineSzotar().translate("test", OnlineSzotar.ENGLISH);
 		
 	}
 	
@@ -45,7 +45,5 @@ public class Main {
 		     return new PasswordAuthentication(authUser, authPassword.toCharArray());
 		 }
 		});
-
 	}
-
 }
