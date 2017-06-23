@@ -1,5 +1,6 @@
 package hu.itsh.gyakorlat.szotar.ui;
 
+import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
@@ -48,9 +49,9 @@ public class MainFrame extends JFrame {
 		setLocationRelativeTo(null);
 	}
 
+
 	void initComponents() {
 		contentPane = new MainContentPane();
-
 		menuBarMain = new JMenuBar();
 
 		menuFile = new JMenu("Fájl");
@@ -81,7 +82,6 @@ public class MainFrame extends JFrame {
 					UIManager.setLookAndFeel(info.getClassName());
 				} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
 						| UnsupportedLookAndFeelException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
