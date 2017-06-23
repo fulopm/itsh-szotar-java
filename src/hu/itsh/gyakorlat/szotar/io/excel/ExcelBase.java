@@ -18,7 +18,6 @@ public class ExcelBase {
 	public ExcelBase(XSSFWorkbook wb) {
 		this.workbook = wb;
 		this.firstSheet = wb.getSheetAt(0);
-		System.out.println("es");
 		
 		
 	}

@@ -11,16 +11,6 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 public class Main {
 
 	public static void main(String[] args) {
-		System.out.println("teszt");
-		System.out.println("test2");
 		
-		
-		try {
-			ExcelBase e1 = new ExcelBase(new XSSFWorkbook(new File("NGP.xlsx")));
-			System.out.println(e1.getRecordNumb());
-			
-		} catch (InvalidFormatException | IOException e) {
-			e.printStackTrace();
-		}
 	}
 }
