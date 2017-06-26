@@ -3,26 +3,100 @@ package hu.itsh.gyakorlat.szotar.io.excel;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Locale;
+
+import javax.swing.text.DateFormatter;
 
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.util.DateFormatConverter.DateFormatTokenizer;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class ExcelBase {
 	
-	private XSSFSheet firstSheet;
+	private XSSFSheet selectedSheet;
 	private XSSFWorkbook workbook;
 	
 	public ExcelBase(XSSFWorkbook wb) {
 		this.workbook = wb;
-		this.firstSheet = wb.getSheetAt(0);
+		this.selectedSheet = wb.getSheetAt(0);
 		
 		
 	}
+
+	
+	public List<String> getRows(String separator) {
+		if (workbook == null || selectedSheet == null)
+			throw new NullPointerException("Either the workbook or the selectedSheet object is null!");
+			
+		
+		
+		Iterator<Row> rowIt = selectedSheet.iterator();
+		String cellData;
+		List<String> rows = new ArrayList<String>();
+		
+		
+		while (rowIt.hasNext()) {
+			Row nextRow = rowIt.next();
+			Iterator<Cell> cellIt = nextRow.cellIterator();
+			String rowData = "";
+			while (cellIt.hasNext()) {
+				Cell nextCell = cellIt.next();
+				switch (nextCell.getCellTypeEnum()) {
+				case BLANK:
+					rowData += separator;
+					break;
+				case BOOLEAN:
+					rowData += Boolean.toString(nextCell.getBooleanCellValue());
+					rowData += separator;
+					break;
+				case ERROR:
+					rowData += Byte.toString(nextCell.getErrorCellValue());
+					rowData += separator;
+					break;
+				case FORMULA:
+					rowData += nextCell.getCellFormula();
+					rowData += separator;
+					break;
+				case NUMERIC: // we're assuming that NUMERIC cells are Dates
+					DataFormatter format = new DataFormatter();
+					rowData += new DataFormatter().formatCellValue(nextCell);
+					rowData += separator;
+					break;
+				case STRING:
+					rowData += nextCell.getStringCellValue();
+					rowData += separator;
+					break;
+				default:
+					System.out.println("******* AJJAJJ *******");
+					break;
+				
+				}
+				
+			}
+			rows.add(rowData);
+		}
+		
+		try {
+			workbook.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return rows;
+	}
 	
 	
+	
+	
+	
+	/*
 	
 	public void readWorksheet(String worksheet){
 		
@@ -32,8 +106,8 @@ public class ExcelBase {
 	
 	public void runTrough(int sheetNum){
 		try{
-			this.firstSheet = this.workbook.getSheetAt(sheetNum);
-			Iterator<Row> rowIterator = firstSheet.iterator();
+			this.selectedSheet = this.workbook.getSheetAt(sheetNum);
+			Iterator<Row> rowIterator = selectedSheet.iterator();
 			rowIterator.next();
 			
 			while(rowIterator.hasNext()){
@@ -46,19 +120,19 @@ public class ExcelBase {
 					Cell currentCell = cellIterator.next();
 					
 					switch(currentCell.getCellTypeEnum()){
-					case STRING: /* Ha String a cella */ break;
-					case NUMERIC: /* Ha szám a cella*/
+					case STRING:break;
+					case NUMERIC: 
 						if(DateUtil.isCellDateFormatted(currentCell)){
-							//Ha dátum
+							//Ha dï¿½tum
 						}else{
-							//Ha csak szám
+							//Ha csak szï¿½m
 						}
 						
 						
 						break;
-					case BOOLEAN: /* Ha logikai érték*/ break;
-					case BLANK: /* Ha ürers a cella */ break;
-					case FORMULA: /* Ha egy föggvény van a cellában */ break;
+					case BOOLEAN:break;
+					case BLANK: break;
+					case FORMULA:  break;
 					default: System.out.println("nem szabadna lefutnom");
 					}
 					
@@ -78,7 +152,7 @@ public class ExcelBase {
 	public ArrayList<String> readExcel(){
 		ArrayList<String> lines = new ArrayList<String>();
 		
-		Iterator<Row> rowIterator = firstSheet.iterator();
+		Iterator<Row> rowIterator = selectedSheet.iterator();
 		rowIterator.next();
 		
 		while(rowIterator.hasNext()){
@@ -94,12 +168,12 @@ public class ExcelBase {
 				
 				switch(currentCell.getCellTypeEnum()){
 				case STRING: s+= currentCell.getStringCellValue() + ";"; break;
-				case NUMERIC: /* Ha szám a cella*/
+				case NUMERIC: 
 					if(DateUtil.isCellDateFormatted(currentCell)){
-						//Ha dátum
+						//Ha dï¿½tum
 						s+= currentCell.getDateCellValue() + ";";
 					}else{
-						//Ha csak szám
+						//Ha csak szï¿½m
 						s+= currentCell.getNumericCellValue() +  ";";
 					}
 					
@@ -121,7 +195,7 @@ public class ExcelBase {
 	}
 	
 	public Object getCellData(int row, int cell){
-		Row selectedRow = firstSheet.getRow(row);
+		Row selectedRow = selectedSheet.getRow(row);
 		Cell selectedCell = selectedRow.getCell(cell);
 		
 			switch(selectedCell.getCellTypeEnum()){
@@ -143,13 +217,15 @@ public class ExcelBase {
 	
 	public void changeCellValue(int row, int cell, String newData){
 		
-		Row selectedRow = firstSheet.getRow(row);
+		Row selectedRow = selectedSheet.getRow(row);
 		Cell selectedCell = selectedRow.getCell(cell);
 		
-		/* Ha meglesz az sorokra az adat akkor tudom befejezn */
+		
 				
 	}
 	
+	
+	*/
 	public void deleteRow(int row) throws IOException{
 		
 		//Ha meglesz a sorokra az adat akkor be tudom fejezni
@@ -160,7 +236,7 @@ public class ExcelBase {
 	
 	public int getRecordNumb(){
 		int records = 0;
-		Iterator<Row> rowIterator = firstSheet.iterator();
+		Iterator<Row> rowIterator = selectedSheet.iterator();
 		rowIterator.next();
 		
 		while(rowIterator.hasNext()){

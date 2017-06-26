@@ -13,6 +13,7 @@ import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.UnsupportedLookAndFeelException;
 
 import hu.itsh.gyakorlat.szotar.SharedConstants;
+import hu.itsh.gyakorlat.szotar.ui.actions.ActionMenuDbOpen;
 import hu.itsh.gyakorlat.szotar.ui.actions.ActionMenuOpenHelpAbout;
 import hu.itsh.gyakorlat.szotar.ui.dialogs.DialogHelpAbout;
 
@@ -54,10 +55,11 @@ public class MainFrame extends JFrame {
 		contentPane = new MainContentPane();
 		menuBarMain = new JMenuBar();
 
-		menuFile = new JMenu("Fájl");
-		menuItemDbOpen = new JMenuItem("Adatbázis megnyitás");
-		menuItemDbSave = new JMenuItem("Adatbázis mentése");
-		menuItemExit = new JMenuItem("Kilépés a programból");
+		menuFile = new JMenu("Fajl");
+		menuItemDbOpen = new JMenuItem("Adatbazis megnyitas");
+		menuItemDbOpen.setAction(new ActionMenuDbOpen(contentPane));
+		menuItemDbSave = new JMenuItem("Adatbazis mentese");
+		menuItemExit = new JMenuItem("Kilepes a programbol");
 
 		menuFile.add(menuItemDbOpen);
 		menuFile.add(menuItemDbSave);
@@ -65,8 +67,8 @@ public class MainFrame extends JFrame {
 
 		menuBarMain.add(menuFile);
 		
-		menuHelp = new JMenu("Segítség");
-		menuItemHelpAbout = new JMenuItem("A programról");
+		menuHelp = new JMenu("Segitseg");
+		menuItemHelpAbout = new JMenuItem("A programrol");
 		menuItemHelpAbout.setAction(new ActionMenuOpenHelpAbout(contentPane));
 		menuHelp.add(menuItemHelpAbout);
 		
