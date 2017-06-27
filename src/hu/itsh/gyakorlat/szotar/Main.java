@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.Authenticator;
 import java.net.PasswordAuthentication;
 import java.net.URISyntaxException;
+import hu.itsh.gyakorlat.szotar.szotarak.OnlineSzotar;
 
 import hu.itsh.gyakorlat.szotar.szotarak.OnlineSzotar;
 
@@ -13,9 +14,9 @@ public class Main {
 		
 
 		// 	SAJÁT FELHASZNÁLÓ + JELSZÓ INTERNET HOZZÁFÉRÉSHEZ
-		setSystemProxy("qhub03.hu.t-internal.com", 3128, "user", "password");
+		setSystemProxy(args[0], Integer.parseInt(args[1]), args[2], args[3]);
 		
-		String s = OnlineSzotar().translate("do", OnlineSzotar.HUNGARIAN)
+		String s = OnlineSzotar.translate("do", OnlineSzotar.HUNGARIAN);
 		System.out.println(s);
 		
 	}

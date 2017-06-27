@@ -34,10 +34,11 @@ public class OnlineSzotar
         // NULLPOINTER EXCEPTION 
         Document hFile = Jsoup.parse(raw_html, "UTF-8");
         Elements res = hFile.select("div.quick-result-entry");
-        return meanings.add(res.get(0).text());
+        //return meanings.add(res.get(0).text());
         //meanings.add(res.get(1).text());
         //meanings.add(res.get(2).text());
         //return meanings;
+        return null;
         
         
 	}
