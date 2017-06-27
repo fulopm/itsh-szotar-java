@@ -23,9 +23,17 @@ public class Dictionary {
 		return this.rows.remove(index);
 	}
 	
+	public Row getRow(int index) {
+		return this.rows.get(index);
+	}
+	
 	
 	public boolean containsRow(Row e) {
 		return this.rows.contains(e);
+	}
+	
+	public int getRowCount() {
+		return rows.size();
 	}
 	
 	

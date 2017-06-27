@@ -13,7 +13,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import hu.itsh.gyakorlat.szotar.io.excel.Database;
 import hu.itsh.gyakorlat.szotar.ui.MainContentPane;
 import hu.itsh.gyakorlat.szotar.ui.PleaseWaitDialog;
-import hu.itsh.gyakorlat.szotar.ui.dialogs.DialogHelpAbout;
+import hu.itsh.gyakorlat.szotar.ui.dialogs.WindowHelpAbout;
 
 public class ActionMenuDbOpen extends AbstractAction {
 

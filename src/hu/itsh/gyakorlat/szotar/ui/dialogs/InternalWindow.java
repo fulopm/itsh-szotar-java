@@ -15,6 +15,7 @@ public abstract class InternalWindow extends JInternalFrame {
 		setTitle(title);
 		setContentPane(contentPane);
 		setClosable(true);
+		setResizable(true);
 		
 	}
 	
@@ -24,6 +25,7 @@ public abstract class InternalWindow extends JInternalFrame {
 		setTitle(title);
 		setContentPane(contentPane);
 		setClosable(true);
+		setResizable(true);
 	}
 	
 	public InternalWindow(String title, JPanel contentPane) {
@@ -31,5 +33,6 @@ public abstract class InternalWindow extends JInternalFrame {
 		setTitle(title);
 		setContentPane(contentPane);
 		setClosable(true);
+		setResizable(true);
 	}
 }

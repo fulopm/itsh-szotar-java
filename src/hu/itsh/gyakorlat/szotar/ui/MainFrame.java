@@ -14,8 +14,9 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 import hu.itsh.gyakorlat.szotar.SharedConstants;
 import hu.itsh.gyakorlat.szotar.ui.actions.ActionMenuDbOpen;
+import hu.itsh.gyakorlat.szotar.ui.actions.ActionMenuDbShow;
 import hu.itsh.gyakorlat.szotar.ui.actions.ActionMenuOpenHelpAbout;
-import hu.itsh.gyakorlat.szotar.ui.dialogs.DialogHelpAbout;
+import hu.itsh.gyakorlat.szotar.ui.dialogs.WindowHelpAbout;
 
 public class MainFrame extends JFrame {
 
@@ -26,6 +27,7 @@ public class MainFrame extends JFrame {
 	JMenu menuFile;
 	JMenuItem menuItemDbOpen;
 	JMenuItem menuItemDbSave;
+	JMenuItem menuItemDbShow;
 	JMenuItem menuItemExit;
 
 	JMenu menuEdit;
@@ -59,10 +61,15 @@ public class MainFrame extends JFrame {
 		menuItemDbOpen = new JMenuItem("Adatbazis megnyitas");
 		menuItemDbOpen.setAction(new ActionMenuDbOpen(contentPane));
 		menuItemDbSave = new JMenuItem("Adatbazis mentese");
+		
+		menuItemDbShow = new JMenuItem("Adatbázis megjelenitese");
+		menuItemDbShow.setAction(new ActionMenuDbShow(contentPane));
+		
 		menuItemExit = new JMenuItem("Kilepes a programbol");
 
 		menuFile.add(menuItemDbOpen);
 		menuFile.add(menuItemDbSave);
+		menuFile.add(menuItemDbShow);
 		menuFile.add(menuItemExit);
 
 		menuBarMain.add(menuFile);
