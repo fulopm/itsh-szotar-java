@@ -3,6 +3,7 @@ package hu.itsh.gyakorlat.szotar.ui.actions;
 import java.awt.event.ActionEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.concurrent.ExecutionException;
 
 import javax.swing.AbstractAction;
 import javax.swing.SwingWorker;
@@ -13,6 +14,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import hu.itsh.gyakorlat.szotar.io.excel.Database;
 import hu.itsh.gyakorlat.szotar.ui.MainContentPane;
 import hu.itsh.gyakorlat.szotar.ui.PleaseWaitDialog;
+import hu.itsh.gyakorlat.szotar.ui.UIUtil;
 import hu.itsh.gyakorlat.szotar.ui.dialogs.WindowHelpAbout;
 
 public class ActionMenuDbOpen extends AbstractAction {
@@ -45,6 +47,7 @@ public class ActionMenuDbOpen extends AbstractAction {
 				if (evt.getPropertyName().equals("state")) {
 					if (evt.getNewValue() == SwingWorker.StateValue.DONE) {
 						dialog.dispose();
+						UIUtil.showInformationDialog("Az adatbazis betoltese megtörtént!");
 					}
 				}
 			}
@@ -52,6 +55,9 @@ public class ActionMenuDbOpen extends AbstractAction {
 
 		mySwingWorker.execute();
 		dialog.setVisible(true);
+		
+	
+		
 
 	}
 

@@ -8,8 +8,7 @@ import hu.itsh.gyakorlat.szotar.ui.MainFrame;
 
 public class Main {
 
-	public static void main(String[] args) throws ClassNotFoundException, InstantiationException,
-			IllegalAccessException, UnsupportedLookAndFeelException {
+	public static void main(String[] args)  {
 		MainFrame frame = new MainFrame();
 		frame.setVisible(true);
 	}

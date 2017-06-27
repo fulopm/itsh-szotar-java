@@ -11,28 +11,23 @@ public abstract class InternalWindow extends JInternalFrame {
 	
 	
 	public InternalWindow(String title) {
+		super(title, true, true, true, true);
 		contentPane = (JPanel) this.getContentPane();
-		setTitle(title);
 		setContentPane(contentPane);
-		setClosable(true);
-		setResizable(true);
 		
 	}
 	
 	public InternalWindow(String title, LayoutManager layout) {
+		super(title, true, true, true, true);
 		contentPane = (JPanel) this.getContentPane();
 		contentPane.setLayout(layout);
-		setTitle(title);
 		setContentPane(contentPane);
-		setClosable(true);
-		setResizable(true);
 	}
 	
 	public InternalWindow(String title, JPanel contentPane) {
+		super(title, true, true, true, true);
 		this.contentPane = contentPane;
-		setTitle(title);
 		setContentPane(contentPane);
-		setClosable(true);
-		setResizable(true);
+
 	}
 }

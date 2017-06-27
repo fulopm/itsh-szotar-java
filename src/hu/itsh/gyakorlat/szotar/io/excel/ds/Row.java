@@ -2,7 +2,7 @@ package hu.itsh.gyakorlat.szotar.io.excel.ds;
 
 import java.time.LocalDateTime;
 
-public class Row {
+public class Row implements Comparable<Row>{
 
 	int id;
 	String timestamp;
@@ -46,6 +46,8 @@ public class Row {
 		this.form2 = form2;
 		this.form3 = form3;
 	}
+	
+
 
 	
 	public Row() {
@@ -203,6 +205,36 @@ public class Row {
 				+ hun1 + ", hunExplain=" + hunExplain + ", hunExample=" + hunExample + ", level=" + level + ", lang="
 				+ lang + ", wordClass=" + wordClass + ", form0=" + form0 + ", form1=" + form1 + ", form2=" + form2
 				+ ", form3=" + form3 + "]";
+	}
+
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + id;
+		return result;
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Row other = (Row) obj;
+		if (id != other.id)
+			return false;
+		return true;
+	}
+
+
+	@Override
+	public int compareTo(Row o) {
+		return this.word.compareTo(o.word);
 	}
 	
 	

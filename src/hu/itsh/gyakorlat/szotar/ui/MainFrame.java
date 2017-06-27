@@ -47,9 +47,9 @@ public class MainFrame extends JFrame {
 		setContentPane(contentPane);
 		setJMenuBar(menuBarMain);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(640,480);
+		setExtendedState(getExtendedState()|JFrame.MAXIMIZED_BOTH);
 		setTitle(SharedConstants.APP_NAME + " - " + SharedConstants.APP_VERSION);
-		setLocationRelativeTo(null);
+		UIUtil.showInformationDialog("Udvozoljuk az NGP programban!\nA kezdeshez toltse be az xlsx adatbazist a Fajlt->Adatbazis megnyitasa menubol.");
 	}
 
 
