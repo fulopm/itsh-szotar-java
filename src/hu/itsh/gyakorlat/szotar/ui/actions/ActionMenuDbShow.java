@@ -5,21 +5,22 @@ import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 
 import hu.itsh.gyakorlat.szotar.ui.MainContentPane;
+import hu.itsh.gyakorlat.szotar.ui.dialogs.WindowDbTable;
 import hu.itsh.gyakorlat.szotar.ui.dialogs.WindowHelpAbout;
 
-public class ActionMenuOpenHelpAbout extends AbstractAction{
+public class ActionMenuDbShow extends AbstractAction{
 	
 	MainContentPane parent;
 	
 	
-	public ActionMenuOpenHelpAbout(MainContentPane contentPane) {
-		super("A programrol...");
+	public ActionMenuDbShow(MainContentPane contentPane) {
+		super("Adatbázis megjelenítése");
 		parent = contentPane;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		parent.add(new WindowHelpAbout());
+		parent.add(new WindowDbTable());
 		
 	}
 

@@ -95,7 +95,7 @@ public class Database {
 			{
 				ex.printStackTrace();
 			}
-			System.out.println(row);
+			dict.addRow(row);
 
 		}
 

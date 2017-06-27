@@ -18,13 +18,13 @@ import javax.swing.UIManager;
 
 import hu.itsh.gyakorlat.szotar.SharedConstants;
 
-public class DialogHelpAbout extends InternalWindow {
+public class WindowHelpAbout extends InternalWindow {
 
 	JLabel labelAppTitle;
 	JTextArea fieldCredits;
 
-	public DialogHelpAbout() {
-		super(SharedConstants.APP_NAME + " (-) A programról", new GridLayout(2,1));
+	public WindowHelpAbout() {
+		super(SharedConstants.APP_NAME + " (-) A programrÃ³l", new GridLayout(2,1));
 		initComponents();
 		
 		contentPane.add(labelAppTitle);
@@ -42,11 +42,11 @@ public class DialogHelpAbout extends InternalWindow {
 		
 		fieldCredits = new JTextArea();
 		fieldCredits.setBackground(UIManager.getColor("JPanel.Background"));
-		String creditsText = "Az alkalmazás fejlesztésében részt vettek:\n";
+		String creditsText = "Az alkalmazï¿½s fejlesztï¿½sï¿½ben rï¿½szt vettek:\n";
 		for (String developer : SharedConstants.APP_DEVS)
 			creditsText += developer +System.lineSeparator();
 		
-		creditsText += "\n\nAz alkalmazás az IT Services Hungary által szervezett összefüggõ szakmai gyakorlaton készült.";
+		creditsText += "\n\nAz alkalmazï¿½s az IT Services Hungary ï¿½ltal szervezett ï¿½sszefï¿½ggï¿½ szakmai gyakorlaton kï¿½szï¿½lt.";
 			
 	
 		fieldCredits.setText(creditsText);
