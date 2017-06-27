@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 public class Row {
 
 	int id;
-	LocalDateTime timestamp;
+	String timestamp;
 	String prefix;
 	String word;
 	String suffix;
@@ -23,7 +23,7 @@ public class Row {
 	String form2;
 	String form3;
 
-	public Row(int id, LocalDateTime timestamp, String prefix, String word, String suffix, String engExplain,
+	public Row(int id, String timestamp, String prefix, String word, String suffix, String engExplain,
 			String engExample, String hun0, String hun1, String hunExplain, String hunExample, int level, char lang,
 			String wordClass, String form0, String form1, String form2, String form3) {
 		super();
@@ -47,6 +47,10 @@ public class Row {
 		this.form3 = form3;
 	}
 
+	
+	public Row() {
+		
+	}
 	public int getId() {
 		return id;
 	}
@@ -55,11 +59,11 @@ public class Row {
 		this.id = id;
 	}
 
-	public LocalDateTime getTimestamp() {
+	public String getTimestamp() {
 		return timestamp;
 	}
 
-	public void setTimestamp(LocalDateTime timestamp) {
+	public void setTimestamp(String timestamp) {
 		this.timestamp = timestamp;
 	}
 
@@ -190,5 +194,18 @@ public class Row {
 	public void setForm3(String form3) {
 		this.form3 = form3;
 	}
+
+
+	@Override
+	public String toString() {
+		return "Row [id=" + id + ", timestamp=" + timestamp + ", prefix=" + prefix + ", word=" + word + ", suffix="
+				+ suffix + ", engExplain=" + engExplain + ", engExample=" + engExample + ", hun0=" + hun0 + ", hun1="
+				+ hun1 + ", hunExplain=" + hunExplain + ", hunExample=" + hunExample + ", level=" + level + ", lang="
+				+ lang + ", wordClass=" + wordClass + ", form0=" + form0 + ", form1=" + form1 + ", form2=" + form2
+				+ ", form3=" + form3 + "]";
+	}
+	
+	
+	
 
 }

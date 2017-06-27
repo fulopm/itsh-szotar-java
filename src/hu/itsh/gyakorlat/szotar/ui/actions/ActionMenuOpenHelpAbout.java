@@ -13,7 +13,7 @@ public class ActionMenuOpenHelpAbout extends AbstractAction{
 	
 	
 	public ActionMenuOpenHelpAbout(MainContentPane contentPane) {
-		super("A programról...");
+		super("A programrol...");
 		parent = contentPane;
 	}
 
