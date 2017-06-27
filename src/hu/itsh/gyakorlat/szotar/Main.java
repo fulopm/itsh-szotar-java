@@ -4,20 +4,19 @@ import java.io.IOException;
 import java.net.Authenticator;
 import java.net.PasswordAuthentication;
 import java.net.URISyntaxException;
-import hu.itsh.gyakorlat.szotar.szotarak.OnlineSzotar;
+import java.util.ArrayList;
 
-import hu.itsh.gyakorlat.szotar.szotarak.OnlineSzotar;
+import hu.itsh.gyakorlat.szotar.szotarak.OnlineDictionary;
+
+import hu.itsh.gyakorlat.szotar.szotarak.OnlineDictionary;
 
 public class Main {
 
 	public static void main(String[] args) throws URISyntaxException, IOException {
 		
 
-		// 	SAJÁT FELHASZNÁLÓ + JELSZÓ INTERNET HOZZÁFÉRÉSHEZ
+		// 	ITSH PROXY HOST + USER + PW TO CONNECT TO PROGRAM ARGUMENTS NEEDED 
 		setSystemProxy(args[0], Integer.parseInt(args[1]), args[2], args[3]);
-		
-		String s = OnlineSzotar.translate("do", OnlineSzotar.HUNGARIAN);
-		System.out.println(s);
 		
 	}
 	
