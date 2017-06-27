@@ -51,9 +51,9 @@ public class Database {
 			try {
 				row.setId(Integer.parseInt(cut[0]));
 				row.setTimestamp(cut[1]);
-				row.setPrefix(cut[2]);
-				row.setWord(cut[3]);
-				row.setSuffix(cut[4]);
+				row.setPrefix(cut[2].toLowerCase());
+				row.setWord(cut[3].toLowerCase());
+				row.setSuffix(cut[4].toLowerCase());
 				row.setEngExplain(cut[5]);
 				row.setEngExample(cut[6]);
 				row.setHun0(cut[7]);
