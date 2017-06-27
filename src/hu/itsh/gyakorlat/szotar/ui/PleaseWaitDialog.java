@@ -35,6 +35,7 @@ public class PleaseWaitDialog extends JDialog {
 
 		add(panel);
 		pack();
+		setAlwaysOnTop(true);
 		setLocationRelativeTo(parent);
 
 	}

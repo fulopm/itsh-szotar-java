@@ -6,13 +6,11 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.TreeSet;
 
 public class Dictionary {
 	
 	private List<Row> rows;
-	
-	int[] indexes = new int[26];
-	char[] alphabet = "abcdefghijklmnopqrstuvwxyz".toCharArray();
 	
 	public Dictionary(List<Row> rows) {
 		this.rows = rows;
@@ -56,48 +54,19 @@ public class Dictionary {
 		return rows.iterator();
 	}
 	
-	
-	public void createCache() {
-		indexes[0] = 0;
-		for (int i = 1; i < indexes.length; i++) {
-			
-			int j = 0;
-
-			for (char c : alphabet) {
-				j++;
-				if (rows.get(i).word.charAt(0) == c) {
-					indexes[i] = j;
-					break;
-				}
-			}
-			
-		}
-		System.out.println(Arrays.toString(indexes));
-	}
-	
 	public int searchByWord(String word) {
-		/*Iterator<Row> it = getRowIterator();
-		while (it.hasNext()) {
-			Row row = it.next();
-			if (row.word.startsWith(word)) {
-				return row;
-			}
-			
-		}
-		*/
-		Row search = new Row();
-		search.setWord(word);
-		
-		
+
 		Comparator<Row> c = new Comparator<Row>() {
 
 			@Override
 			public int compare(Row o1, Row o2) {
-				return o1.getWord().compareTo(o2.getWord());
+				return o1.getWord().compareToIgnoreCase(o2.getWord());
 			}
 			
 		};
-		return Collections.binarySearch(rows, search, c);
+		Row r = new Row();
+		r.setWord(word);
+		return Collections.binarySearch(rows, r, c);
 		
 		
 	}
