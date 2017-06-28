@@ -1,0 +1,6 @@
+projectKey=itsh-szotar-java
+serverUrl=http://192.168.0.100:9000
+serverVersion=6.4.0.25310
+dashboardUrl=http://192.168.0.100:9000/dashboard/index/itsh-szotar-java
+ceTaskId=AVzqw29BswHu3uJe0ZYj
+ceTaskUrl=http://192.168.0.100:9000/api/ce/task?id=AVzqw29BswHu3uJe0ZYj
