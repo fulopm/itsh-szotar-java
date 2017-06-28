@@ -1,5 +1,4 @@
 package hu.itsh.gyakorlat.szotar;
-
 import java.io.IOException;
 import java.net.Authenticator;
 import java.net.PasswordAuthentication;
@@ -14,7 +13,8 @@ public class Main {
 
 	public static void main(String[] args) throws URISyntaxException, IOException {
 		
-
+   MainFrame frame = new MainFrame();
+	 frame.setVisible(true);
 		// 	ITSH PROXY HOST + USER + PW TO CONNECT TO PROGRAM ARGUMENTS NEEDED 
 		setSystemProxy(args[0], Integer.parseInt(args[1]), args[2], args[3]);
 		
@@ -47,4 +47,5 @@ public class Main {
 		 }
 		});
 	}
+
 }
