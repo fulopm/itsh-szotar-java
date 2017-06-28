@@ -2,6 +2,7 @@ package hu.itsh.gyakorlat.szotar.ui;
 
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.AbstractAction;
 import javax.swing.JFrame;
@@ -13,12 +14,15 @@ import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.UnsupportedLookAndFeelException;
 
 import hu.itsh.gyakorlat.szotar.SharedConstants;
+import hu.itsh.gyakorlat.szotar.tts.TTS;
+import hu.itsh.gyakorlat.szotar.tts.TestFrame;
 import hu.itsh.gyakorlat.szotar.ui.actions.ActionMenuDbOpen;
 import hu.itsh.gyakorlat.szotar.ui.actions.ActionMenuDbShow;
 import hu.itsh.gyakorlat.szotar.ui.actions.ActionMenuOpenHelpAbout;
+import hu.itsh.gyakorlat.szotar.ui.actions.ActionMenuTestType;
 import hu.itsh.gyakorlat.szotar.ui.dialogs.WindowHelpAbout;
 
-public class MainFrame extends JFrame {
+public class MainFrame extends JFrame{
 
 	MainContentPane contentPane;
 
@@ -71,6 +75,13 @@ public class MainFrame extends JFrame {
 		menuFile.add(menuItemDbSave);
 		menuFile.add(menuItemDbShow);
 		menuFile.add(menuItemExit);
+		
+		menuPractice = new JMenu("Gyakorlas");
+		menuItemTestsListeningTest = new JMenuItem("Felovasos teszt");
+		menuItemTestsListeningTest.setAction(new ActionMenuTestType(contentPane));
+		
+		menuPractice.add(menuItemTestsListeningTest);
+		
 
 		menuBarMain.add(menuFile);
 		
@@ -79,6 +90,7 @@ public class MainFrame extends JFrame {
 		menuItemHelpAbout.setAction(new ActionMenuOpenHelpAbout(contentPane));
 		menuHelp.add(menuItemHelpAbout);
 		
+		menuBarMain.add(menuPractice);
 		
 		menuBarMain.add(menuHelp);
 
@@ -96,6 +108,9 @@ public class MainFrame extends JFrame {
 			}
 		}
 	}
+
+
+	
 	
 	
 	

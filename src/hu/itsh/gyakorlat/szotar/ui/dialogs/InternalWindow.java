@@ -7,7 +7,7 @@ import javax.swing.JPanel;
 
 public abstract class InternalWindow extends JInternalFrame {
 
-	JPanel contentPane;
+	protected JPanel contentPane;
 	
 	
 	public InternalWindow(String title) {
