@@ -22,5 +22,7 @@
 hs_err_pid*
 /bin/
 
-# excluse xxlsx
+# exclude xxlsx
 *.xlsx
+# exclude classpath
+.classpath
