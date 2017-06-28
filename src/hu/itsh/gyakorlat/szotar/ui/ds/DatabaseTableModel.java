@@ -3,8 +3,9 @@ package hu.itsh.gyakorlat.szotar.ui.ds;
 import javax.swing.table.AbstractTableModel;
 
 import hu.itsh.gyakorlat.szotar.io.excel.ds.Dictionary;
+import static hu.itsh.gyakorlat.szotar.SharedConstants.TABLE_HEADERS;
 
-public class DatabaseTableModel<Row> extends AbstractTableModel {
+public class DatabaseTableModel extends AbstractTableModel {
 
 	private Dictionary dict;
 
@@ -12,13 +13,9 @@ public class DatabaseTableModel<Row> extends AbstractTableModel {
 		this.dict = dict;
 	}
 
-	final String columns[] = { "ID", "Timestamp", "Prefix", "Word", "Suffix", "EnglishExplaination", "EnglishExample",
-			"Hungarian0", "Hungarian1", "HungarianExplaination", "HungarianExample", "Level", "Language", "WordClass",
-			"form0", "form1", "form2", "form3" };
-
 	@Override
 	public int getColumnCount() {
-		return columns.length;
+		return TABLE_HEADERS.length;
 	}
 
 	@Override
@@ -28,7 +25,6 @@ public class DatabaseTableModel<Row> extends AbstractTableModel {
 
 	@Override
 	public Object getValueAt(int row, int column) {
-		//System.out.println(row + ", "+ column);
 		switch (column) {
 		case 0:
 			return dict.getRow(row).getId();
@@ -66,22 +62,22 @@ public class DatabaseTableModel<Row> extends AbstractTableModel {
 			return dict.getRow(row).getForm2();
 		case 17:
 			return dict.getRow(row).getForm3();
+		default:
+			throw new IllegalStateException("Bad column number");
 		}
-		return column;
 
 	}
 
 	@Override
 	public String getColumnName(int column) {
 
-		return columns[column];
+		return TABLE_HEADERS[column];
 
 	}
 
+	@Override
 	public boolean isCellEditable(int rowIndex, int columnIndex) {
 		return false;
 	}
-
-	
 
 }

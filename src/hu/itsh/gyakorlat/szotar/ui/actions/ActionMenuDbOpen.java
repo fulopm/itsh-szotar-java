@@ -44,20 +44,15 @@ public class ActionMenuDbOpen extends AbstractAction {
 
 			@Override
 			public void propertyChange(PropertyChangeEvent evt) {
-				if (evt.getPropertyName().equals("state")) {
-					if (evt.getNewValue() == SwingWorker.StateValue.DONE) {
-						dialog.dispose();
-						UIUtil.showInformationDialog("Az adatbazis betoltese megtörtént!");
-					}
+				if (evt.getPropertyName().equals("state") && evt.getNewValue() == SwingWorker.StateValue.DONE) {
+					dialog.dispose();
+					UIUtil.showInformationDialog("Az adatbazis betoltese megtörtént!");
 				}
 			}
 		});
 
 		mySwingWorker.execute();
 		dialog.setVisible(true);
-		
-	
-		
 
 	}
 

@@ -7,12 +7,11 @@ public class MainContentPane extends JDesktopPane {
 
 	
 	public MainContentPane() {
-		initComponents();
 	}
 	
 	
 	public void initComponents() {
-		
+		// Nincs szukseg muveletvegzesre. Ha szeretnenk testreszabni a JDesktoPane-t, azt majd itt kell csinalni.
 	}
 	
 	

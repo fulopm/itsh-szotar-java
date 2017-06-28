@@ -15,7 +15,11 @@ import hu.itsh.gyakorlat.szotar.io.excel.ds.Dictionary;
 import hu.itsh.gyakorlat.szotar.io.excel.ds.Row;
 
 public class Database {
-	public static Dictionary dict;
+	public static final Dictionary dict;
+
+	private Database() {
+		throw new IllegalStateException("Utility classes should be accessed through static way");
+	}
 
 	static {
 		dict = new Dictionary();
@@ -35,16 +39,14 @@ public class Database {
 		ExcelBase reader = new ExcelBase(workbook);
 		List<String> rowsRaw = null;
 		try {
-		 rowsRaw = reader.getRows(SharedConstants.SEPARATOR);
+			rowsRaw = reader.getRows(SharedConstants.SEPARATOR);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-		System.out.println(rowsRaw.size());
 
 		for (String rowRaw : rowsRaw) {
 			String[] cut = rowRaw.split(SharedConstants.SEPARATOR);
 
-			// System.out.println(Arrays.toString(cut));
 			Row row = new Row();
 
 			System.out.println(Arrays.toString(cut));
@@ -63,10 +65,6 @@ public class Database {
 				row.setLevel(Integer.parseInt(cut[11]));
 				row.setLang(cut[12].charAt(0));
 				row.setWordClass(cut[13]);
-				/*
-				 * Ez egy katasztrófa, majd újra kell írni. De legalább működik.
-				 * FM
-				 */
 				switch (cut.length) {
 				case 14:
 					row.setForm0(null);
@@ -97,6 +95,9 @@ public class Database {
 					row.setForm1(cut[15]);
 					row.setForm2(cut[16]);
 					row.setForm3(cut[17]);
+					break;
+				default:
+					throw new IllegalStateException("String is malformed");
 				}
 
 			} catch (Exception ex) {
@@ -105,14 +106,13 @@ public class Database {
 			dict.addRow(row);
 
 		}
-		
-		dict.sortByWord();
+
+		dict.sort();
 
 	}
-	
+
 	public static boolean isNull() {
 		return dict == null || dict.isEmpty();
 	}
-	
-	
+
 }

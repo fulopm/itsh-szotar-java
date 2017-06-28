@@ -53,6 +53,8 @@ public class Row implements Comparable<Row>{
 	public Row() {
 		
 	}
+	
+	
 	public int getId() {
 		return id;
 	}

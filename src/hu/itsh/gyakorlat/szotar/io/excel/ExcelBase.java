@@ -1,9 +1,9 @@
 package hu.itsh.gyakorlat.szotar.io.excel;
 
+import static hu.itsh.gyakorlat.szotar.SharedConstants.FORMAT_YYMMDD;
+
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -27,179 +27,70 @@ public class ExcelBase {
 	public List<String> getRows(String separator) {
 		if (workbook == null || selectedSheet == null)
 			throw new NullPointerException("Either the workbook or the selectedSheet object is null!");
-			
-		
-		
+
 		Iterator<Row> rowIt = selectedSheet.iterator();
-		String cellData;
 		List<String> rows = new ArrayList<String>();
-		
-		
+
 		while (rowIt.hasNext()) {
 			Row nextRow = rowIt.next();
 			Iterator<Cell> cellIt = nextRow.cellIterator();
-			String rowData = "";
+			StringBuilder rowData = new StringBuilder("");
+
 			while (cellIt.hasNext()) {
 				Cell nextCell = cellIt.next();
+
 				switch (nextCell.getCellTypeEnum()) {
-				case BLANK:
-					rowData += separator;
-					break;
+
 				case BOOLEAN:
-					rowData += Boolean.toString(nextCell.getBooleanCellValue());
-					rowData += separator;
+					rowData.append(Boolean.toString(nextCell.getBooleanCellValue()));
 					break;
+
 				case ERROR:
-					rowData += Byte.toString(nextCell.getErrorCellValue());
-					rowData += separator;
+					rowData.append(Byte.toString(nextCell.getErrorCellValue()));
 					break;
+
 				case FORMULA:
-					rowData += nextCell.getCellFormula();
-					rowData += separator;
+					rowData.append(nextCell.getCellFormula());
 					break;
-				case NUMERIC: // we're assuming that NUMERIC cells are Dates
+
+				case NUMERIC: // Date cells are read as NUMERIC. If the Cell has
+								// the type Date, we are formatting them to a
+								// YYYY-MM-DD format, otherwise it gets
+								// converted to a int
 					if (DateUtil.isCellDateFormatted(nextCell)) {
-						Date date = DateUtil.getJavaDate(nextCell.getNumericCellValue());
-						String dateFormatted = new SimpleDateFormat("yyyy-MM-dd").format(date);
-						rowData += dateFormatted;
-						rowData += separator;
+						rowData.append(FORMAT_YYMMDD.format(DateUtil.getJavaDate(nextCell.getNumericCellValue())));
 					} else {
-						rowData += (int)nextCell.getNumericCellValue();
-						rowData += separator;
+						rowData.append((int) nextCell.getNumericCellValue());
 					}
-					
 					break;
+
 				case STRING:
-					rowData += nextCell.getStringCellValue();
-					rowData += separator;
+					rowData.append(nextCell.getStringCellValue());
 					break;
+
+				case BLANK:
+					rowData.append(separator);
+					break;
+
 				default:
-					System.out.println("******* AJJAJJ *******");
-					break;
-				
+					throw new IllegalStateException("String is malformed");
+
 				}
-				
+
 			}
-			rows.add(rowData);
+			rowData.append(separator);
+			rows.add(rowData.toString());
 		}
-		
+
 		try {
 			workbook.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
-		
-		
+
 		return rows;
 	}
 
-	/*
-	 * 
-	 * public void readWorksheet(String worksheet){
-	 * 
-	 * 
-	 * 
-	 * }
-	 * 
-	 * public void runTrough(int sheetNum){ try{ this.selectedSheet =
-	 * this.workbook.getSheetAt(sheetNum); Iterator<Row> rowIterator =
-	 * selectedSheet.iterator(); rowIterator.next();
-	 * 
-	 * while(rowIterator.hasNext()){
-	 * 
-	 * Row currentRow = rowIterator.next(); Iterator<Cell> cellIterator =
-	 * currentRow.iterator();
-	 * 
-	 * 
-	 * while(cellIterator.hasNext()){ Cell currentCell = cellIterator.next();
-	 * 
-	 * switch(currentCell.getCellTypeEnum()){ case STRING:break; case NUMERIC:
-	 * if(DateUtil.isCellDateFormatted(currentCell)){ //Ha d�tum }else{ //Ha
-	 * csak sz�m }
-	 * 
-	 * 
-	 * break; case BOOLEAN:break; case BLANK: break; case FORMULA: break;
-	 * default: System.out.println("nem szabadna lefutnom"); }
-	 * 
-	 * }
-	 * 
-	 * }
-	 * 
-	 * this.workbook.close();
-	 * 
-	 * 
-	 * }catch(Exception e){ System.out.println(e); }
-	 * 
-	 * }
-	 * 
-	 * public ArrayList<String> readExcel(){ ArrayList<String> lines = new
-	 * ArrayList<String>();
-	 * 
-	 * Iterator<Row> rowIterator = selectedSheet.iterator(); rowIterator.next();
-	 * 
-	 * while(rowIterator.hasNext()){ String s = "";
-	 * 
-	 * Row currentRow = rowIterator.next(); Iterator<Cell> cellIterator =
-	 * currentRow.iterator();
-	 * 
-	 * while (cellIterator.hasNext()){
-	 * 
-	 * 
-	 * Cell currentCell = cellIterator.next();
-	 * 
-	 * switch(currentCell.getCellTypeEnum()){ case STRING: s+=
-	 * currentCell.getStringCellValue() + ";"; break; case NUMERIC:
-	 * if(DateUtil.isCellDateFormatted(currentCell)){ //Ha d�tum s+=
-	 * currentCell.getDateCellValue() + ";"; }else{ //Ha csak sz�m s+=
-	 * currentCell.getNumericCellValue() + ";"; }
-	 * 
-	 * break; case BOOLEAN: s+= currentCell.getBooleanCellValue() + ";" ; break;
-	 * case BLANK: s+= ";"; break; case FORMULA: s+=
-	 * currentCell.getCellFormula() + ";"; break; default:
-	 * System.out.println("nem szabadna lefutnom");
-	 * 
-	 * }
-	 * 
-	 * 
-	 * } lines.add(s);
-	 * 
-	 * } return lines;
-	 * 
-	 * }
-	 * 
-	 * public Object getCellData(int row, int cell){ Row selectedRow =
-	 * selectedSheet.getRow(row); Cell selectedCell = selectedRow.getCell(cell);
-	 * 
-	 * switch(selectedCell.getCellTypeEnum()){ case STRING: return
-	 * selectedCell.getStringCellValue();
-	 * 
-	 * case NUMERIC: if(DateUtil.isCellDateFormatted(selectedCell)){ return
-	 * selectedCell.getDateCellValue(); }else{ return
-	 * selectedCell.getNumericCellValue(); } case BOOLEAN: return
-	 * selectedCell.getBooleanCellValue(); case BLANK: return "" ; case FORMULA:
-	 * return selectedCell.getCellFormula(); default: return "unknownData"; }
-	 * 
-	 * }
-	 * 
-	 * public void changeCellValue(int row, int cell, String newData){
-	 * 
-	 * Row selectedRow = selectedSheet.getRow(row); Cell selectedCell =
-	 * selectedRow.getCell(cell);
-	 * 
-	 * 
-	 * 
-	 * }
-	 * 
-	 * 
-	 */
-	public void deleteRow(int row) throws IOException {
-
-		// Ha meglesz a sorokra az adat akkor be tudom fejezni
-
-	}
-
-	public int getRecordNumb() {
+	public int getRecordNumber() {
 		int records = 0;
 		Iterator<Row> rowIterator = selectedSheet.iterator();
 		rowIterator.next();
