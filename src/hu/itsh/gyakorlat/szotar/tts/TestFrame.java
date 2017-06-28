@@ -53,11 +53,11 @@ public class TestFrame extends InternalWindow implements ActionListener{
 	
 	void initComponents() {
 		this.buttonStart = new JButton("Start!");
-		this.buttonStart.setSize(100,20);
+		this.buttonStart.setSize(100,30);
 		this.buttonStart.setLocation(20,20);
 		
 		this.buttonAgain = new JButton("Nem ertettem, ujra!");
-		this.buttonAgain.setSize(150,20);
+		this.buttonAgain.setSize(150,30);
 		this.buttonAgain.setLocation(150,20);
 		this.buttonAgain.setEnabled(false);
 		
@@ -67,11 +67,11 @@ public class TestFrame extends InternalWindow implements ActionListener{
 		this.labelInput.setText("Ird ide, amit halottal:");
 		
 		this.textEnglishWord = new JTextField();
-		this.textEnglishWord.setSize(100,20);
+		this.textEnglishWord.setSize(100,30);
 		this.textEnglishWord.setLocation(150,80);
 		
 		this.buttonCheck = new JButton("Ellenorzes");
-		this.buttonCheck.setSize(100,20);
+		this.buttonCheck.setSize(100,30);
 		this.buttonCheck.setLocation(150,120);
 		
 		this.labelCheck = new JLabel(this.gameNo + "/10");
