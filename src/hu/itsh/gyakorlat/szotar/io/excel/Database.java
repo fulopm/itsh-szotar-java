@@ -36,10 +36,10 @@ public class Database {
 	}
 
 	public static void loadDictionary(XSSFWorkbook workbook) {
-		ExcelBase reader = new ExcelBase(workbook);
+		ExcelBase excelBase = new ExcelBase(workbook);
 		List<String> rowsRaw = null;
 		try {
-			rowsRaw = reader.getRows(SharedConstants.SEPARATOR);
+			rowsRaw = excelBase.getRows(SharedConstants.SEPARATOR);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}

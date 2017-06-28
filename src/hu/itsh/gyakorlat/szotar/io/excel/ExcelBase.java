@@ -8,6 +8,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -43,14 +44,17 @@ public class ExcelBase {
 
 				case BOOLEAN:
 					rowData.append(Boolean.toString(nextCell.getBooleanCellValue()));
+					rowData.append(separator);
 					break;
 
 				case ERROR:
 					rowData.append(Byte.toString(nextCell.getErrorCellValue()));
+					rowData.append(separator);
 					break;
 
 				case FORMULA:
 					rowData.append(nextCell.getCellFormula());
+					rowData.append(separator);
 					break;
 
 				case NUMERIC: // Date cells are read as NUMERIC. If the Cell has
@@ -62,23 +66,28 @@ public class ExcelBase {
 					} else {
 						rowData.append((int) nextCell.getNumericCellValue());
 					}
+					rowData.append(separator);
 					break;
-
+					
 				case STRING:
 					rowData.append(nextCell.getStringCellValue());
+					rowData.append(separator);
 					break;
-
 				case BLANK:
 					rowData.append(separator);
 					break;
 
 				default:
-					throw new IllegalStateException("String is malformed");
+					
+						throw new IllegalStateException("String is malformed");
+					
+					
 
 				}
+				
 
 			}
-			rowData.append(separator);
+			
 			rows.add(rowData.toString());
 		}
 
