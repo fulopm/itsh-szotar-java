@@ -28,7 +28,7 @@ public class ActionMenuDbOpen extends AbstractAction {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		PleaseWaitDialog dialog = new PleaseWaitDialog(parent, "");
+		PleaseWaitDialog dialog = new PleaseWaitDialog();
 		SwingWorker<Void, Void> mySwingWorker = new SwingWorker<Void, Void>() {
 			@Override
 			protected Void doInBackground() throws Exception {

@@ -1,42 +1,42 @@
 package hu.itsh.gyakorlat.szotar.ui;
 
 import java.awt.Color;
-import java.awt.Dialog.ModalityType;
 import java.awt.Font;
 
 import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
+import javax.swing.UIManager;
 
 import hu.itsh.gyakorlat.szotar.SharedConstants;
+import net.java.dev.designgridlayout.DesignGridLayout;
 
 public class PleaseWaitDialog extends JDialog {
 
-	private JLabel labelPleaseWait;
+	JLabel labelPleaseWait;
 	JProgressBar progressBar;
 
 	JPanel panel;
 
-	public PleaseWaitDialog(MainContentPane parent, String title) {
-		super();
+	DesignGridLayout layoutHelper;
+
+	public PleaseWaitDialog() {
+		setModalityType(ModalityType.DOCUMENT_MODAL);
 		setUndecorated(true);
 
 		initComponents();
 
-		BoxLayout layout = new BoxLayout(panel, BoxLayout.Y_AXIS);
-		panel.setLayout(layout);
+		layoutHelper = new DesignGridLayout(panel);
 
-		panel.add(labelPleaseWait);
-		panel.add(progressBar);
-
+		layoutHelper.row().center().add(labelPleaseWait);
+		layoutHelper.row().center().add(progressBar);
 
 		add(panel);
 		pack();
+		setLocationRelativeTo(null);
 		setAlwaysOnTop(true);
-		setLocationRelativeTo(parent);
 
 	}
 
@@ -47,8 +47,9 @@ public class PleaseWaitDialog extends JDialog {
 		panel = new JPanel();
 		panel.setBorder(BorderFactory.createLineBorder(Color.RED, 2));
 
+		
 		labelPleaseWait = new JLabel("Kérem, várjon...");
-		labelPleaseWait.setFont(labelPleaseWait.getFont().deriveFont(22f));
+		labelPleaseWait.setFont(UIManager.getFont("Label.font").deriveFont(18f).deriveFont(Font.BOLD));
 
 	}
 

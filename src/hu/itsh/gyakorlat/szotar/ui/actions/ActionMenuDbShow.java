@@ -24,7 +24,7 @@ public class ActionMenuDbShow extends AbstractAction{
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		if (Database.isNull()) {
-			UIUtil.showErrorDialog("Az adatbázis nincs betoltve!\nKattintson a Fajl->Adatbazis megnyitasa menure mielott elkezdene dolgozni az adatokkal.");
+			UIUtil.showErrorDialog("Az adatbazis nincs betoltve!\nKattintson a Fajl->Adatbazis megnyitasa gombra.");
 			return;
 		}
 		parent.add(new WindowDbTable());

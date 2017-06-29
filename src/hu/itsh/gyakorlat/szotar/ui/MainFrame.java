@@ -54,7 +54,6 @@ public class MainFrame extends JFrame{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setExtendedState(getExtendedState()|JFrame.MAXIMIZED_BOTH);
 		setTitle(SharedConstants.APP_NAME + " - " + SharedConstants.APP_VERSION);
-		UIUtil.showInformationDialog("Udvozoljuk az NGP programban!\nKattintson az OK gombra az adatbazis betoltesehez!");
 		new ActionMenuDbOpen(contentPane).actionPerformed(null);
 	}
 
