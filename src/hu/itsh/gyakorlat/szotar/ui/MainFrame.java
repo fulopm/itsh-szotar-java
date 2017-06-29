@@ -18,6 +18,7 @@ import hu.itsh.gyakorlat.szotar.tts.TTS;
 import hu.itsh.gyakorlat.szotar.tts.TestFrame;
 import hu.itsh.gyakorlat.szotar.ui.actions.ActionMenuDbOpen;
 import hu.itsh.gyakorlat.szotar.ui.actions.ActionMenuDbShow;
+import hu.itsh.gyakorlat.szotar.ui.actions.ActionMenuExit;
 import hu.itsh.gyakorlat.szotar.ui.actions.ActionMenuOpenHelpAbout;
 import hu.itsh.gyakorlat.szotar.ui.actions.ActionMenuTestType;
 import hu.itsh.gyakorlat.szotar.ui.dialogs.WindowHelpAbout;
@@ -71,11 +72,15 @@ public class MainFrame extends JFrame{
 		menuItemDbShow.setAction(new ActionMenuDbShow(contentPane));
 		
 		menuItemExit = new JMenuItem("Kilepes a programbol");
+		menuItemExit.setAction(new ActionMenuExit());
 
 		menuFile.add(menuItemDbOpen);
 		menuFile.add(menuItemDbSave);
 		menuFile.add(menuItemDbShow);
+		menuFile.addSeparator();
 		menuFile.add(menuItemExit);
+		
+		
 		
 		menuPractice = new JMenu("Gyakorlas");
 		menuItemTestsListeningTest = new JMenuItem("Felovasos teszt");
