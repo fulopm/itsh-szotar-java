@@ -47,7 +47,9 @@ public class ActionMenuDbOpen extends AbstractAction {
 				if (evt.getPropertyName().equals("state")) {
 					if (evt.getNewValue() == SwingWorker.StateValue.DONE) {
 						dialog.dispose();
-						UIUtil.showInformationDialog("Az adatbazis betoltese megtörtént!");
+						UIUtil.showInformationDialog("Az adatbazis betoltese lezajlott!");
+						parent.requestFocus();
+						
 					}
 				}
 			}
