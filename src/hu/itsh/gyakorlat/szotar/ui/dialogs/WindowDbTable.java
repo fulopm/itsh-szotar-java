@@ -1,8 +1,11 @@
 package hu.itsh.gyakorlat.szotar.ui.dialogs;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.Iterator;
@@ -10,12 +13,17 @@ import java.util.List;
 import java.util.Vector;
 
 import javax.swing.JButton;
+import javax.swing.JCheckBoxMenuItem;
+import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.RowFilter;
 import javax.swing.UIManager;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.swing.table.TableRowSorter;
 
 import hu.itsh.gyakorlat.szotar.SharedConstants;
@@ -23,128 +31,123 @@ import hu.itsh.gyakorlat.szotar.io.excel.Database;
 import hu.itsh.gyakorlat.szotar.io.excel.ds.Row;
 import hu.itsh.gyakorlat.szotar.ui.UIUtil;
 import hu.itsh.gyakorlat.szotar.ui.ds.DatabaseTableModel;
+import net.java.balloontip.BalloonTip;
 
-public class WindowDbTable extends InternalWindow{
+public class WindowDbTable extends InternalWindow {
 
-	private JTable tableData;
-	private JTextField fieldSearch;
-	private JList<String> listHits;
-	private String[] arrayHits;
-	private JButton buttonSearch;
-	TableRowSorter sorter;
+	JTable tableData;
+	DatabaseTableModel tableModel;
+	TableRowSorter tableSorter;
+	JTextField fieldSearch;
+	BalloonTip fieldSearchBalloon;
+
+	JPopupMenu fieldSearchMenu;
+	JLabel fieldSearchMenuTitle;
+	JCheckBoxMenuItem fieldSearchMenuExplainAndExample;
+	JCheckBoxMenuItem fieldSearchMenuForms;
+
 	
 	public WindowDbTable() {
 		super(SharedConstants.APP_NAME + " (-) Adatbázis", new BorderLayout());
 		initComponents();
-		
+
 		contentPane.add(new JScrollPane(tableData), BorderLayout.CENTER);
 		contentPane.add(fieldSearch, BorderLayout.SOUTH);
-		contentPane.add(listHits, BorderLayout.EAST);
-		contentPane.add(listHits, BorderLayout.EAST);
-		pack();
+		setSize(new Dimension((int)Toolkit.getDefaultToolkit().getScreenSize().getWidth()/2, (int)Toolkit.getDefaultToolkit().getScreenSize().getHeight()/2));
 		setVisible(true);
-		tableData.repaint();
 
 	}
-	
-	
+
 	void initComponents() {
-		
-		
-		
+
 		fieldSearch = new JTextField();
-		listHits = new JList<>();
-		
-		arrayHits = new String[5];
+
 		fieldSearch.setToolTipText("Keresés");
-		
-		
-		
-		
-		 RowFilter<DatabaseTableModel, Object> rf = null;
-		    //If current expression doesn't parse, don't update.
-		    try {
-		        rf = RowFilter.regexFilter(fieldSearch.getText(), 0);
-		    } catch (java.util.regex.PatternSyntaxException e) {
-		        return;
-		    }
-		   
-		   DatabaseTableModel model = new DatabaseTableModel(Database.dict);
-		   sorter = new TableRowSorter<DatabaseTableModel>(model);
-		    tableData = new JTable(model);
-			tableData.setRowSorter(sorter);
-		fieldSearch.addKeyListener(new KeyListener() {
-			
+		fieldSearchBalloon = new BalloonTip(fieldSearch, "Kattintson a mezore jobb klikkel, ha szeretne modositani hogy mely mezokben keressunk!");		
+		fieldSearchMenu = new JPopupMenu();
+
+		fieldSearchMenuTitle = new JLabel("Keresés a következő mezőkben:");
+		fieldSearchMenuExplainAndExample = new JCheckBoxMenuItem("Magyarázat és példa");
+		fieldSearchMenuExplainAndExample.addChangeListener(new ChangeListener() {
+
 			@Override
-			public void keyTyped(KeyEvent e) {
-				newFilter();
-				/*
-				 	String compareString = fieldSearch.getText()+e.getKeyChar();
-		            int counter = 0;
-		            for (int i = 0 ; i <Database.dict.getRowCount() ; i++){
-		                if (counter < 5){
-		                	String hit = Database.dict.getRow(i).getWord();
-		                	if (compareString.length() > hit.length()) {
-		                		compareString = compareString.substring(0, hit.length());
-		                		
-		                	}
-		                	
-		                    if (hit.substring(0, compareString.length()).equals(compareString)){
-		                        arrayHits[counter] = hit;
-		                        counter++;
-		                    }
-		                    listHits.setListData(arrayHits);
-		                }
-		            }
-		           */
-				
-				
+			public void stateChanged(ChangeEvent e) {
+				newFilter(fieldSearchMenuExplainAndExample.isSelected(), fieldSearchMenuForms.isSelected());
+
 			}
-			
+		});
+		fieldSearchMenuForms = new JCheckBoxMenuItem("Szótári alakokban");
+		fieldSearchMenuForms.addChangeListener(new ChangeListener() {
+
 			@Override
-			public void keyReleased(KeyEvent e) {
-				// TODO Auto-generated method stub
-				
+			public void stateChanged(ChangeEvent e) {
+				newFilter(fieldSearchMenuExplainAndExample.isSelected(), fieldSearchMenuForms.isSelected());
+
 			}
-			
+		});
+
+		fieldSearchMenu.add(fieldSearchMenuTitle);
+		fieldSearchMenu.add(fieldSearchMenuExplainAndExample);
+		fieldSearchMenu.add(fieldSearchMenuForms);
+
+		fieldSearch.setComponentPopupMenu(fieldSearchMenu);
+
+		tableModel = new DatabaseTableModel(Database.dict);
+		tableSorter = new TableRowSorter<DatabaseTableModel>(tableModel);
+		tableData = new JTable(tableModel);
+		tableData.setRowSorter(tableSorter);
+		fieldSearch.addKeyListener(new KeyAdapter() {
+
 			@Override
 			public void keyPressed(KeyEvent e) {
-				// TODO Auto-generated method stub
-				
+				newFilter(fieldSearchMenuExplainAndExample.isSelected(), fieldSearchMenuForms.isSelected());
+
 			}
+
 		});
-		
-		buttonSearch = new JButton("Keres");
-		buttonSearch.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				UIUtil.showInformationDialog(Integer.toString(Database.dict.searchByWord(fieldSearch.getText())));
-				
-			}
-		});
+
 	}
-	
-	private void newFilter() {
-	    RowFilter<String, String> rf = null;
-	    //If current expression doesn't parse, don't update.
-	    try {
-	        rf = new RowFilter<String, String>() {
+
+	private void newFilter(boolean inExampleAndExplain, boolean inForms) {
+		RowFilter<String, String> rf = null;
+		// If current expression doesn't parse, don't update.
+		try {
+			rf = new RowFilter<String, String>() {
 
 				@Override
 				public boolean include(javax.swing.RowFilter.Entry<? extends String, ? extends String> entry) {
-					return entry.getStringValue(3).startsWith(fieldSearch.getText().toLowerCase());
+					String searchString = fieldSearch.getText().toLowerCase();
+					boolean finalResult = false;
+					if (inExampleAndExplain && inForms) {
+						finalResult = entry.getStringValue(3).startsWith(searchString)
+								|| entry.getStringValue(5).contains(searchString)
+								|| entry.getStringValue(6).contains(searchString)
+								|| entry.getStringValue(14).startsWith(searchString)
+								|| entry.getStringValue(15).startsWith(searchString)
+								|| entry.getStringValue(16).startsWith(searchString)
+								|| entry.getStringValue(17).startsWith(searchString);
+					} else if (inExampleAndExplain) {
+						finalResult = entry.getStringValue(3).startsWith(searchString)
+								|| entry.getStringValue(5).contains(searchString)
+								|| entry.getStringValue(6).contains(searchString);
+					} else if (inForms) {
+						finalResult = entry.getStringValue(3).startsWith(searchString)
+								|| entry.getStringValue(14).startsWith(searchString)
+								|| entry.getStringValue(15).startsWith(searchString)
+								|| entry.getStringValue(16).startsWith(searchString)
+								|| entry.getStringValue(17).startsWith(searchString);
+					} else {
+						finalResult = entry.getStringValue(3).startsWith(searchString);
+					}
+
+					return finalResult;
 
 				}
 
-
-
-				
-	        	
 			};
-	    } catch (java.util.regex.PatternSyntaxException e) {
-	        return;
-	    }
-	    sorter.setRowFilter(rf);
+		} catch (java.util.regex.PatternSyntaxException e) {
+			return;
+		}
+		tableSorter.setRowFilter(rf);
 	}
 }
