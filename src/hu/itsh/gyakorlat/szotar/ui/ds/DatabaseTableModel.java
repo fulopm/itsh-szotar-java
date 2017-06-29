@@ -12,9 +12,27 @@ public class DatabaseTableModel<Row> extends AbstractTableModel {
 		this.dict = dict;
 	}
 
-	final String columns[] = { "ID", "Timestamp", "Prefix", "Word", "Suffix", "EnglishExplaination", "EnglishExample",
-			"Hungarian0", "Hungarian1", "HungarianExplaination", "HungarianExample", "Level", "Language", "WordClass",
-			"form0", "form1", "form2", "form3" };
+	final String columns[] = {
+			"ID", //0
+			"Timestamp", //1
+			"Prefix",//2
+			"Word",//3
+			"Suffix",//4
+			"EnglishExplaination",//5
+			"EnglishExample",//6
+			"Hungarian0",//7
+			"Hungarian1",//8
+			"HungarianExplaination",//9
+			"HungarianExample",//10
+			"Level",//11
+			"Language",//12
+			"WordClass",//13
+			"form0",//14
+			"form1",//15
+			"form2",//16
+			"form3"//17
+			
+	};
 
 	@Override
 	public int getColumnCount() {
@@ -28,7 +46,7 @@ public class DatabaseTableModel<Row> extends AbstractTableModel {
 
 	@Override
 	public Object getValueAt(int row, int column) {
-		//System.out.println(row + ", "+ column);
+		// System.out.println(row + ", "+ column);
 		switch (column) {
 		case 0:
 			return dict.getRow(row).getId();
@@ -81,7 +99,5 @@ public class DatabaseTableModel<Row> extends AbstractTableModel {
 	public boolean isCellEditable(int rowIndex, int columnIndex) {
 		return false;
 	}
-
-	
 
 }

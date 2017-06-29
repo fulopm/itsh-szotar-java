@@ -1,10 +1,6 @@
 package hu.itsh.gyakorlat.szotar.szotarak;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.ArrayList;
 
 import org.jsoup.Jsoup;
@@ -36,7 +32,7 @@ public class OnlineDictionary
         		div.add(classes.text());
         }
         
-        // Lista szintaxisa: ANGOL KIFEJEZÉS + NYELV (HU/EN) + JELENTÉSEK
+        // Lista szintaxisa: ANGOL KIFEJEZï¿½S + NYELV (HU/EN) + JELENTï¿½SEK
         ArrayList<String> words = new ArrayList<>();
        
         String[] line;
