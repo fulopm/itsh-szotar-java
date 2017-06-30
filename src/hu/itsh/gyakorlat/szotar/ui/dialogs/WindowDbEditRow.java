@@ -15,6 +15,7 @@ import javax.swing.JTextField;
 import hu.itsh.gyakorlat.szotar.SharedConstants;
 import hu.itsh.gyakorlat.szotar.io.excel.Database;
 import hu.itsh.gyakorlat.szotar.io.excel.ds.Row;
+import hu.itsh.gyakorlat.szotar.ui.actions.ActionSaveRowState;
 import net.java.dev.designgridlayout.DesignGridLayout;
 import net.java.dev.designgridlayout.Tag;
 
@@ -65,15 +66,16 @@ public class WindowDbEditRow extends InternalWindow {
 	JButton buttonSave;
 
 	DesignGridLayout layoutHelper;
+	
 
 	public WindowDbEditRow(Row row) {
 		super(SharedConstants.APP_NAME + " (-) Sor szerkesztése");
-		
 		layoutHelper = new DesignGridLayout(this.getContentPane());
 		this.getLayeredPane().setLayer(this, JLayeredPane.POPUP_LAYER.intValue());
 		
 		
 		if (!Database.dict.containsRow(row)) {
+			System.out.println("itt");
 			this.dispose();
 			return;
 		}
@@ -144,6 +146,7 @@ public class WindowDbEditRow extends InternalWindow {
 		fieldForm3 = new JTextField(row.getForm3());
 		
 		buttonSave = new JButton("Mentés");
+		buttonSave.setAction(new ActionSaveRowState(row));
 
 	}
 
@@ -171,5 +174,8 @@ public class WindowDbEditRow extends InternalWindow {
 			return false;
 		return true;
 	}
+	
+	
+
 
 }

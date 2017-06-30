@@ -1,6 +1,7 @@
 package hu.itsh.gyakorlat.szotar.ui.actions;
 
 import java.awt.event.ActionEvent;
+import java.util.Arrays;
 
 import javax.swing.AbstractAction;
 
@@ -11,11 +12,11 @@ import hu.itsh.gyakorlat.szotar.ui.UIUtil;
 import hu.itsh.gyakorlat.szotar.ui.dialogs.WindowDbTable;
 import hu.itsh.gyakorlat.szotar.ui.dialogs.WindowHelpAbout;
 
-public class ActionMenuDbShow extends AbstractAction{
-	
+public class ActionMenuDbShow extends AbstractAction {
+
 	MainContentPane parent;
-	
-	
+	public static WindowDbTable window;
+
 	public ActionMenuDbShow(MainContentPane contentPane) {
 		super("Adatbázis megjelenítése");
 		parent = contentPane;
@@ -27,8 +28,11 @@ public class ActionMenuDbShow extends AbstractAction{
 			UIUtil.showErrorDialog("Az adatbazis nincs betoltve!\nKattintson a Fajl->Adatbazis megnyitasa gombra.");
 			return;
 		}
-		parent.add(new WindowDbTable());
-		
+		if (window == null)
+			window = new WindowDbTable();
+
+		parent.add(window);
+
 	}
 
 }

@@ -106,7 +106,7 @@ public class Database {
 
 		}
 		
-		dict.sortByWord();
+		dict.sort();
 
 	}
 	
