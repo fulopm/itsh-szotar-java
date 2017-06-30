@@ -22,6 +22,7 @@ import hu.itsh.gyakorlat.szotar.ui.actions.ActionMenuExit;
 import hu.itsh.gyakorlat.szotar.ui.actions.ActionMenuOpenHelpAbout;
 import hu.itsh.gyakorlat.szotar.ui.actions.ActionMenuTestSelect;
 import hu.itsh.gyakorlat.szotar.ui.actions.ActionMenuTestType;
+import hu.itsh.gyakorlat.szotar.ui.actions.ActionMenuTranslate;
 import hu.itsh.gyakorlat.szotar.ui.dialogs.WindowHelpAbout;
 
 public class MainFrame extends JFrame{
@@ -44,6 +45,9 @@ public class MainFrame extends JFrame{
 	JMenu menuPractice;
 	JMenuItem menuItemTestsSelectTest;
 	JMenuItem menuItemTestsListeningTest;
+	
+	JMenu menuTranslate;
+	JMenuItem menuWordBook;
 
 	JMenu menuHelp;
 	JMenuItem menuItemHelpAbout;
@@ -92,6 +96,10 @@ public class MainFrame extends JFrame{
 		menuPractice.add(menuItemTestsListeningTest);
 		menuPractice.add(menuItemTestsSelectTest);
 		
+		menuTranslate = new JMenu("Forditas");
+		menuWordBook = new JMenuItem("Szoszedet, mondatforditas");
+		menuWordBook.setAction(new ActionMenuTranslate(contentPane));
+		menuTranslate.add(menuWordBook);
 
 		menuBarMain.add(menuFile);
 		
@@ -101,6 +109,8 @@ public class MainFrame extends JFrame{
 		menuHelp.add(menuItemHelpAbout);
 		
 		menuBarMain.add(menuPractice);
+		
+		menuBarMain.add(menuTranslate);
 		
 		menuBarMain.add(menuHelp);
 

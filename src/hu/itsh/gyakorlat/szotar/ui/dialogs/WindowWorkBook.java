@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -17,6 +18,7 @@ import javax.swing.table.JTableHeader;
 
 import hu.itsh.gyakorlat.szotar.io.excel.Database;
 import hu.itsh.gyakorlat.szotar.io.user.WordBook;
+import hu.itsh.gyakorlat.szotar.szotarak.OnlineDictionary;
 import net.java.dev.designgridlayout.DesignGridLayout;
 import net.java.dev.designgridlayout.DesignGridLayoutManager;
 
@@ -72,6 +74,44 @@ public class WindowWorkBook extends InternalWindow
 					switch (change)
 					{
 						case (JOptionPane.YES_OPTION):
+							
+						try
+						{
+							ArrayList<String> onlineWords = OnlineDictionary.translate(tableModel.getValueAt(row, col).toString(), OnlineDictionary.HUNGARIAN);
+							String meanings = "";
+							String eng_word = "";
+							ArrayList<String> hun_words = null;
+							int langIndex = 0;
+							for (int i = 0; i < onlineWords.size(); i++)
+							{
+								if (onlineWords.get(i).equals("HU"))
+								{
+									if (i >= 2 && onlineWords.get(i-2).equals("to"))
+									{
+										eng_word += " " + onlineWords.get(i-2) + " " + onlineWords.get(i-1) + ":\n";
+									}
+									else if (i == 1)
+									{
+										eng_word += onlineWords.get(i) + ":\n";
+									}
+									// TO BE CONTINUED
+								}
+								
+								else
+								{
+									
+								}
+								
+								//meanings += " " + onlineWords.get(i);
+								
+							}
+							
+							JOptionPane.showMessageDialog(new WindowWorkBook(), meanings, "Lehetséges jelentések", JOptionPane.OK_CANCEL_OPTION);
+							
+						} catch (IOException e1)
+						{
+							e1.printStackTrace();
+						}
 						break;
 						case (JOptionPane.NO_OPTION):
 							
