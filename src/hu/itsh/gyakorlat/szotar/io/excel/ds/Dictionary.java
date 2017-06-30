@@ -46,6 +46,16 @@ public class Dictionary {
 		
 	}
 	
+	
+	public Row getRowByID(int id) {
+		for (Row row : rows)
+			if (row.getId() == id)
+				return row;
+		
+		
+		return null;
+	}
+	
 	public void sortByWord() {
 		Collections.sort(rows);
 	}

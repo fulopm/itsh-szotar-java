@@ -1,7 +1,10 @@
 package hu.itsh.gyakorlat.szotar.ui;
 
 import javax.swing.JDesktopPane;
+import javax.swing.JInternalFrame;
 import javax.swing.JMenuBar;
+
+import hu.itsh.gyakorlat.szotar.ui.dialogs.InternalWindow;
 
 public class MainContentPane extends JDesktopPane {
 
@@ -15,6 +18,21 @@ public class MainContentPane extends JDesktopPane {
 		
 	}
 	
+	public void addInterenalWindow(InternalWindow w) {
+		add(w);
+	}
 	
+	
+	public void cascade() {
+		JInternalFrame ifs[] = getAllFrames();
+		for (int i = 0; i < ifs.length; i++) {
+		  ifs[i].setBounds(
+		     i*20
+		     ,i*20
+		     ,200
+		     ,200
+		   );
+		}
+	}
 }
  

@@ -95,6 +95,11 @@ public class DatabaseTableModel<Row> extends AbstractTableModel {
 		return columns[column];
 
 	}
+	
+	public Class<?> getColumnClass(int column) {
+		return super.getColumnClass(column);
+		
+	}
 
 	public boolean isCellEditable(int rowIndex, int columnIndex) {
 		return false;
