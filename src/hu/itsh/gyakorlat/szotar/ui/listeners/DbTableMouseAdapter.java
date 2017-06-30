@@ -1,6 +1,7 @@
 package hu.itsh.gyakorlat.szotar.ui.listeners;
 
 import java.awt.event.MouseAdapter;
+import java.util.Arrays;
 
 import javax.swing.JTable;
 
@@ -22,14 +23,14 @@ public class DbTableMouseAdapter extends MouseAdapter {
 	public void mouseClicked(java.awt.event.MouseEvent e) {
 		int row = dbTable.rowAtPoint(e.getPoint());
 		int column = dbTable.columnAtPoint(e.getPoint());
-		System.out.println(row+"; "+column);
 		if (row >= 0 && column >= 0) {
 			int id = Integer.parseInt(dbTable.getValueAt(row, 0).toString());
-			Row roww = Database.dict.getRowByID(id);
-		
-			InternalWindow.mainContentPane.add(new WindowDbEditRow(roww));
-			//InternalWindow.mainContentPane.cascade(); TODO remove me038-edit-row038-edit-row038-edit-row
-			
+			WindowDbEditRow editWindow = new WindowDbEditRow(Database.dict.getRowByID(id));
+			if (!Arrays.asList(InternalWindow.mainContentPane.getAllFrames()).contains(editWindow)) {
+				InternalWindow.mainContentPane.add(editWindow);
+				InternalWindow.mainContentPane.cascade();
+			}
+
 		}
 
 	}

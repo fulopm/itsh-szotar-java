@@ -29,8 +29,8 @@ public class MainContentPane extends JDesktopPane {
 		  ifs[i].setBounds(
 		     i*20
 		     ,i*20
-		     ,200
-		     ,200
+		     ,ifs[i].getWidth()
+		     ,ifs[i].getHeight()
 		   );
 		}
 	}
