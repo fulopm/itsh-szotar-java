@@ -42,11 +42,11 @@ public class WindowHelpAbout extends InternalWindow {
 		
 		fieldCredits = new JTextArea();
 		fieldCredits.setBackground(UIManager.getColor("JPanel.Background"));
-		String creditsText = "Az alkalmaz�s fejleszt�s�ben r�szt vettek:\n";
+		String creditsText = "Az alkalmazas fejleszteseben reszt vettek:\n";
 		for (String developer : SharedConstants.APP_DEVS)
 			creditsText += developer +System.lineSeparator();
 		
-		creditsText += "\n\nAz alkalmaz�s az IT Services Hungary �ltal szervezett �sszef�gg� szakmai gyakorlaton k�sz�lt.";
+		creditsText += "\n\nAz alkalmazas az IT Services Hungary altal szervezett osszefuggo szakmai gyakorlaton keszult.";
 			
 	
 		fieldCredits.setText(creditsText);
