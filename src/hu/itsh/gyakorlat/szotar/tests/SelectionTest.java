@@ -128,7 +128,7 @@ public class SelectionTest extends InternalWindow implements ActionListener {
 	public String newWord() {
 		setRandom();
 		if (!Database.dict.getRow(this.random).getWordClass().contains("definició") && !Database.dict.getRow(this.random).getWordClass().contains("mondat") && !Database.dict.getRow(this.random).getWordClass().contains("rövidítés")) {
-			this.dbWord = Database.dict.getRow(this.random).getWord();
+			this.dbWord = Database.dict.getRow(this.random).getPrefix() + " " + Database.dict.getRow(this.random).getWord() + " " + Database.dict.getRow(this.random).getSuffix();
 			this.wordClass = Database.dict.getRow(this.random).getWordClass();
 			this.rightAns = Database.dict.getRow(this.random).getHun0();
 		} else {
