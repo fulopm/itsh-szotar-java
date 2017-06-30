@@ -63,10 +63,6 @@ public class Database {
 				row.setLevel(Integer.parseInt(cut[11]));
 				row.setLang(cut[12].charAt(0));
 				row.setWordClass(cut[13]);
-				/*
-				 * Ez egy katasztrófa, majd újra kell írni. De legalább működik.
-				 * FM
-				 */
 				switch (cut.length) {
 				case 14:
 					row.setForm0(null);

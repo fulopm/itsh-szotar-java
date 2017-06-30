@@ -1,11 +1,14 @@
 package hu.itsh.gyakorlat.szotar.tts;
 
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.*;
+
+import com.sun.glass.ui.MenuItem;
 
 import hu.itsh.gyakorlat.szotar.SharedConstants;
 import hu.itsh.gyakorlat.szotar.io.excel.Database;
@@ -73,6 +76,7 @@ public class TestFrame extends InternalWindow implements ActionListener{
 		this.buttonCheck = new JButton("Ellenorzes");
 		this.buttonCheck.setSize(100,30);
 		this.buttonCheck.setLocation(150,120);
+		buttonCheck.setMnemonic(KeyEvent.VK_ENTER);
 		
 		this.labelCheck = new JLabel(this.gameNo + "/10");
 		this.labelCheck.setSize(100,20);
