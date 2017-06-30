@@ -17,7 +17,7 @@ public class WordBook
 		for (String word : allWords)
 		{
 			if (sortedWords.isEmpty() || !sortedWords.contains(word))
-				sortedWords.add(word);
+				sortedWords.add(word.replaceAll("[-+.^:,?!]", ""));
 		}
 		sortedWords.sort(String.CASE_INSENSITIVE_ORDER);
 		
