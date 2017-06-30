@@ -33,8 +33,12 @@ public class ActionMenuDbOpen extends AbstractAction {
 			@Override
 			protected Void doInBackground() throws Exception {
 
+				try {
 				XSSFWorkbook wb = Database.loadWorkbook("NGP.xlsx");
 				Database.loadDictionary(wb);
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
 				return null;
 
 			}
@@ -57,7 +61,7 @@ public class ActionMenuDbOpen extends AbstractAction {
 		dialog.setVisible(true);
 		
 	
-		
+	
 
 	}
 
