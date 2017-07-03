@@ -12,7 +12,7 @@ import hu.itsh.gyakorlat.szotar.szotarak.OnlineDictionary;
 public class Main {
 
 	public static void main(String[] args) throws URISyntaxException, IOException {
-		
+		System.setProperty("mbrola.base", "C:\\Users\\mafueloe\\workspace\\itsh-szotar-java\\lib\\mbrola.jar");
    MainFrame frame = new MainFrame();
 	 frame.setVisible(true);
 		// 	ITSH PROXY HOST + USER + PW TO CONNECT TO PROGRAM ARGUMENTS NEEDED 

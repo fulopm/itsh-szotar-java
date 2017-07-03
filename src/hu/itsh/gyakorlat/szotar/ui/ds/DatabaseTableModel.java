@@ -1,10 +1,15 @@
 package hu.itsh.gyakorlat.szotar.ui.ds;
 
+import java.util.Observable;
+import java.util.Observer;
+
 import javax.swing.table.AbstractTableModel;
 
+import hu.itsh.gyakorlat.szotar.io.excel.Database;
 import hu.itsh.gyakorlat.szotar.io.excel.ds.Dictionary;
 
-public class DatabaseTableModel<Row> extends AbstractTableModel {
+public class DatabaseTableModel<Row> extends AbstractTableModel
+{
 
 	private Dictionary dict;
 
@@ -46,7 +51,6 @@ public class DatabaseTableModel<Row> extends AbstractTableModel {
 
 	@Override
 	public Object getValueAt(int row, int column) {
-		// System.out.println(row + ", "+ column);
 		switch (column) {
 		case 0:
 			return dict.getRow(row).getId();
@@ -95,9 +99,22 @@ public class DatabaseTableModel<Row> extends AbstractTableModel {
 		return columns[column];
 
 	}
+	
+	public Class<?> getColumnClass(int column) {
+		return super.getColumnClass(column);
+		
+	}
 
 	public boolean isCellEditable(int rowIndex, int columnIndex) {
 		return false;
 	}
+	
+	
+	public void updateBackend() {
+		this.dict = Database.dict;
+		this.fireTableDataChanged();
+	}
+
+
 
 }

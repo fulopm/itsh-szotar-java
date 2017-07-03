@@ -5,9 +5,13 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
@@ -24,6 +28,8 @@ import javax.swing.RowFilter;
 import javax.swing.UIManager;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.swing.event.InternalFrameAdapter;
+import javax.swing.event.InternalFrameEvent;
 import javax.swing.table.TableRowSorter;
 
 import hu.itsh.gyakorlat.szotar.SharedConstants;
@@ -31,11 +37,12 @@ import hu.itsh.gyakorlat.szotar.io.excel.Database;
 import hu.itsh.gyakorlat.szotar.io.excel.ds.Row;
 import hu.itsh.gyakorlat.szotar.ui.UIUtil;
 import hu.itsh.gyakorlat.szotar.ui.ds.DatabaseTableModel;
+import hu.itsh.gyakorlat.szotar.ui.listeners.DbTableMouseAdapter;
 import net.java.balloontip.BalloonTip;
 
 public class WindowDbTable extends InternalWindow {
 
-	JTable tableData;
+	JTable table;
 	DatabaseTableModel tableModel;
 	TableRowSorter tableSorter;
 	JTextField fieldSearch;
@@ -51,10 +58,16 @@ public class WindowDbTable extends InternalWindow {
 		super(SharedConstants.APP_NAME + " (-) Adatbázis", new BorderLayout());
 		initComponents();
 
-		contentPane.add(new JScrollPane(tableData), BorderLayout.CENTER);
+		contentPane.add(new JScrollPane(table), BorderLayout.CENTER);
 		contentPane.add(fieldSearch, BorderLayout.SOUTH);
 		setSize(new Dimension((int)Toolkit.getDefaultToolkit().getScreenSize().getWidth()/2, (int)Toolkit.getDefaultToolkit().getScreenSize().getHeight()/2));
 		setVisible(true);
+		 addInternalFrameListener(new InternalFrameAdapter(){
+	            public void internalFrameClosing(InternalFrameEvent e) {
+	            	WindowDbTable.this.dispose();
+	                InternalWindow.mainContentPane.remove(WindowDbTable.this);
+	            }
+	        });
 
 	}
 
@@ -94,8 +107,9 @@ public class WindowDbTable extends InternalWindow {
 
 		tableModel = new DatabaseTableModel(Database.dict);
 		tableSorter = new TableRowSorter<DatabaseTableModel>(tableModel);
-		tableData = new JTable(tableModel);
-		tableData.setRowSorter(tableSorter);
+		table = new JTable(tableModel);
+		table.setRowSorter(tableSorter);
+		table.addMouseListener(new DbTableMouseAdapter(table));
 		fieldSearch.addKeyListener(new KeyAdapter() {
 
 			@Override
@@ -150,4 +164,22 @@ public class WindowDbTable extends InternalWindow {
 		}
 		tableSorter.setRowFilter(rf);
 	}
+
+	public DatabaseTableModel getTableModel() {
+		return tableModel;
+	}
+
+	public void setTableModel(DatabaseTableModel tableModel) {
+		this.tableModel = tableModel;
+	}
+
+	public JTable getTable() {
+		return table;
+	}
+
+	public void setTable(JTable table) {
+		this.table = table;
+	}
+	
+
 }

@@ -5,9 +5,12 @@ import java.awt.LayoutManager;
 import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 
+import hu.itsh.gyakorlat.szotar.ui.MainContentPane;
+
 public abstract class InternalWindow extends JInternalFrame {
 
 	protected JPanel contentPane;
+	public static MainContentPane mainContentPane;
 	
 	
 	public InternalWindow(String title) {

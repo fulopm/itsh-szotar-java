@@ -9,52 +9,66 @@ import java.util.List;
 import java.util.TreeSet;
 
 public class Dictionary {
-	
+
 	private List<Row> rows;
-	
+
 	public Dictionary(List<Row> rows) {
 		this.rows = rows;
 	}
-	
+
 	public Dictionary() {
 		this.rows = new ArrayList<>();
 	}
-	
+
 	public boolean addRow(Row e) {
 		return this.rows.add(e);
 	}
-	
+
 	public Row removeRow(int index) {
 		return this.rows.remove(index);
 	}
-	
+
 	public Row getRow(int index) {
 		return this.rows.get(index);
 	}
-	
-	
+
 	public boolean containsRow(Row e) {
 		return this.rows.contains(e);
 	}
-	
+
 	public int getRowCount() {
 		return rows.size();
 	}
-	
+
 	public boolean isEmpty() {
 		return rows == null || rows.size() == 0;
-		
+
 	}
-	
-	public void sortByWord() {
-		Collections.sort(rows);
+
+	public Row searchByID(int id) {
+		for (Row row : rows)
+			if (row.getId() == id)
+				return row;
+
+		return null;
+
+		/*
+		 * 
+		 * Comparator<Row> c = new Comparator<Row>() {
+		 * 
+		 * @Override public int compare(Row o1, Row o2) { return
+		 * Integer.compare(o1.getId(), o2.getId()); }
+		 * 
+		 * }; Row r = new Row(); r.setId(id); int hit =
+		 * Collections.binarySearch(rows, r, c);
+		 * 
+		 * 
+		 * return hit > -1 ? getRow(hit) : null;
+		 */
+
 	}
-	
-	public Iterator<Row> getRowIterator() {
-		return rows.iterator();
-	}
-	
-	public int searchByWord(String word) {
+
+	public Row searchByWord(String word) {
 
 		Comparator<Row> c = new Comparator<Row>() {
 
@@ -62,16 +76,33 @@ public class Dictionary {
 			public int compare(Row o1, Row o2) {
 				return o1.getWord().compareToIgnoreCase(o2.getWord());
 			}
-			
+
 		};
 		Row r = new Row();
 		r.setWord(word);
-		return Collections.binarySearch(rows, r, c);
-		
-		
-	}
-	
+		int hit = Collections.binarySearch(rows, r, c);
 
-	
-	
+		return hit > -1 ? getRow(hit) : null;
+
+	}
+
+	public void setRow(int index, Row newRow) {
+		rows.set(index, newRow);
+	}
+
+	public int getRowIndex(Row e) {
+		if (!rows.contains(e))
+			return -1;
+
+		return rows.indexOf(e);
+	}
+
+	public void sort() {
+		Collections.sort(rows);
+	}
+
+	Iterator<Row> getRowIterator() {
+		return rows.iterator();
+	}
+
 }

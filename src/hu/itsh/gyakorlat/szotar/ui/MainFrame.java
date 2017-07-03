@@ -22,6 +22,7 @@ import hu.itsh.gyakorlat.szotar.ui.actions.ActionMenuExit;
 import hu.itsh.gyakorlat.szotar.ui.actions.ActionMenuOpenHelpAbout;
 import hu.itsh.gyakorlat.szotar.ui.actions.ActionMenuTestSelect;
 import hu.itsh.gyakorlat.szotar.ui.actions.ActionMenuTestType;
+import hu.itsh.gyakorlat.szotar.ui.dialogs.InternalWindow;
 import hu.itsh.gyakorlat.szotar.ui.dialogs.WindowHelpAbout;
 
 public class MainFrame extends JFrame{
@@ -62,7 +63,9 @@ public class MainFrame extends JFrame{
 	void initComponents() {
 		contentPane = new MainContentPane();
 		menuBarMain = new JMenuBar();
-
+		InternalWindow.mainContentPane = contentPane;
+		
+		
 		menuFile = new JMenu("Fajl");
 		menuItemDbOpen = new JMenuItem("Adatbazis megnyitas");
 		menuItemDbOpen.setAction(new ActionMenuDbOpen(contentPane));
@@ -118,6 +121,8 @@ public class MainFrame extends JFrame{
 			}
 		}
 	}
+	
+	
 
 
 	
