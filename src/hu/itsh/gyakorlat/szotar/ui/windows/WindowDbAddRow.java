@@ -11,6 +11,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import hu.itsh.gyakorlat.szotar.SharedConstants;
+import hu.itsh.gyakorlat.szotar.spell.SpellChecking;
 import hu.itsh.gyakorlat.szotar.ui.UIUtil;
 import hu.itsh.gyakorlat.szotar.ui.actions.ActionAddRow;
 import hu.itsh.gyakorlat.szotar.ui.actions.ActionSaveRowState;
@@ -29,6 +30,17 @@ public class WindowDbAddRow extends WindowDbRow {
 		layoutHelper.row().grid(labelLevel).add(fieldLevel);
 		layoutHelper.row().grid(labelLang).add(fieldLang);
 		layoutHelper.row().grid(labelForms).add(fieldForm0).add(fieldForm1).add(fieldForm2).add(fieldForm3);
+		
+		SpellChecking sp = new SpellChecking();
+		sp.check(fieldPrefix);
+		sp.check(fieldWord);
+		sp.check(fieldSuffix);
+		sp.check(fieldEngExplain);
+		sp.check(fieldEngExample);
+		sp.check(fieldForm0);
+		sp.check(fieldForm1);
+		sp.check(fieldForm2);
+		sp.check(fieldForm3);
 
 		layoutHelper.row().bar().add(buttonSave, Tag.OK);
 		setMinimumSize(new Dimension(810, 380));
