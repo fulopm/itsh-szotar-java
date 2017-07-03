@@ -16,6 +16,9 @@ import javax.swing.JTextArea;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
 import hu.itsh.gyakorlat.szotar.io.excel.Database;
 import hu.itsh.gyakorlat.szotar.io.user.WordBook;
 import hu.itsh.gyakorlat.szotar.szotarak.OnlineDictionary;
@@ -77,35 +80,38 @@ public class WindowWorkBook extends InternalWindow
 							
 						try
 						{
-							ArrayList<String> onlineWords = OnlineDictionary.translate(tableModel.getValueAt(row, col).toString(), OnlineDictionary.HUNGARIAN);
-							String meanings = "";
-							String eng_word = "";
-							ArrayList<String> hun_words = null;
-							int langIndex = 0;
-							for (int i = 0; i < onlineWords.size(); i++)
+							Elements onlineWords = OnlineDictionary.translate(tableModel.getValueAt(row, col).toString(), OnlineDictionary.HUNGARIAN);
+							String meanings = "<html>";
+							String[] line;
+							boolean isSource = true;
+							String craft = "<b>";
+							for (Element wordSet : onlineWords)
 							{
-								if (onlineWords.get(i).equals("HU"))
+								if (wordSet.text().contains("HU") || wordSet.text().contains("EN"))
 								{
-									if (i >= 2 && onlineWords.get(i-2).equals("to"))
+									line = wordSet.text().split("\\s+");
+									for (String wd : line)
 									{
-										eng_word += " " + onlineWords.get(i-2) + " " + onlineWords.get(i-1) + ":\n";
+										if (!wd.contains("{"))
+										{
+											if (wd.equals("HU") || wd.equals("EN"))
+											{
+												isSource = false;
+												meanings += craft + "</b>";
+												craft = "<b>";
+											}
+											else if (isSource)
+												craft += wd + " ";
+											else if (!isSource && !wd.equals("HU") && !wd.equals("EN"))
+												meanings += wd + " ";
+										 }
 									}
-									else if (i == 1)
-									{
-										eng_word += onlineWords.get(i) + ":\n";
-									}
-									// TO BE CONTINUED
 								}
-								
-								else
-								{
-									
-								}
-								
-								//meanings += " " + onlineWords.get(i);
-								
+								isSource = true;
+								meanings +=  "<br>";
 							}
-							
+							meanings += "</html>";
+							System.out.println(meanings);
 							JOptionPane.showMessageDialog(new WindowWorkBook(), meanings, "Lehetséges jelentések", JOptionPane.OK_CANCEL_OPTION);
 							
 						} catch (IOException e1)
