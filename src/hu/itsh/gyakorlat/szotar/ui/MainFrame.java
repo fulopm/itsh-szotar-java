@@ -1,10 +1,5 @@
 package hu.itsh.gyakorlat.szotar.ui;
 
-import java.awt.HeadlessException;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.AbstractAction;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -14,7 +9,6 @@ import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.UnsupportedLookAndFeelException;
 
 import hu.itsh.gyakorlat.szotar.SharedConstants;
-import hu.itsh.gyakorlat.szotar.tts.TTS;
 import hu.itsh.gyakorlat.szotar.ui.actions.ActionMenuDbOpen;
 import hu.itsh.gyakorlat.szotar.ui.actions.ActionMenuDbShow;
 import hu.itsh.gyakorlat.szotar.ui.actions.ActionMenuExit;
@@ -22,9 +16,8 @@ import hu.itsh.gyakorlat.szotar.ui.actions.ActionMenuOpenHelpAbout;
 import hu.itsh.gyakorlat.szotar.ui.actions.ActionMenuStatistics;
 import hu.itsh.gyakorlat.szotar.ui.actions.ActionMenuTestSelect;
 import hu.itsh.gyakorlat.szotar.ui.actions.ActionMenuTestType;
+import hu.itsh.gyakorlat.szotar.ui.actions.ActionMenuTranslate;
 import hu.itsh.gyakorlat.szotar.ui.windows.InternalWindow;
-import hu.itsh.gyakorlat.szotar.ui.windows.WindowTestRead;
-import hu.itsh.gyakorlat.szotar.ui.windows.WindowHelpAbout;
 
 public class MainFrame extends JFrame{
 
@@ -46,7 +39,11 @@ public class MainFrame extends JFrame{
 	JMenu menuPractice;
 	JMenuItem menuItemTestsSelectTest;
 	JMenuItem menuItemTestsListeningTest;
+	
 	JMenuItem menuItemStatistics;
+	
+	JMenu menuTranslate;
+	JMenuItem menuWordBook;
 
 	JMenu menuHelp;
 	JMenuItem menuItemHelpAbout;
@@ -102,6 +99,10 @@ public class MainFrame extends JFrame{
 		menuPractice.addSeparator();
 		menuPractice.add(menuItemStatistics);
 		
+		menuTranslate = new JMenu("Forditas");
+		menuWordBook = new JMenuItem("Szoszedet, mondatforditas");
+		menuWordBook.setAction(new ActionMenuTranslate(contentPane));
+		menuTranslate.add(menuWordBook);
 
 		menuBarMain.add(menuFile);
 		
@@ -111,6 +112,8 @@ public class MainFrame extends JFrame{
 		menuHelp.add(menuItemHelpAbout);
 		
 		menuBarMain.add(menuPractice);
+		
+		menuBarMain.add(menuTranslate);
 		
 		menuBarMain.add(menuHelp);
 

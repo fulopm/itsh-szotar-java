@@ -1,10 +1,10 @@
 package hu.itsh.gyakorlat.szotar.ui.windows;
 
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -13,13 +13,15 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
+
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 import hu.itsh.gyakorlat.szotar.dictionaries.Database;
+import hu.itsh.gyakorlat.szotar.dictionaries.OnlineDictionary;
 import hu.itsh.gyakorlat.szotar.io.excel.ds.Row;
 import hu.itsh.gyakorlat.szotar.io.user.WordBook;
 import net.java.dev.designgridlayout.DesignGridLayout;
-import net.java.dev.designgridlayout.DesignGridLayoutManager;
 
 public class WindowWorkBook extends InternalWindow
 {
@@ -73,6 +75,47 @@ public class WindowWorkBook extends InternalWindow
 					switch (change)
 					{
 						case (JOptionPane.YES_OPTION):
+							
+						try
+						{
+							Elements onlineWords = OnlineDictionary.translate(tableModel.getValueAt(row, col).toString(), OnlineDictionary.HUNGARIAN);
+							String meanings = "<html>";
+							String[] line;
+							boolean isSource = true;
+							String craft = "<b>";
+							for (Element wordSet : onlineWords)
+							{
+								if (wordSet.text().contains("HU") || wordSet.text().contains("EN"))
+								{
+									line = wordSet.text().split("\\s+");
+									for (String wd : line)
+									{
+										if (!wd.contains("{"))
+										{
+											if (wd.equals("HU") || wd.equals("EN"))
+											{
+												isSource = false;
+												meanings += craft + "</b>";
+												craft = "<b>";
+											}
+											else if (isSource)
+												craft += wd + " ";
+											else if (!isSource && !wd.equals("HU") && !wd.equals("EN"))
+												meanings += wd + " ";
+										 }
+									}
+								}
+								isSource = true;
+								meanings +=  "<br>";
+							}
+							meanings += "</html>";
+							System.out.println(meanings);
+							JOptionPane.showMessageDialog(new WindowWorkBook(), meanings, "Lehetséges jelentések", JOptionPane.OK_CANCEL_OPTION);
+							
+						} catch (IOException e1)
+						{
+							e1.printStackTrace();
+						}
 						break;
 						case (JOptionPane.NO_OPTION):
 							
@@ -115,9 +158,10 @@ public class WindowWorkBook extends InternalWindow
 					
 					for (int i = 0; i < sourceWords.size(); i++)
 					{			
+						// 55
 						row[0] = sourceWords.get(i);
-						Row hit = Database.dict.searchByWord(sourceWords.get(i));
-						row[1] = hit != null ? hit.getHun0() : "UNKNOWN";
+						Row rowHit = Database.dict.searchByWord(sourceWords.get(i));
+						row[1] = rowHit != null ? rowHit.getHun0() : "UNKNOWN";
 						tableModel.addRow(row);	
 					}
 				}
