@@ -5,12 +5,12 @@ import java.util.Arrays;
 
 import javax.swing.AbstractAction;
 
-import hu.itsh.gyakorlat.szotar.io.excel.Database;
-import hu.itsh.gyakorlat.szotar.io.excel.ds.Dictionary;
+import hu.itsh.gyakorlat.szotar.dictionaries.Database;
+import hu.itsh.gyakorlat.szotar.dictionaries.Dictionary;
 import hu.itsh.gyakorlat.szotar.ui.MainContentPane;
 import hu.itsh.gyakorlat.szotar.ui.UIUtil;
-import hu.itsh.gyakorlat.szotar.ui.dialogs.WindowDbTable;
-import hu.itsh.gyakorlat.szotar.ui.dialogs.WindowHelpAbout;
+import hu.itsh.gyakorlat.szotar.ui.windows.WindowDbTable;
+import hu.itsh.gyakorlat.szotar.ui.windows.WindowHelpAbout;
 
 public class ActionMenuDbShow extends AbstractAction {
 

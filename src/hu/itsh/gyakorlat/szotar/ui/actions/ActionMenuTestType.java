@@ -11,12 +11,12 @@ import javax.swing.SwingWorker;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import hu.itsh.gyakorlat.szotar.io.excel.Database;
-import hu.itsh.gyakorlat.szotar.tts.TestFrame;
+import hu.itsh.gyakorlat.szotar.dictionaries.Database;
 import hu.itsh.gyakorlat.szotar.ui.MainContentPane;
 import hu.itsh.gyakorlat.szotar.ui.PleaseWaitDialog;
 import hu.itsh.gyakorlat.szotar.ui.UIUtil;
-import hu.itsh.gyakorlat.szotar.ui.dialogs.WindowHelpAbout;
+import hu.itsh.gyakorlat.szotar.ui.windows.WindowTestRead;
+import hu.itsh.gyakorlat.szotar.ui.windows.WindowHelpAbout;
 
 public class ActionMenuTestType extends AbstractAction {
 
@@ -29,7 +29,7 @@ public class ActionMenuTestType extends AbstractAction {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		TestFrame tf = new TestFrame();
+		WindowTestRead tf = new WindowTestRead();
 		parent.add(tf);
 	
 		

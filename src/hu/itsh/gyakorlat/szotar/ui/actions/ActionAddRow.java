@@ -6,7 +6,7 @@ import java.util.Date;
 import javax.swing.AbstractAction;
 
 import hu.itsh.gyakorlat.szotar.SharedConstants;
-import hu.itsh.gyakorlat.szotar.io.excel.Database;
+import hu.itsh.gyakorlat.szotar.dictionaries.Database;
 import hu.itsh.gyakorlat.szotar.io.excel.ds.Row;
 import hu.itsh.gyakorlat.szotar.ui.UIUtil;
 

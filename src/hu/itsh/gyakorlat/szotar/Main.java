@@ -5,9 +5,8 @@ import java.net.PasswordAuthentication;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 
-import hu.itsh.gyakorlat.szotar.szotarak.OnlineDictionary;
+import hu.itsh.gyakorlat.szotar.dictionaries.OnlineDictionary;
 import hu.itsh.gyakorlat.szotar.ui.MainFrame;
-import hu.itsh.gyakorlat.szotar.szotarak.OnlineDictionary;
 
 public class Main {
 

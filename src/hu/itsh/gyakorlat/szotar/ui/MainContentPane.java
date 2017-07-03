@@ -4,7 +4,7 @@ import javax.swing.JDesktopPane;
 import javax.swing.JInternalFrame;
 import javax.swing.JMenuBar;
 
-import hu.itsh.gyakorlat.szotar.ui.dialogs.InternalWindow;
+import hu.itsh.gyakorlat.szotar.ui.windows.InternalWindow;
 
 public class MainContentPane extends JDesktopPane {
 

@@ -1,4 +1,4 @@
-package hu.itsh.gyakorlat.szotar.tests;
+package hu.itsh.gyakorlat.szotar.ui.windows;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -14,11 +14,10 @@ import java.util.Collections;
 import javax.swing.*;
 
 import hu.itsh.gyakorlat.szotar.SharedConstants;
-import hu.itsh.gyakorlat.szotar.io.excel.Database;
+import hu.itsh.gyakorlat.szotar.dictionaries.Database;
 import hu.itsh.gyakorlat.szotar.statistics.Statistics;
-import hu.itsh.gyakorlat.szotar.ui.dialogs.InternalWindow;
 
-public class SelectionTest extends InternalWindow implements ActionListener {
+public class WindowTestSelection extends InternalWindow implements ActionListener {
 
 	private JButton buttonStart, buttonCheck;
 	private JLabel labelEnglishWord, labelMeaning, labelCheck;
@@ -34,7 +33,7 @@ public class SelectionTest extends InternalWindow implements ActionListener {
 
 	private ArrayList<String> answers = new ArrayList<String>();
 
-	public SelectionTest() {
+	public WindowTestSelection() {
 
 		super(SharedConstants.APP_NAME + " (-) Valasztos teszt");
 		initComponents();

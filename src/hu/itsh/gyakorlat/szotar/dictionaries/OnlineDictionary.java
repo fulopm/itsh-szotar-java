@@ -1,4 +1,4 @@
-package hu.itsh.gyakorlat.szotar.szotarak;
+package hu.itsh.gyakorlat.szotar.dictionaries;
 
 import java.io.IOException;
 import java.util.ArrayList;

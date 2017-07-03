@@ -1,4 +1,4 @@
-package hu.itsh.gyakorlat.szotar.ui.dialogs;
+package hu.itsh.gyakorlat.szotar.ui.windows;
 
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -15,7 +15,7 @@ import javax.swing.JTextArea;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
-import hu.itsh.gyakorlat.szotar.io.excel.Database;
+import hu.itsh.gyakorlat.szotar.dictionaries.Database;
 import hu.itsh.gyakorlat.szotar.io.excel.ds.Row;
 import hu.itsh.gyakorlat.szotar.io.user.WordBook;
 import net.java.dev.designgridlayout.DesignGridLayout;

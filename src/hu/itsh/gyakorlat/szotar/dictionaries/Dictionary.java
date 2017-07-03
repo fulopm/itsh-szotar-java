@@ -1,4 +1,4 @@
-package hu.itsh.gyakorlat.szotar.io.excel.ds;
+package hu.itsh.gyakorlat.szotar.dictionaries;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -7,6 +7,8 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.TreeSet;
+
+import hu.itsh.gyakorlat.szotar.io.excel.ds.Row;
 
 public class Dictionary {
 

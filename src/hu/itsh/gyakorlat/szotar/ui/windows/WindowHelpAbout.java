@@ -1,4 +1,4 @@
-package hu.itsh.gyakorlat.szotar.ui.dialogs;
+package hu.itsh.gyakorlat.szotar.ui.windows;
 
 import java.awt.FlowLayout;
 import java.awt.Font;

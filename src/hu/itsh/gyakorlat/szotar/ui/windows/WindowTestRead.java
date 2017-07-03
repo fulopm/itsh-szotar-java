@@ -1,4 +1,4 @@
-package hu.itsh.gyakorlat.szotar.tts;
+package hu.itsh.gyakorlat.szotar.ui.windows;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -16,11 +16,11 @@ import javax.swing.*;
 import com.sun.glass.ui.MenuItem;
 
 import hu.itsh.gyakorlat.szotar.SharedConstants;
-import hu.itsh.gyakorlat.szotar.io.excel.Database;
+import hu.itsh.gyakorlat.szotar.dictionaries.Database;
 import hu.itsh.gyakorlat.szotar.statistics.Statistics;
-import hu.itsh.gyakorlat.szotar.ui.dialogs.InternalWindow;
+import hu.itsh.gyakorlat.szotar.tts.TTS;
 
-public class TestFrame extends InternalWindow implements ActionListener {
+public class WindowTestRead extends InternalWindow implements ActionListener {
 
 	private JLabel labelInput, labelCheck, labelAnswser;
 	private JTextField textEnglishWord;
@@ -32,7 +32,7 @@ public class TestFrame extends InternalWindow implements ActionListener {
 	private String inputWord = "";
 	private String dbWord;
 
-	public TestFrame() {
+	public WindowTestRead() {
 		super(SharedConstants.APP_NAME + " (-) Felolvasos teszt");
 		initComponents();
 

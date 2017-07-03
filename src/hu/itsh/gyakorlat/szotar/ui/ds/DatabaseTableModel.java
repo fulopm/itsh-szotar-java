@@ -5,8 +5,8 @@ import java.util.Observer;
 
 import javax.swing.table.AbstractTableModel;
 
-import hu.itsh.gyakorlat.szotar.io.excel.Database;
-import hu.itsh.gyakorlat.szotar.io.excel.ds.Dictionary;
+import hu.itsh.gyakorlat.szotar.dictionaries.Database;
+import hu.itsh.gyakorlat.szotar.dictionaries.Dictionary;
 
 public class DatabaseTableModel<Row> extends AbstractTableModel
 {

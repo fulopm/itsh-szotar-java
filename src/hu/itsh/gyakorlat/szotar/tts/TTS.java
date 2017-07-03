@@ -2,8 +2,8 @@ package hu.itsh.gyakorlat.szotar.tts;
 
 import com.sun.speech.freetts.*;
 
-import hu.itsh.gyakorlat.szotar.io.excel.Database;
-import hu.itsh.gyakorlat.szotar.io.excel.ds.Dictionary;
+import hu.itsh.gyakorlat.szotar.dictionaries.Database;
+import hu.itsh.gyakorlat.szotar.dictionaries.Dictionary;
 
 public class TTS {
 

@@ -1,4 +1,4 @@
-package hu.itsh.gyakorlat.szotar.ui.dialogs;
+package hu.itsh.gyakorlat.szotar.ui.windows;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -25,7 +25,7 @@ import javax.swing.event.InternalFrameEvent;
 import javax.swing.table.TableRowSorter;
 
 import hu.itsh.gyakorlat.szotar.SharedConstants;
-import hu.itsh.gyakorlat.szotar.io.excel.Database;
+import hu.itsh.gyakorlat.szotar.dictionaries.Database;
 import hu.itsh.gyakorlat.szotar.ui.ds.DatabaseTableModel;
 import hu.itsh.gyakorlat.szotar.ui.listeners.DbTableMouseAdapter;
 import net.java.balloontip.BalloonTip;

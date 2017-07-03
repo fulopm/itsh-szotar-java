@@ -4,8 +4,8 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
 
-import hu.itsh.gyakorlat.szotar.tests.SelectionTest;
 import hu.itsh.gyakorlat.szotar.ui.MainContentPane;
+import hu.itsh.gyakorlat.szotar.ui.windows.WindowTestSelection;
 
 public class ActionMenuTestSelect extends AbstractAction{
 	
@@ -19,7 +19,7 @@ public class ActionMenuTestSelect extends AbstractAction{
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		SelectionTest st = new SelectionTest();
+		WindowTestSelection st = new WindowTestSelection();
 		parent.add(st);
 	}
 

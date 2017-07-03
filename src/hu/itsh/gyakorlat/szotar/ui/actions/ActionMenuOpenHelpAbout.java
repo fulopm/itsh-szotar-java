@@ -5,7 +5,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 
 import hu.itsh.gyakorlat.szotar.ui.MainContentPane;
-import hu.itsh.gyakorlat.szotar.ui.dialogs.WindowHelpAbout;
+import hu.itsh.gyakorlat.szotar.ui.windows.WindowHelpAbout;
 
 public class ActionMenuOpenHelpAbout extends AbstractAction{
 	

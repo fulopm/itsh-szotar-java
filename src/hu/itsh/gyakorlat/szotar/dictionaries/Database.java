@@ -1,4 +1,4 @@
-package hu.itsh.gyakorlat.szotar.io.excel;
+package hu.itsh.gyakorlat.szotar.dictionaries;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,7 +12,7 @@ import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import hu.itsh.gyakorlat.szotar.SharedConstants;
-import hu.itsh.gyakorlat.szotar.io.excel.ds.Dictionary;
+import hu.itsh.gyakorlat.szotar.io.excel.ExcelBase;
 import hu.itsh.gyakorlat.szotar.io.excel.ds.Row;
 
 public class Database extends Observable {

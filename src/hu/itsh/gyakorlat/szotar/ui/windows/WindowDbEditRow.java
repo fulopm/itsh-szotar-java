@@ -1,4 +1,4 @@
-package hu.itsh.gyakorlat.szotar.ui.dialogs;
+package hu.itsh.gyakorlat.szotar.ui.windows;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -15,7 +15,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import hu.itsh.gyakorlat.szotar.SharedConstants;
-import hu.itsh.gyakorlat.szotar.io.excel.Database;
+import hu.itsh.gyakorlat.szotar.dictionaries.Database;
 import hu.itsh.gyakorlat.szotar.io.excel.ds.Row;
 import hu.itsh.gyakorlat.szotar.ui.UIUtil;
 import hu.itsh.gyakorlat.szotar.ui.actions.ActionSaveRowState;

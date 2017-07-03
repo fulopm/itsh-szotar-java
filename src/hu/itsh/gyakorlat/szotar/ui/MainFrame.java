@@ -15,7 +15,6 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 import hu.itsh.gyakorlat.szotar.SharedConstants;
 import hu.itsh.gyakorlat.szotar.tts.TTS;
-import hu.itsh.gyakorlat.szotar.tts.TestFrame;
 import hu.itsh.gyakorlat.szotar.ui.actions.ActionMenuDbOpen;
 import hu.itsh.gyakorlat.szotar.ui.actions.ActionMenuDbShow;
 import hu.itsh.gyakorlat.szotar.ui.actions.ActionMenuExit;
@@ -23,8 +22,9 @@ import hu.itsh.gyakorlat.szotar.ui.actions.ActionMenuOpenHelpAbout;
 import hu.itsh.gyakorlat.szotar.ui.actions.ActionMenuStatistics;
 import hu.itsh.gyakorlat.szotar.ui.actions.ActionMenuTestSelect;
 import hu.itsh.gyakorlat.szotar.ui.actions.ActionMenuTestType;
-import hu.itsh.gyakorlat.szotar.ui.dialogs.InternalWindow;
-import hu.itsh.gyakorlat.szotar.ui.dialogs.WindowHelpAbout;
+import hu.itsh.gyakorlat.szotar.ui.windows.InternalWindow;
+import hu.itsh.gyakorlat.szotar.ui.windows.WindowTestRead;
+import hu.itsh.gyakorlat.szotar.ui.windows.WindowHelpAbout;
 
 public class MainFrame extends JFrame{
 

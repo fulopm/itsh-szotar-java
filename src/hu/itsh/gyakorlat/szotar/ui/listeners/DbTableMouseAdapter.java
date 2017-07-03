@@ -5,12 +5,12 @@ import java.util.Arrays;
 
 import javax.swing.JTable;
 
-import hu.itsh.gyakorlat.szotar.io.excel.Database;
+import hu.itsh.gyakorlat.szotar.dictionaries.Database;
 import hu.itsh.gyakorlat.szotar.io.excel.ds.Row;
 import hu.itsh.gyakorlat.szotar.ui.MainContentPane;
-import hu.itsh.gyakorlat.szotar.ui.dialogs.InternalWindow;
-import hu.itsh.gyakorlat.szotar.ui.dialogs.WindowDbEditRow;
-import hu.itsh.gyakorlat.szotar.ui.dialogs.WindowDbTable;
+import hu.itsh.gyakorlat.szotar.ui.windows.InternalWindow;
+import hu.itsh.gyakorlat.szotar.ui.windows.WindowDbEditRow;
+import hu.itsh.gyakorlat.szotar.ui.windows.WindowDbTable;
 
 public class DbTableMouseAdapter extends MouseAdapter {
 
