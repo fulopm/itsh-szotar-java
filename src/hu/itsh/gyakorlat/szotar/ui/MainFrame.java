@@ -20,6 +20,7 @@ import hu.itsh.gyakorlat.szotar.ui.actions.ActionMenuDbOpen;
 import hu.itsh.gyakorlat.szotar.ui.actions.ActionMenuDbShow;
 import hu.itsh.gyakorlat.szotar.ui.actions.ActionMenuExit;
 import hu.itsh.gyakorlat.szotar.ui.actions.ActionMenuOpenHelpAbout;
+import hu.itsh.gyakorlat.szotar.ui.actions.ActionMenuStatistics;
 import hu.itsh.gyakorlat.szotar.ui.actions.ActionMenuTestSelect;
 import hu.itsh.gyakorlat.szotar.ui.actions.ActionMenuTestType;
 import hu.itsh.gyakorlat.szotar.ui.dialogs.WindowHelpAbout;
@@ -44,6 +45,7 @@ public class MainFrame extends JFrame{
 	JMenu menuPractice;
 	JMenuItem menuItemTestsSelectTest;
 	JMenuItem menuItemTestsListeningTest;
+	JMenuItem menuItemStatistics;
 
 	JMenu menuHelp;
 	JMenuItem menuItemHelpAbout;
@@ -89,8 +91,13 @@ public class MainFrame extends JFrame{
 		menuItemTestsSelectTest = new JMenuItem("Valasztos teszt");
 		menuItemTestsSelectTest.setAction(new ActionMenuTestSelect(contentPane));
 		
+		menuItemStatistics = new JMenuItem("Statisztika");
+		menuItemStatistics.setAction(new ActionMenuStatistics(contentPane));
+		
 		menuPractice.add(menuItemTestsListeningTest);
 		menuPractice.add(menuItemTestsSelectTest);
+		menuPractice.addSeparator();
+		menuPractice.add(menuItemStatistics);
 		
 
 		menuBarMain.add(menuFile);
