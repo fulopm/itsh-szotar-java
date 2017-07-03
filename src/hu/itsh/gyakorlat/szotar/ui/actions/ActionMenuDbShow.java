@@ -28,10 +28,17 @@ public class ActionMenuDbShow extends AbstractAction {
 			UIUtil.showErrorDialog("Az adatbazis nincs betoltve!\nKattintson a Fajl->Adatbazis megnyitasa gombra.");
 			return;
 		}
-		if (window == null)
+		if (window == null) {
 			window = new WindowDbTable();
-
-		parent.add(window);
+			parent.add(window);
+			parent.cascade();
+		} else {
+			window.dispose();
+			parent.remove(window);
+			window = new WindowDbTable();
+			parent.add(window);
+			parent.cascade();
+		}
 
 	}
 

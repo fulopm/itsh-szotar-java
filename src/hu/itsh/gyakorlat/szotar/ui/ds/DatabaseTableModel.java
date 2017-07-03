@@ -1,11 +1,15 @@
 package hu.itsh.gyakorlat.szotar.ui.ds;
 
+import java.util.Observable;
+import java.util.Observer;
+
 import javax.swing.table.AbstractTableModel;
 
 import hu.itsh.gyakorlat.szotar.io.excel.Database;
 import hu.itsh.gyakorlat.szotar.io.excel.ds.Dictionary;
 
-public class DatabaseTableModel<Row> extends AbstractTableModel {
+public class DatabaseTableModel<Row> extends AbstractTableModel
+{
 
 	private Dictionary dict;
 
@@ -110,5 +114,7 @@ public class DatabaseTableModel<Row> extends AbstractTableModel {
 		this.dict = Database.dict;
 		this.fireTableDataChanged();
 	}
+
+
 
 }

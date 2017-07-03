@@ -27,10 +27,14 @@ public class ActionSaveRowState extends AbstractAction {
 			throw new IllegalStateException("Row doesn't exists!, ROW ID: " + row.getId());
 		else if (UIUtil.showYesNoDialog("Biztosan menti a jelenleg megadott adatokkal a sort?")) {
 			int index = Database.dict.getRowIndex(row);
-			System.out.println(index);
+			System.out.println("Index:" + index);
 			Database.dict.setRow(index, row);
 			Database.dict.sort();
-			ActionMenuDbShow.window.getTableModel().updateBackend();
+			System.out.println(Database.dict.searchByID(13655));
+			ActionMenuDbShow.window.getTableModel().fireTableDataChanged();
+			ActionMenuDbShow.window.getTable().repaint();
+			
+	
 		}
 	}
 
