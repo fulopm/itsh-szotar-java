@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -26,6 +28,8 @@ import javax.swing.RowFilter;
 import javax.swing.UIManager;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.swing.event.InternalFrameAdapter;
+import javax.swing.event.InternalFrameEvent;
 import javax.swing.table.TableRowSorter;
 
 import hu.itsh.gyakorlat.szotar.SharedConstants;
@@ -58,6 +62,12 @@ public class WindowDbTable extends InternalWindow {
 		contentPane.add(fieldSearch, BorderLayout.SOUTH);
 		setSize(new Dimension((int)Toolkit.getDefaultToolkit().getScreenSize().getWidth()/2, (int)Toolkit.getDefaultToolkit().getScreenSize().getHeight()/2));
 		setVisible(true);
+		 addInternalFrameListener(new InternalFrameAdapter(){
+	            public void internalFrameClosing(InternalFrameEvent e) {
+	            	WindowDbTable.this.dispose();
+	                InternalWindow.mainContentPane.remove(WindowDbTable.this);
+	            }
+	        });
 
 	}
 
@@ -154,5 +164,22 @@ public class WindowDbTable extends InternalWindow {
 		}
 		tableSorter.setRowFilter(rf);
 	}
+
+	public DatabaseTableModel getTableModel() {
+		return tableModel;
+	}
+
+	public void setTableModel(DatabaseTableModel tableModel) {
+		this.tableModel = tableModel;
+	}
+
+	public JTable getTable() {
+		return table;
+	}
+
+	public void setTable(JTable table) {
+		this.table = table;
+	}
+	
 
 }

@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Observable;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -14,7 +15,7 @@ import hu.itsh.gyakorlat.szotar.SharedConstants;
 import hu.itsh.gyakorlat.szotar.io.excel.ds.Dictionary;
 import hu.itsh.gyakorlat.szotar.io.excel.ds.Row;
 
-public class Database {
+public class Database extends Observable {
 	public static Dictionary dict;
 
 	static {
@@ -106,7 +107,7 @@ public class Database {
 
 		}
 		
-		dict.sortByWord();
+		dict.sort();
 
 	}
 	
