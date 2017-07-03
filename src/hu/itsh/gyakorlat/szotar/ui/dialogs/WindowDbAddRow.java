@@ -1,32 +1,25 @@
 package hu.itsh.gyakorlat.szotar.ui.dialogs;
 
 import java.awt.Dimension;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import java.beans.PropertyVetoException;
+import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JLayeredPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import hu.itsh.gyakorlat.szotar.SharedConstants;
-import hu.itsh.gyakorlat.szotar.io.excel.Database;
-import hu.itsh.gyakorlat.szotar.io.excel.ds.Row;
 import hu.itsh.gyakorlat.szotar.ui.UIUtil;
+import hu.itsh.gyakorlat.szotar.ui.actions.ActionAddRow;
 import hu.itsh.gyakorlat.szotar.ui.actions.ActionSaveRowState;
-import net.java.dev.designgridlayout.DesignGridLayout;
 import net.java.dev.designgridlayout.Tag;
 
-public class WindowDbEditRow extends WindowDbRow {
-
-	public WindowDbEditRow(Row row) {
-		super(row);
-
+public class WindowDbAddRow extends WindowDbRow {
+	
+	public WindowDbAddRow() {
+		super();
 		layoutHelper.row().grid(labelID).add(fieldID);
 		layoutHelper.row().grid(labelTimestamp).add(fieldTimestamp);
 		layoutHelper.row().grid(labelEngWord).add(fieldPrefix).add(fieldWord).add(fieldSuffix);
@@ -41,62 +34,70 @@ public class WindowDbEditRow extends WindowDbRow {
 		setMinimumSize(new Dimension(810, 380));
 		setSize(810, 380);
 		setVisible(true);
+	}
+	
+	public WindowDbAddRow(String word) {
+		this();
+		fieldWord.setText(word);
+	
 
 	}
 
 	@Override
 	protected void initComponents() {
 		labelID = new JLabel("ID:");
-		fieldID = new JTextField(Integer.toString(row.getId()));
+		fieldID = new JTextField("később automatikusan kitöltve");
 		fieldID.setEditable(false);
+		fieldID.setEnabled(false);
 
 		labelTimestamp = new JLabel("Timestamp:");
-		fieldTimestamp = new JTextField(row.getTimestamp());
+		fieldTimestamp = new JTextField("később automatikusan kitöltve");
 		fieldTimestamp.setEditable(false);
+		fieldTimestamp.setEnabled(false);
 
 		labelEngWord = new JLabel("Idegen szó:");
-		fieldPrefix = new JTextField(row.getPrefix());
-		fieldWord = new JTextField(row.getWord());
-		fieldSuffix = new JTextField(row.getSuffix());
+		fieldPrefix = new JTextField();
+		fieldWord = new JTextField();
+		fieldSuffix = new JTextField();
 
 		labelEngExplain = new JLabel("Idegen leírás:");
-		fieldEngExplain = new JTextArea(row.getEngExplain());
+		fieldEngExplain = new JTextArea();
 
 		labelEngExample = new JLabel("Idegen példa:");
-		fieldEngExample = new JTextArea(row.getEngExample());
+		fieldEngExample = new JTextArea();
 
 		labelHunWord = new JLabel("Magyar szó:");
-		fieldHun0 = new JTextField(row.getHun0());
-		fieldHun1 = new JTextField(row.getHun1());
+		fieldHun0 = new JTextField();
+		fieldHun1 = new JTextField();
 
 		labelHunExplain = new JLabel("Magyar leírás:");
-		fieldHunExplain = new JTextArea(row.getHunExplain());
+		fieldHunExplain = new JTextArea();
 
 		labelHunExample = new JLabel("Magyar példa:");
-		fieldHunExample = new JTextArea(row.getHunExample());
+		fieldHunExample = new JTextArea();
 
 		labelLevel = new JLabel("Szint:");
-		fieldLevel = new JTextField(Integer.toString(row.getLevel()));
+		fieldLevel = new JTextField();
 
 		labelLang = new JLabel("Nyelv:");
-		fieldLang = new JTextField("" + row.getLang());
+		fieldLang = new JTextField();
 
 		labelForms = new JLabel("Szótári alakok:");
-		fieldForm0 = new JTextField(row.getForm0());
-		fieldForm1 = new JTextField(row.getForm1());
-		fieldForm2 = new JTextField(row.getForm2());
-		fieldForm3 = new JTextField(row.getForm3());
+		fieldForm0 = new JTextField();
+		fieldForm1 = new JTextField();
+		fieldForm2 = new JTextField();
+		fieldForm3 = new JTextField();
 
 		buttonSave = new JButton("Mentés");
-		// buttonSave.setAction(new ActionSaveRowState(row));
 		buttonSave.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (fieldLevel.getText().length() < 1 || fieldLang.getText().length() < 1) {
-					UIUtil.showErrorDialog("Sem a szint, sem pedig a nyelv nem maradhat uresen!");
+				if (fieldWord.getText().length() < 1 || fieldLevel.getText().length() < 1 || fieldLang.getText().length() < 1) {
+					UIUtil.showErrorDialog("A szo, a szint, vagy a nyelv ures!");
 					return;
 				} else {
+					
 					row.setPrefix(fieldPrefix.getText());
 					row.setWord(fieldWord.getText());
 					row.setSuffix(fieldSuffix.getText());
@@ -112,8 +113,8 @@ public class WindowDbEditRow extends WindowDbRow {
 					row.setForm1(fieldForm1.getText());
 					row.setForm2(fieldForm2.getText());
 					row.setForm3(fieldForm3.getText());
-					new ActionSaveRowState(row).actionPerformed(e);
-					WindowDbEditRow.this.dispose();
+					new ActionAddRow(row).actionPerformed(e);
+					WindowDbAddRow.this.dispose();
 				}
 			}
 		});
@@ -136,7 +137,7 @@ public class WindowDbEditRow extends WindowDbRow {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		WindowDbEditRow other = (WindowDbEditRow) obj;
+		WindowDbAddRow other = (WindowDbAddRow) obj;
 		if (row == null) {
 			if (other.row != null)
 				return false;
