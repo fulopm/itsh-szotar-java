@@ -2,30 +2,22 @@ package hu.itsh.gyakorlat.szotar.ui.dialogs;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Vector;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JLabel;
-import javax.swing.JList;
+import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.RowFilter;
-import javax.swing.UIManager;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.InternalFrameAdapter;
@@ -34,8 +26,6 @@ import javax.swing.table.TableRowSorter;
 
 import hu.itsh.gyakorlat.szotar.SharedConstants;
 import hu.itsh.gyakorlat.szotar.io.excel.Database;
-import hu.itsh.gyakorlat.szotar.io.excel.ds.Row;
-import hu.itsh.gyakorlat.szotar.ui.UIUtil;
 import hu.itsh.gyakorlat.szotar.ui.ds.DatabaseTableModel;
 import hu.itsh.gyakorlat.szotar.ui.listeners.DbTableMouseAdapter;
 import net.java.balloontip.BalloonTip;
@@ -53,21 +43,25 @@ public class WindowDbTable extends InternalWindow {
 	JCheckBoxMenuItem fieldSearchMenuExplainAndExample;
 	JCheckBoxMenuItem fieldSearchMenuForms;
 
+	JButton buttonAddWord;
 	
+	JPanel panelUserActions;
+
 	public WindowDbTable() {
 		super(SharedConstants.APP_NAME + " (-) Adatbázis", new BorderLayout());
 		initComponents();
 
 		contentPane.add(new JScrollPane(table), BorderLayout.CENTER);
-		contentPane.add(fieldSearch, BorderLayout.SOUTH);
-		setSize(new Dimension((int)Toolkit.getDefaultToolkit().getScreenSize().getWidth()/2, (int)Toolkit.getDefaultToolkit().getScreenSize().getHeight()/2));
+		contentPane.add(panelUserActions, BorderLayout.SOUTH);
+		setSize(new Dimension((int) Toolkit.getDefaultToolkit().getScreenSize().getWidth() / 2,
+				(int) Toolkit.getDefaultToolkit().getScreenSize().getHeight() / 2));
 		setVisible(true);
-		 addInternalFrameListener(new InternalFrameAdapter(){
-	            public void internalFrameClosing(InternalFrameEvent e) {
-	            	WindowDbTable.this.dispose();
-	                InternalWindow.mainContentPane.remove(WindowDbTable.this);
-	            }
-	        });
+		addInternalFrameListener(new InternalFrameAdapter() {
+			public void internalFrameClosing(InternalFrameEvent e) {
+				WindowDbTable.this.dispose();
+				InternalWindow.mainContentPane.remove(WindowDbTable.this);
+			}
+		});
 
 	}
 
@@ -76,7 +70,8 @@ public class WindowDbTable extends InternalWindow {
 		fieldSearch = new JTextField();
 
 		fieldSearch.setToolTipText("Keresés");
-		fieldSearchBalloon = new BalloonTip(fieldSearch, "Kattintson a mezore jobb klikkel, ha szeretne modositani hogy mely mezokben keressunk!");		
+		fieldSearchBalloon = new BalloonTip(fieldSearch,
+				"Kattintson a mezore jobb klikkel, ha szeretne modositani hogy mely mezokben keressunk!");
 		fieldSearchMenu = new JPopupMenu();
 
 		fieldSearchMenuTitle = new JLabel("Keresés a következő mezőkben:");
@@ -119,6 +114,21 @@ public class WindowDbTable extends InternalWindow {
 			}
 
 		});
+		
+		buttonAddWord = new JButton("H.ad");
+		buttonAddWord.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				WindowDbAddRow addRowWindow = new WindowDbAddRow(fieldSearch.getText());
+				mainContentPane.add(addRowWindow);
+				mainContentPane.cascade();
+			}
+		});
+		
+		panelUserActions = new JPanel(new GridLayout(1,2));
+		panelUserActions.add(fieldSearch);
+		panelUserActions.add(buttonAddWord);
 
 	}
 
@@ -180,6 +190,5 @@ public class WindowDbTable extends InternalWindow {
 	public void setTable(JTable table) {
 		this.table = table;
 	}
-	
 
 }

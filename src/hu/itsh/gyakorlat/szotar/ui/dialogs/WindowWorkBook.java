@@ -16,6 +16,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
 import hu.itsh.gyakorlat.szotar.io.excel.Database;
+import hu.itsh.gyakorlat.szotar.io.excel.ds.Row;
 import hu.itsh.gyakorlat.szotar.io.user.WordBook;
 import net.java.dev.designgridlayout.DesignGridLayout;
 import net.java.dev.designgridlayout.DesignGridLayoutManager;
@@ -114,9 +115,9 @@ public class WindowWorkBook extends InternalWindow
 					
 					for (int i = 0; i < sourceWords.size(); i++)
 					{			
-						// 55
 						row[0] = sourceWords.get(i);
-						row[1] = (Database.dict.searchByWord(sourceWords.get(i)) > -1 ? Database.dict.getRow(Database.dict.searchByWord(sourceWords.get(i))).getHun0() : "UNKNOWN");
+						Row hit = Database.dict.searchByWord(sourceWords.get(i));
+						row[1] = hit != null ? hit.getHun0() : "UNKNOWN";
 						tableModel.addRow(row);	
 					}
 				}
