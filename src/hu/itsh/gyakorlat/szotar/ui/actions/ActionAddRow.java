@@ -26,7 +26,7 @@ public class ActionAddRow extends AbstractAction {
 		if (UIUtil.showYesNoDialog("Biztosan hozzáadja a megadott adatokkal a sort?")) {
 			int nextID = Database.dict.getRowCount() + 1;
 			row.setId(nextID);
-			row.setTimestamp(SharedConstants.FORMAT_YYMMDDHHMMSS.format(new Date()));
+			row.setTimestamp(SharedConstants.FORMAT_YYMMDD.format(new Date()));
 			
 			Database.dict.addRow(row);
 			Database.dict.recalculateIDs();
