@@ -13,8 +13,6 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import hu.itsh.gyakorlat.szotar.SharedConstants;
-
 public class ExcelBase {
 
 	private XSSFSheet selectedSheet;
@@ -62,7 +60,7 @@ public class ExcelBase {
 				case NUMERIC: // we're assuming that NUMERIC cells are Dates
 					if (DateUtil.isCellDateFormatted(nextCell)) {
 						Date date = DateUtil.getJavaDate(nextCell.getNumericCellValue());
-						String dateFormatted = SharedConstants.FORMAT_YYMMDDHHMMSS.format(date);
+						String dateFormatted = new SimpleDateFormat("yyyy-MM-dd").format(date);
 						rowData += dateFormatted;
 						rowData += separator;
 					} else {
