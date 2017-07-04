@@ -9,11 +9,13 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
+import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -30,7 +32,7 @@ import hu.itsh.gyakorlat.szotar.ui.ds.DatabaseTableModel;
 import hu.itsh.gyakorlat.szotar.ui.listeners.DbTableMouseAdapter;
 import net.java.balloontip.BalloonTip;
 
-public class WindowDbTable extends InternalWindow {
+public class WindowDbTable extends InternalWindow implements ChangeListener {
 
 	JTable table;
 	DatabaseTableModel tableModel;
@@ -39,12 +41,16 @@ public class WindowDbTable extends InternalWindow {
 	BalloonTip fieldSearchBalloon;
 
 	JPopupMenu fieldSearchMenu;
+	JLabel fieldSearchMenuLanguage;
+	JRadioButtonMenuItem fieldSearchMenuLangEng;
+	JRadioButtonMenuItem fieldSearchMenuLangHun;
+	ButtonGroup languageButtonGroup;
 	JLabel fieldSearchMenuTitle;
 	JCheckBoxMenuItem fieldSearchMenuExplainAndExample;
 	JCheckBoxMenuItem fieldSearchMenuForms;
 
 	JButton buttonAddWord;
-	
+
 	JPanel panelUserActions;
 
 	public WindowDbTable() {
@@ -74,25 +80,25 @@ public class WindowDbTable extends InternalWindow {
 				"Kattintson a mezore jobb klikkel, ha szeretne modositani hogy mely mezokben keressunk!");
 		fieldSearchMenu = new JPopupMenu();
 
+		fieldSearchMenuLanguage = new JLabel("Keresési nyelv:");
+
+		fieldSearchMenuLangEng = new JRadioButtonMenuItem("Angol");
+		fieldSearchMenuLangEng.addChangeListener(this);
+		fieldSearchMenuLangHun = new JRadioButtonMenuItem("Magyar");
+		fieldSearchMenuLangHun.addChangeListener(this);
+		languageButtonGroup = new ButtonGroup();
+		languageButtonGroup.add(fieldSearchMenuLangEng);
+		languageButtonGroup.add(fieldSearchMenuLangHun);
+
 		fieldSearchMenuTitle = new JLabel("Keresés a következő mezőkben:");
 		fieldSearchMenuExplainAndExample = new JCheckBoxMenuItem("Magyarázat és példa");
-		fieldSearchMenuExplainAndExample.addChangeListener(new ChangeListener() {
-
-			@Override
-			public void stateChanged(ChangeEvent e) {
-				newFilter(fieldSearchMenuExplainAndExample.isSelected(), fieldSearchMenuForms.isSelected());
-
-			}
-		});
+		fieldSearchMenuExplainAndExample.addChangeListener(this);
 		fieldSearchMenuForms = new JCheckBoxMenuItem("Szótári alakokban");
-		fieldSearchMenuForms.addChangeListener(new ChangeListener() {
+		fieldSearchMenuForms.addChangeListener(this);
 
-			@Override
-			public void stateChanged(ChangeEvent e) {
-				newFilter(fieldSearchMenuExplainAndExample.isSelected(), fieldSearchMenuForms.isSelected());
-
-			}
-		});
+		fieldSearchMenu.add(fieldSearchMenuLanguage);
+		fieldSearchMenu.add(fieldSearchMenuLangEng);
+		fieldSearchMenu.add(fieldSearchMenuLangHun);
 
 		fieldSearchMenu.add(fieldSearchMenuTitle);
 		fieldSearchMenu.add(fieldSearchMenuExplainAndExample);
@@ -109,15 +115,16 @@ public class WindowDbTable extends InternalWindow {
 
 			@Override
 			public void keyPressed(KeyEvent e) {
-				newFilter(fieldSearchMenuExplainAndExample.isSelected(), fieldSearchMenuForms.isSelected());
+				newFilter(fieldSearchMenuLangHun.isSelected(), fieldSearchMenuExplainAndExample.isSelected(),
+						fieldSearchMenuForms.isSelected());
 
 			}
 
 		});
-		
+
 		buttonAddWord = new JButton("H.ad");
 		buttonAddWord.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				WindowDbAddRow addRowWindow = new WindowDbAddRow(fieldSearch.getText());
@@ -125,14 +132,14 @@ public class WindowDbTable extends InternalWindow {
 				mainContentPane.cascade();
 			}
 		});
-		
-		panelUserActions = new JPanel(new GridLayout(1,2));
+
+		panelUserActions = new JPanel(new GridLayout(1, 2));
 		panelUserActions.add(fieldSearch);
 		panelUserActions.add(buttonAddWord);
 
 	}
 
-	private void newFilter(boolean inExampleAndExplain, boolean inForms) {
+	private void newFilter(boolean isHungarian, boolean inExampleAndExplain, boolean inForms) {
 		RowFilter<String, String> rf = null;
 		// If current expression doesn't parse, don't update.
 		try {
@@ -142,28 +149,39 @@ public class WindowDbTable extends InternalWindow {
 				public boolean include(javax.swing.RowFilter.Entry<? extends String, ? extends String> entry) {
 					String searchString = fieldSearch.getText().toLowerCase();
 					boolean finalResult = false;
-					if (inExampleAndExplain && inForms) {
-						finalResult = entry.getStringValue(3).startsWith(searchString)
-								|| entry.getStringValue(5).contains(searchString)
-								|| entry.getStringValue(6).contains(searchString)
-								|| entry.getStringValue(14).startsWith(searchString)
-								|| entry.getStringValue(15).startsWith(searchString)
-								|| entry.getStringValue(16).startsWith(searchString)
-								|| entry.getStringValue(17).startsWith(searchString);
-					} else if (inExampleAndExplain) {
-						finalResult = entry.getStringValue(3).startsWith(searchString)
-								|| entry.getStringValue(5).contains(searchString)
-								|| entry.getStringValue(6).contains(searchString);
-					} else if (inForms) {
-						finalResult = entry.getStringValue(3).startsWith(searchString)
-								|| entry.getStringValue(14).startsWith(searchString)
-								|| entry.getStringValue(15).startsWith(searchString)
-								|| entry.getStringValue(16).startsWith(searchString)
-								|| entry.getStringValue(17).startsWith(searchString);
+					if (isHungarian) {
+						if (inExampleAndExplain) {
+							finalResult = entry.getStringValue(7).startsWith(searchString)
+									|| entry.getStringValue(8).startsWith(searchString)
+									|| entry.getStringValue(9).contains(searchString)
+									|| entry.getStringValue(10).contains(searchString);
+						} else {
+							finalResult = entry.getStringValue(7).startsWith(searchString)
+									|| entry.getStringValue(8).startsWith(searchString);
+						}
 					} else {
-						finalResult = entry.getStringValue(3).startsWith(searchString);
+						if (inExampleAndExplain && inForms) {
+							finalResult = entry.getStringValue(3).startsWith(searchString)
+									|| entry.getStringValue(5).contains(searchString)
+									|| entry.getStringValue(6).contains(searchString)
+									|| entry.getStringValue(14).startsWith(searchString)
+									|| entry.getStringValue(15).startsWith(searchString)
+									|| entry.getStringValue(16).startsWith(searchString)
+									|| entry.getStringValue(17).startsWith(searchString);
+						} else if (inExampleAndExplain) {
+							finalResult = entry.getStringValue(3).startsWith(searchString)
+									|| entry.getStringValue(5).contains(searchString)
+									|| entry.getStringValue(6).contains(searchString);
+						} else if (inForms) {
+							finalResult = entry.getStringValue(3).startsWith(searchString)
+									|| entry.getStringValue(14).startsWith(searchString)
+									|| entry.getStringValue(15).startsWith(searchString)
+									|| entry.getStringValue(16).startsWith(searchString)
+									|| entry.getStringValue(17).startsWith(searchString);
+						} else {
+							finalResult = entry.getStringValue(3).startsWith(searchString);
+						}
 					}
-
 					return finalResult;
 
 				}
@@ -189,6 +207,18 @@ public class WindowDbTable extends InternalWindow {
 
 	public void setTable(JTable table) {
 		this.table = table;
+	}
+
+	@Override
+	public void stateChanged(ChangeEvent e) {
+		if (fieldSearchMenuLangHun.isSelected()) {
+			fieldSearchMenuForms.setSelected(false);
+			fieldSearchMenuForms.setEnabled(false);
+		}
+
+		newFilter(fieldSearchMenuLangHun.isSelected(), fieldSearchMenuExplainAndExample.isSelected(),
+				fieldSearchMenuForms.isSelected());
+
 	}
 
 }
