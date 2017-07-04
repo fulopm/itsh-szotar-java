@@ -22,6 +22,9 @@ public class DbTableMouseAdapter extends MouseAdapter {
 
 	@Override
 	public void mouseClicked(java.awt.event.MouseEvent e) {
+		if (e.getClickCount() != 2) {
+			return;
+		}
 		int row = dbTable.rowAtPoint(e.getPoint());
 		int column = dbTable.columnAtPoint(e.getPoint());
 		if (row >= 0 && column >= 0) {
