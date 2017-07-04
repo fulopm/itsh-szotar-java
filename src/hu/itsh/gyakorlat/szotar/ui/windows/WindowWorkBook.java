@@ -1,6 +1,8 @@
 package hu.itsh.gyakorlat.szotar.ui.windows;
 
 import java.awt.event.ActionEvent;
+import java.awt.Cursor;
+
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -78,6 +80,8 @@ public class WindowWorkBook extends InternalWindow
 							
 						try
 						{
+							contentPane.setCursor(new Cursor(Cursor.WAIT_CURSOR));
+							
 							Elements onlineWords = OnlineDictionary.translate(tableModel.getValueAt(row, col).toString(), OnlineDictionary.HUNGARIAN);
 							String meanings = "<html>";
 							String[] line;
@@ -110,15 +114,18 @@ public class WindowWorkBook extends InternalWindow
 							}
 							meanings += "</html>";
 							System.out.println(meanings);
+							contentPane.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 							JOptionPane.showMessageDialog(new WindowWorkBook(), meanings, "Lehetséges jelentések", JOptionPane.OK_CANCEL_OPTION);
 							
 						} catch (IOException e1)
 						{
-							e1.printStackTrace();
+							JOptionPane.showInternalMessageDialog(contentPane, "Nem sikerult csatlakozni az internethez.");
+							contentPane.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 						}
 						break;
 						case (JOptionPane.NO_OPTION):
-							
+							WindowDbAddRow addRow = new WindowDbAddRow(tableModel.getValueAt(row, col).toString());
+							InternalWindow.mainContentPane.add(new WindowDbAddRow(tableModel.getValueAt(row, col).toString()));
 						break;
 					}
 				}
@@ -158,7 +165,6 @@ public class WindowWorkBook extends InternalWindow
 					
 					for (int i = 0; i < sourceWords.size(); i++)
 					{			
-						// 55
 						row[0] = sourceWords.get(i);
 						Row rowHit = Database.dict.searchByWord(sourceWords.get(i));
 						row[1] = rowHit != null ? rowHit.getHun0() : "UNKNOWN";
