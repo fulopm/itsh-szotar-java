@@ -239,6 +239,7 @@ public class WindowTestSelection extends InternalWindow implements ActionListene
 
 			}
 		} else if (ae.getSource().equals(this.buttonCheck)) {
+			this.buttonCheck.setEnabled(false);
 			try {
 				if (this.rightAns.equals(this.group.getSelection().getActionCommand())) {
 					this.labelCheck.setText(this.gameNo + "/10 - Helyes!");
@@ -251,6 +252,7 @@ public class WindowTestSelection extends InternalWindow implements ActionListene
 				}
 			} catch (Exception e) {
 				this.labelCheck.setText("<html>" + this.gameNo + "/10 - Hiba!<br>" + "Válassz valamit!<br></html>");
+				this.buttonCheck.setEnabled(true);
 			}
 		}
 
