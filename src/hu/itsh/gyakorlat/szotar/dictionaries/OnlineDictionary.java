@@ -18,15 +18,11 @@ public class OnlineDictionary
 	
 	public static Elements translate(String word, int destLanguage) throws IOException
 	{
-        
-		
-		
         Document doc = Jsoup.connect("http://en.bab.la/dictionary/" + (destLanguage == 1 ? "english-hungarian" : "hungarian-english") + "/" + word).get();
         Elements quickResultOption = doc.getElementsByClass("quick-result-entry");
         Elements quickResultEntry = doc.getElementsByClass("quick-result-option");
         
         ArrayList<String> eng_words = new ArrayList<>();
-        ArrayList<String> hun_words = new ArrayList<>();
         
         for (Element classes : quickResultOption)
         {
@@ -34,9 +30,7 @@ public class OnlineDictionary
         		eng_words.add(classes.text());
         }
         return quickResultOption;
-        
-	}
-	
+	}	
 }
 
 
