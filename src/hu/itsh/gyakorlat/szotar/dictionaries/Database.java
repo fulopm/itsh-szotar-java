@@ -33,6 +33,7 @@ public class Database extends Observable {
 	}
 
 	public static void loadDictionary(XSSFWorkbook workbook) {
+		dict.clear();
 		ExcelBase reader = new ExcelBase(workbook);
 		List<String> rowsRaw = null;
 		try {
