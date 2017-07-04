@@ -83,12 +83,7 @@ public class ExcelBase {
 			rows.add(rowData);
 		}
 		
-		try {
-			workbook.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
 		
 		
 		return rows;
