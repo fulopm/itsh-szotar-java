@@ -13,7 +13,7 @@ import hu.itsh.gyakorlat.szotar.io.excel.ds.Row;
 public class Dictionary {
 
 	private List<Row> rows;
-
+	
 	public Dictionary(List<Row> rows) {
 		this.rows = rows;
 	}
@@ -21,7 +21,11 @@ public class Dictionary {
 	public Dictionary() {
 		this.rows = new ArrayList<>();
 	}
-
+	
+	public void clear(){
+		this.rows.clear();
+	}
+	
 	public boolean addRow(Row e) {
 		return this.rows.add(e);
 	}
