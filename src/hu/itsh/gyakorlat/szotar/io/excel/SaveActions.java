@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
 
+import org.apache.poi.hssf.usermodel.HSSFDateUtil;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
@@ -24,9 +25,12 @@ import hu.itsh.gyakorlat.szotar.io.excel.ds.Row;
 public class SaveActions {
 	
 	Dictionary dict;
+	XSSFWorkbook wb;
 	
-	public SaveActions(){
+	
+	public SaveActions() throws InvalidFormatException, IOException{
 		this.dict = Database.dict;
+		wb = new XSSFWorkbook(new File("NGP.xlsx"));
 	}
 	
 	public void saveAsCSV() throws IOException{
@@ -34,8 +38,6 @@ public class SaveActions {
 		for (int i = 0; i < dict.getRowCount(); i++) {
 			String s = "";
 			Row r = dict.getRow(i);
-			
-			
 			
 			s += 	  r.getId() + "$"
 					+ r.getTimestamp() + "$"
@@ -52,13 +54,19 @@ public class SaveActions {
 					+ r.getLang() + "$"
 					+ r.getWordClass() + "$";
 			
-			if(r.getForm0() == null){
-				s+= "$";
+			if(r.getWordClass() == null){
+				s += "$";
 			}else{
-				s+= r.getForm0() + "$";
+				s += r.getWordClass() + "$";
 			}
 			
-			if(r.getForm1()== null){
+			if(r.getForm0() == null){
+				s += "$";
+			}else{
+				s += r.getForm0() + "$";
+			}
+			
+			if(r.getForm1() == null){
 				s += "$";
 			}else{
 				s += r.getForm1() + "$";
@@ -71,11 +79,10 @@ public class SaveActions {
 			}
 			
 			if(r.getForm3() == null){
-				s+= "$";
+				s += "$";
 			}else{
 				s += r.getForm3() + "$";
 			}
-			
 //					+ r.getForm0() + "$"
 //					+ r.getForm1() + "$"
 //					+ r.getForm2() + "$"
@@ -86,11 +93,16 @@ public class SaveActions {
 	}
 	
 	public void cvsToExcel() throws IOException, InvalidFormatException{
+		
+		try{
+			
+		
+		
 		CSVReader reader = new CSVReader(new FileReader("table.csv"),'$');
 		String[] line;
-		CreationHelper helper = ExcelBase.workbook.getCreationHelper();
-		Sheet firstSheet = ExcelBase.workbook.getSheetAt(0);
-		CellStyle cellStyle = ExcelBase.workbook.createCellStyle();
+		CreationHelper helper = wb.getCreationHelper();
+		Sheet firstSheet = wb.getSheetAt(0);
+		CellStyle cellStyle = wb.createCellStyle();
 		cellStyle.setDataFormat(helper.createDataFormat().getFormat("yyyy.mm.dd"));
 		
 		int r = 0;
@@ -106,14 +118,16 @@ public class SaveActions {
 						c.setCellValue(Integer.parseInt(line[i]));
 						//row.createCell(i).setCellValue(Integer.parseInt(line[i]));
 					}catch(Exception e){
-						System.out.println(r);
 						System.out.println(e);
 					}
 				}else if(i == 1){
 					try{
+						String[] strTmp = line[i].split("-");
+						Date tmpDate = new Date(Integer.parseInt(strTmp[0])-1900,Integer.parseInt(strTmp[1]),Integer.parseInt(strTmp[2]));
 						
 						Cell c = row.createCell(i);
-						c.setCellValue(new Date());
+						c.setCellValue(HSSFDateUtil.getExcelDate(tmpDate));
+						
 						c.setCellStyle(cellStyle);
 						
 						
@@ -123,32 +137,34 @@ public class SaveActions {
 				}
 				
 				else{
-					row.createCell(i).setCellValue(helper.createRichTextString(line[i]));
+					System.out.println("Row: " + row.getRowNum() + " Cell:" + i);
+					Cell c = row.createCell(i);
+					c.setCellType(CellType.STRING);
+					c.setCellValue(helper.createRichTextString(line[i]));
+//					row.createCell(i).setCellValue(helper.createRichTextString(line[i]));
 				}
 			}
+			
 			line = reader.readNext();
 			
 		}
 		saveToXLSX();
 		
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 	}
 	
 	public void saveToXLSX() throws InvalidFormatException, IOException{
-		System.out.println("XLSX save");
-		try{
-			XSSFWorkbook saveWB = ExcelBase.workbook;
-			FileOutputStream fos = new FileOutputStream("NGP.xlsx",true);
-			
-			saveWB.write(fos);
-			saveWB.close();
-			fos.flush();
-			fos.close();
-			
-		}catch (Exception e){
-			e.printStackTrace();
-		}
+		XSSFWorkbook saveWB = wb;
+		//XSSFWorkbook sajt = new XSSFWorkbook(new File("NGP.xlsx"));
+		FileOutputStream fos = new FileOutputStream("NGP.xlsx",true);
 		
-
+		saveWB.write(fos);
+		saveWB.close();
+		fos.flush();
+		fos.close();
+		
 		
 	}
 	

@@ -16,10 +16,10 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 public class ExcelBase {
 
 	private XSSFSheet selectedSheet;
-	public static XSSFWorkbook workbook;
+	private XSSFWorkbook workbook;
 
 	public ExcelBase(XSSFWorkbook wb) {
-		ExcelBase.workbook = wb;
+		this.workbook = wb;
 		this.selectedSheet = wb.getSheetAt(0);
 
 	}

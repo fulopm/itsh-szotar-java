@@ -8,6 +8,7 @@ import javax.swing.AbstractAction;
 import javax.swing.SwingWorker;
 
 import hu.itsh.gyakorlat.szotar.dictionaries.Database;
+import hu.itsh.gyakorlat.szotar.io.excel.ExcelBase;
 import hu.itsh.gyakorlat.szotar.io.excel.SaveActions;
 import hu.itsh.gyakorlat.szotar.ui.PleaseWaitDialog;
 
@@ -34,7 +35,6 @@ public class ActionSaveDb extends AbstractAction {
 					System.out.println("Mentés elkezdése...");
 					SaveActions sa = new SaveActions();
 					sa.fullSave();
-					
 					return null;
 				}
 				
