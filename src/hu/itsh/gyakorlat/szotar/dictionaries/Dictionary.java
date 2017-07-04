@@ -54,20 +54,6 @@ public class Dictionary {
 
 		return null;
 
-		/*
-		 * 
-		 * Comparator<Row> c = new Comparator<Row>() {
-		 * 
-		 * @Override public int compare(Row o1, Row o2) { return
-		 * Integer.compare(o1.getId(), o2.getId()); }
-		 * 
-		 * }; Row r = new Row(); r.setId(id); int hit =
-		 * Collections.binarySearch(rows, r, c);
-		 * 
-		 * 
-		 * return hit > -1 ? getRow(hit) : null;
-		 */
-
 	}
 
 	public Row searchByWord(String word) {
@@ -105,6 +91,14 @@ public class Dictionary {
 
 	Iterator<Row> getRowIterator() {
 		return rows.iterator();
+	}
+
+	public void recalculateIDs() {
+		int currentID = 1;
+		for (Row r : rows) {
+			r.setId(currentID);
+			currentID++;
+		}
 	}
 
 }

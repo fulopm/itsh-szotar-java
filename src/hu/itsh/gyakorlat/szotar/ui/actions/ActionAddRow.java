@@ -29,6 +29,7 @@ public class ActionAddRow extends AbstractAction {
 			row.setTimestamp(SharedConstants.FORMAT_YYMMDD.format(new Date()));
 			
 			Database.dict.addRow(row);
+			Database.dict.recalculateIDs();
 			Database.dict.sort();
 			
 			ActionMenuDbShow.window.getTableModel().fireTableDataChanged();
