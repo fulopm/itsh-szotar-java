@@ -16,10 +16,10 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 public class ExcelBase {
 
 	private XSSFSheet selectedSheet;
-	private XSSFWorkbook workbook;
+	public static XSSFWorkbook workbook;
 
 	public ExcelBase(XSSFWorkbook wb) {
-		this.workbook = wb;
+		ExcelBase.workbook = wb;
 		this.selectedSheet = wb.getSheetAt(0);
 
 	}
@@ -83,12 +83,7 @@ public class ExcelBase {
 			rows.add(rowData);
 		}
 		
-		try {
-			workbook.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
 		
 		
 		return rows;

@@ -17,6 +17,7 @@ import hu.itsh.gyakorlat.szotar.ui.actions.ActionMenuStatistics;
 import hu.itsh.gyakorlat.szotar.ui.actions.ActionMenuTestSelect;
 import hu.itsh.gyakorlat.szotar.ui.actions.ActionMenuTestType;
 import hu.itsh.gyakorlat.szotar.ui.actions.ActionMenuTranslate;
+import hu.itsh.gyakorlat.szotar.ui.actions.ActionSaveDb;
 import hu.itsh.gyakorlat.szotar.ui.windows.InternalWindow;
 
 public class MainFrame extends JFrame{
@@ -69,6 +70,7 @@ public class MainFrame extends JFrame{
 		menuItemDbOpen = new JMenuItem("Adatbazis megnyitas");
 		menuItemDbOpen.setAction(new ActionMenuDbOpen(contentPane));
 		menuItemDbSave = new JMenuItem("Adatbazis mentese");
+		menuItemDbSave.setAction(new ActionSaveDb());
 		
 		menuItemDbShow = new JMenuItem("Adatbázis megjelenitese");
 		menuItemDbShow.setAction(new ActionMenuDbShow(contentPane));
