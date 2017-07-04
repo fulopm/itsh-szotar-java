@@ -16,5 +16,7 @@ public class SharedConstants {
 	
 	public static final String SEPARATOR = "~";
 	public static final SimpleDateFormat FORMAT_YYMMDD = new SimpleDateFormat("yyyy-MM-dd");
+	public static final SimpleDateFormat FORMAT_YYMMDDHHMMSS = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
 
 }
