@@ -1,6 +1,10 @@
 package hu.itsh.gyakorlat.szotar.ui.actions;
 
 import java.awt.event.ActionEvent;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.util.Date;
 
 import javax.swing.AbstractAction;
@@ -24,13 +28,16 @@ public class ActionAddRow extends AbstractAction {
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		if (UIUtil.showYesNoDialog("Biztosan hozzáadja a megadott adatokkal a sort?")) {
-			int nextID = Database.dict.getRowCount() + 1;
-			row.setId(nextID);
-			row.setTimestamp(SharedConstants.FORMAT_YYMMDD.format(new Date()));
+			//int nextID = Database.dict.getRowCount() + 1;
+			//row.setId(nextID);
+			row.setTimestamp( DateTimeFormatter.ofPattern("uuuu-MM-dd").format(LocalDate.now()));
+			System.out.println(DateTimeFormatter.ofPattern("uuuu-MM-dd").format(LocalDate.now()));
 			
 			Database.dict.addRow(row);
-			Database.dict.recalculateIDs();
 			Database.dict.sort();
+			Database.dict.recalculateIDs();
+			
+			
 			
 			ActionMenuDbShow.window.getTableModel().fireTableDataChanged();
 			ActionMenuDbShow.window.getTable().repaint();

@@ -6,14 +6,17 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
-import org.apache.poi.hssf.usermodel.HSSFDateUtil;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.CreationHelper;
+import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -122,11 +125,10 @@ public class SaveActions {
 					}
 				}else if(i == 1){
 					try{
-						String[] strTmp = line[i].split("-");
-						Date tmpDate = new Date(Integer.parseInt(strTmp[0])-1900,Integer.parseInt(strTmp[1]),Integer.parseInt(strTmp[2]));
-						
+						LocalDate ld = LocalDate.parse(line[i], DateTimeFormatter.ofPattern("uuuu-MM-dd"));
+	
 						Cell c = row.createCell(i);
-						c.setCellValue(HSSFDateUtil.getExcelDate(tmpDate));
+						c.setCellValue(DateUtil.getExcelDate(Date.from(ld.atStartOfDay(ZoneId.systemDefault()).toInstant())));
 						
 						c.setCellStyle(cellStyle);
 						
