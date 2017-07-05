@@ -62,7 +62,7 @@ public class WindowDbEditRow extends WindowDbRow {
 		
 		layoutHelper.row().bar().add(buttonSave, Tag.OK);
 		setMinimumSize(new Dimension(810, 380));
-		setSize(810, 380);
+		setSize(810, 410);
 		setVisible(true);
 
 	}
@@ -120,10 +120,13 @@ public class WindowDbEditRow extends WindowDbRow {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (fieldLevel.getText().length() < 1 || fieldLang.getText().length() < 1) {
-					UIUtil.showErrorDialog("Sem a szint, sem pedig a nyelv nem maradhat uresen!");
+				if (fieldLevel.getText().length() < 1 || (Integer.getInteger(fieldLevel.getText(), -1) == -1)) {
+					UIUtil.showErrorDialog("A szint mezo tartalma nem lehet ures, es csak szamot tartalmazhat!");
 					return;
-				} else {
+				} else if (fieldLang.getText().length() != 1) {
+					UIUtil.showErrorDialog("A nyelv mezonek egy karaktert kell tartalmaznia!");
+					return;
+				}else {
 					row.setPrefix(fieldPrefix.getText());
 					row.setWord(fieldWord.getText());
 					row.setSuffix(fieldSuffix.getText());
