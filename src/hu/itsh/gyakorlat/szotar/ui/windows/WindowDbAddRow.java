@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.util.Date;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -27,6 +28,7 @@ public class WindowDbAddRow extends WindowDbRow {
 		layoutHelper.row().grid(labelEngExplain).add(fieldEngExplain);
 		layoutHelper.row().grid(labelEngExample).add(fieldEngExample);
 		layoutHelper.row().grid(labelHunWord).add(fieldHun0).add(fieldHun1);
+		layoutHelper.row().grid(labelWordClass).add(fieldWordClass);
 		layoutHelper.row().grid(labelLevel).add(fieldLevel);
 		layoutHelper.row().grid(labelLang).add(fieldLang);
 		layoutHelper.row().grid(labelForms).add(fieldForm0).add(fieldForm1).add(fieldForm2).add(fieldForm3);
@@ -88,6 +90,9 @@ public class WindowDbAddRow extends WindowDbRow {
 		labelHunExample = new JLabel("Magyar példa:");
 		fieldHunExample = new JTextArea();
 
+		labelWordClass = new JLabel("Szófaj:");
+		fieldWordClass = new JComboBox<String>(SharedConstants.wordClasses);
+		
 		labelLevel = new JLabel("Szint:");
 		fieldLevel = new JTextField();
 

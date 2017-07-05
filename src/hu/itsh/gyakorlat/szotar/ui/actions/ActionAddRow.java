@@ -30,8 +30,8 @@ public class ActionAddRow extends AbstractAction {
 		if (UIUtil.showYesNoDialog("Biztosan hozzáadja a megadott adatokkal a sort?")) {
 			//int nextID = Database.dict.getRowCount() + 1;
 			//row.setId(nextID);
-			row.setTimestamp( DateTimeFormatter.ofPattern("uuuu-MM-dd").format(LocalDate.now()));
-			System.out.println(DateTimeFormatter.ofPattern("uuuu-MM-dd").format(LocalDate.now()));
+			row.setTimestamp(SharedConstants.DTF_YYMMDD.format(LocalDate.now()));
+			row.setWordClass("default");
 			
 			Database.dict.addRow(row);
 			Database.dict.sort();
