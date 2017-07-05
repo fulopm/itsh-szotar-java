@@ -3,6 +3,7 @@ package hu.itsh.gyakorlat.szotar.ui.windows;
 import java.awt.Dimension;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JTextArea;
@@ -29,7 +30,7 @@ public abstract class WindowDbRow extends InternalWindow {
 	JTextField fieldSuffix;
 
 	JLabel labelEngExplain;
-	JTextArea fieldEngExplain;
+	JTextArea fieldEngExplain;	
 
 	JLabel labelEngExample;
 	JTextArea fieldEngExample;
@@ -44,6 +45,9 @@ public abstract class WindowDbRow extends InternalWindow {
 	JLabel labelHunExample;
 	JTextArea fieldHunExample;
 
+	JLabel labelWordClass;
+	JComboBox fieldWordClass;
+		
 	JLabel labelLevel;
 	JTextField fieldLevel;
 

@@ -7,8 +7,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.beans.PropertyVetoException;
+import java.util.Arrays;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JTextArea;
@@ -41,6 +43,7 @@ public class WindowDbEditRow extends WindowDbRow {
 		layoutHelper.row().grid(labelEngExplain).add(fieldEngExplain);
 		layoutHelper.row().grid(labelEngExample).add(fieldEngExample);
 		layoutHelper.row().grid(labelHunWord).add(fieldHun0).add(fieldHun1);
+		layoutHelper.row().grid(labelWordClass).add(fieldWordClass);
 		layoutHelper.row().grid(labelLevel).add(fieldLevel);
 		layoutHelper.row().grid(labelLang).add(fieldLang);
 		layoutHelper.row().grid(labelForms).add(fieldForm0).add(fieldForm1).add(fieldForm2).add(fieldForm3);
@@ -94,6 +97,10 @@ public class WindowDbEditRow extends WindowDbRow {
 
 		labelHunExample = new JLabel("Magyar példa:");
 		fieldHunExample = new JTextArea(row.getHunExample());
+		
+		labelWordClass = new JLabel("Szófaj:");
+		fieldWordClass = new JComboBox<String>(SharedConstants.wordClasses);
+		fieldWordClass.setSelectedIndex(Arrays.asList(SharedConstants.wordClasses).indexOf(row.getWordClass()));
 
 		labelLevel = new JLabel("Szint:");
 		fieldLevel = new JTextField(Integer.toString(row.getLevel()));

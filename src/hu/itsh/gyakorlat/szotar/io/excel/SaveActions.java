@@ -57,11 +57,11 @@ public class SaveActions {
 					+ r.getLang() + "$"
 					+ r.getWordClass() + "$";
 			
-			if(r.getWordClass() == null){
+			/*if(r.getWordClass() == null){
 				s += "$";
 			}else{
 				s += r.getWordClass() + "$";
-			}
+			}*/
 			
 			if(r.getForm0() == null){
 				s += "$";
@@ -81,7 +81,7 @@ public class SaveActions {
 				s += r.getForm2() + "$";
 			}
 			
-			if(r.getForm3() == null){
+			if(r.getForm3() == null){ 
 				s += "$";
 			}else{
 				s += r.getForm3() + "$";
