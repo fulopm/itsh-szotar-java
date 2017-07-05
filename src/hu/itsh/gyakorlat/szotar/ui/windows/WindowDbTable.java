@@ -114,8 +114,8 @@ public class WindowDbTable extends InternalWindow implements ChangeListener {
 		fieldSearch.addKeyListener(new KeyAdapter() {
 
 			@Override
-			public void keyPressed(KeyEvent e) {
-				newFilter(fieldSearchMenuLangHun.isSelected(), fieldSearchMenuExplainAndExample.isSelected(),
+			public void keyReleased(KeyEvent e) {
+				newFilter(fieldSearch.getText().toLowerCase(), fieldSearchMenuLangHun.isSelected(), fieldSearchMenuExplainAndExample.isSelected(),
 						fieldSearchMenuForms.isSelected());
 
 			}
@@ -139,7 +139,7 @@ public class WindowDbTable extends InternalWindow implements ChangeListener {
 
 	}
 
-	private void newFilter(boolean isHungarian, boolean inExampleAndExplain, boolean inForms) {
+	private void newFilter(String searchString, boolean isHungarian, boolean inExampleAndExplain, boolean inForms) {
 		RowFilter<String, String> rf = null;
 		// If current expression doesn't parse, don't update.
 		try {
@@ -147,7 +147,6 @@ public class WindowDbTable extends InternalWindow implements ChangeListener {
 
 				@Override
 				public boolean include(javax.swing.RowFilter.Entry<? extends String, ? extends String> entry) {
-					String searchString = fieldSearch.getText().toLowerCase();
 					boolean finalResult = false;
 					if (isHungarian) {
 						if (inExampleAndExplain) {
@@ -216,7 +215,7 @@ public class WindowDbTable extends InternalWindow implements ChangeListener {
 			fieldSearchMenuForms.setEnabled(false);
 		}
 
-		newFilter(fieldSearchMenuLangHun.isSelected(), fieldSearchMenuExplainAndExample.isSelected(),
+		newFilter(fieldSearch.getText().toLowerCase(), fieldSearchMenuLangHun.isSelected(), fieldSearchMenuExplainAndExample.isSelected(),
 				fieldSearchMenuForms.isSelected());
 
 	}
