@@ -3,9 +3,11 @@ package hu.itsh.gyakorlat.szotar.ui.actions;
 import java.awt.event.ActionEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.File;
 import java.util.concurrent.ExecutionException;
 
 import javax.swing.AbstractAction;
+import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 
 import org.apache.poi.ss.usermodel.Workbook;
@@ -28,42 +30,52 @@ public class ActionMenuDbOpen extends AbstractAction {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		PleaseWaitDialog dialog = new PleaseWaitDialog();
-		SwingWorker<Void, Void> mySwingWorker = new SwingWorker<Void, Void>() {
-			@Override
-			protected Void doInBackground() throws Exception {
+		
+		File f = new File("NGP.xlsx");
+		if(f.exists()){
+			PleaseWaitDialog dialog = new PleaseWaitDialog();
+			SwingWorker<Void, Void> mySwingWorker = new SwingWorker<Void, Void>() {
+				@Override
+				protected Void doInBackground() throws Exception {
 
-				try {
-				XSSFWorkbook wb = Database.loadWorkbook("NGP.xlsx");
-				Database.loadDictionary(wb);
-				} catch (Exception ex) {
-					ex.printStackTrace();
+					try {
+					XSSFWorkbook wb = Database.loadWorkbook("NGP.xlsx");
+					Database.loadDictionary(wb);
+					} catch (Exception ex) {
+						ex.printStackTrace();
+					}
+					return null;
+
 				}
-				return null;
+			};
 
-			}
-		};
+			mySwingWorker.addPropertyChangeListener(new PropertyChangeListener() {
 
-		mySwingWorker.addPropertyChangeListener(new PropertyChangeListener() {
-
-			@Override
-			public void propertyChange(PropertyChangeEvent evt) {
-				if (evt.getPropertyName().equals("state")) {
-					if (evt.getNewValue() == SwingWorker.StateValue.DONE) {
-						dialog.dispose();
-						UIUtil.showInformationDialog("Az adatbazis betoltese lezajlott!");
-						parent.requestFocus();
-						
+				@Override
+				public void propertyChange(PropertyChangeEvent evt) {
+					if (evt.getPropertyName().equals("state")) {
+						if (evt.getNewValue() == SwingWorker.StateValue.DONE) {
+							dialog.dispose();
+							UIUtil.showInformationDialog("Az adatbazis betoltese lezajlott!");
+							parent.requestFocus();
+							
+						}
 					}
 				}
-			}
-		});
+			});
 
 		mySwingWorker.execute();
 		dialog.setVisible(true);
 		
 		Database.dict.sort();
 		Database.dict.recalculateIDs();
+			
+		}else{
+			UIUtil.showErrorDialog("NGP.xlsx nem található. Kérem helyezze be a gyökér könyvtárba.");
+			System.exit(0);
+		}
+	
+
 	
 
 	}
