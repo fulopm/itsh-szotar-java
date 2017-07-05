@@ -131,7 +131,7 @@ public class WindowTestSelection extends InternalWindow implements ActionListene
 
 	public String newWord() {
 		setRandom();
-		if (!Database.dict.getRow(this.random).getWordClass().contains("definició") && !Database.dict.getRow(this.random).getWordClass().contains("mondat") && !Database.dict.getRow(this.random).getWordClass().contains("rövidítés")) {
+		if (!Database.dict.getRow(this.random).getWordClass().contains("definició") && !Database.dict.getRow(this.random).getWordClass().contains("mondat") && !Database.dict.getRow(this.random).getWordClass().contains("rövidítés") && Database.dict.getRow(this.random).getWord().length() < 40 && !Database.dict.getRow(this.random).getHun0().equals("") && Database.dict.getRow(this.random).getHun0().length() < 40) {
 			this.dbWord = Database.dict.getRow(this.random).getPrefix() + " " + Database.dict.getRow(this.random).getWord() + " " + Database.dict.getRow(this.random).getSuffix();
 			this.wordClass = Database.dict.getRow(this.random).getWordClass();
 			this.rightAns = Database.dict.getRow(this.random).getHun0();
@@ -147,7 +147,7 @@ public class WindowTestSelection extends InternalWindow implements ActionListene
 		this.answers.add(this.rightAns);
 		for (int i = 0; i < 4; i++) {
 			setRandom();
-			while (!Database.dict.getRow(this.random).getWordClass().equals(this.wordClass)) {
+			while (!Database.dict.getRow(this.random).getWordClass().equals(this.wordClass) || Database.dict.getRow(this.random).getHun0().equals("") || Database.dict.getRow(this.random).getHun0().length() > 40) {
 				setRandom();
 			}
 			this.answers.add(Database.dict.getRow(this.random).getHun0());
