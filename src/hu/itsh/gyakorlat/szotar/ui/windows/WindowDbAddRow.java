@@ -19,7 +19,7 @@ import hu.itsh.gyakorlat.szotar.ui.actions.ActionSaveRowState;
 import net.java.dev.designgridlayout.Tag;
 
 public class WindowDbAddRow extends WindowDbRow {
-	
+
 	public WindowDbAddRow() {
 		super();
 		layoutHelper.row().grid(labelID).add(fieldID);
@@ -32,7 +32,7 @@ public class WindowDbAddRow extends WindowDbRow {
 		layoutHelper.row().grid(labelLevel).add(fieldLevel);
 		layoutHelper.row().grid(labelLang).add(fieldLang);
 		layoutHelper.row().grid(labelForms).add(fieldForm0).add(fieldForm1).add(fieldForm2).add(fieldForm3);
-		
+
 		SpellChecking sp = new SpellChecking();
 		sp.check(fieldPrefix);
 		sp.check(fieldWord);
@@ -46,14 +46,13 @@ public class WindowDbAddRow extends WindowDbRow {
 
 		layoutHelper.row().bar().add(buttonSave, Tag.OK);
 		setMinimumSize(new Dimension(810, 380));
-		setSize(810, 380);
+		setSize(810, 410);
 		setVisible(true);
 	}
-	
+
 	public WindowDbAddRow(String word) {
 		this();
 		fieldWord.setText(word);
-	
 
 	}
 
@@ -92,7 +91,7 @@ public class WindowDbAddRow extends WindowDbRow {
 
 		labelWordClass = new JLabel("Szófaj:");
 		fieldWordClass = new JComboBox<String>(SharedConstants.wordClasses);
-		
+
 		labelLevel = new JLabel("Szint:");
 		fieldLevel = new JTextField();
 
@@ -110,11 +109,14 @@ public class WindowDbAddRow extends WindowDbRow {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (fieldWord.getText().length() < 1 || fieldLevel.getText().length() < 1 || fieldLang.getText().length() < 1) {
-					UIUtil.showErrorDialog("A szo, a szint, vagy a nyelv ures!");
+				if (fieldLevel.getText().length() < 1 || (Integer.getInteger(fieldLevel.getText(), -1) == -1)) {
+					UIUtil.showErrorDialog("A szint mezo tartalma nem lehet ures, es csak szamot tartalmazhat!");
+					return;
+				} else if (fieldLang.getText().length() != 1) {
+					UIUtil.showErrorDialog("A nyelv mezonek egy karaktert kell tartalmaznia!");
 					return;
 				} else {
-					
+
 					row.setPrefix(fieldPrefix.getText());
 					row.setWord(fieldWord.getText());
 					row.setSuffix(fieldSuffix.getText());
