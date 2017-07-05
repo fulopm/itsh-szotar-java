@@ -1,5 +1,9 @@
 package hu.itsh.gyakorlat.szotar.games;
 
+import javax.swing.JOptionPane;
+
+import hu.itsh.gyakorlat.szotar.ui.windows.InternalWindow;
+
 public class Hanger 
 {
 	String word;
@@ -41,23 +45,39 @@ public class Hanger
 			else
 				hidden += " _";
 		}
-		System.out.println("DEBUG WITH WORD SIZE " + getWordLength() + ": [" + hidden + "]");
-		System.out.println("DEBUG WITH WORD SIZE " + getWordLength() + ": [" + modified_word + "]");
+		//System.out.println("DEBUG WITH WORD SIZE " + getWordLength() + ": [" + hidden + "]");
+		//System.out.println("DEBUG WITH WORD SIZE " + getWordLength() + ": [" + modified_word + "]");
 		return hidden;
 	}
 	
 	public String checkAndUpdateWord(String status, char inp)
 	{
 		char[] wd = status.toCharArray();
-
+			System.out.println("DEBUG [" + modified_word + "]");
+			System.out.println("DEBUG [" + String.copyValueOf(wd) + "]");
+			
 			for (int i = 0; i < status.length(); i++)
 			{
 				if (inp == modified_word.charAt(i))
 					wd[i] = inp;
 					
 			}
-		System.out.println("DEBUG [" + String.copyValueOf(wd) + "]");
+			  if (status.toCharArray() == wd)
+			  {
+				JOptionPane.showMessageDialog(InternalWindow.mainContentPane, "Kitalaltad, gratulalok!");
+			  }
 		return String.copyValueOf(wd);
 		
+	}
+	
+	public boolean checkWord(String status)
+	{
+		boolean isGuessed = true;
+		for (char c : status.toCharArray())
+		{
+			if (c == '_')
+				isGuessed = false;
+		}	
+		return isGuessed;
 	}
 }
