@@ -31,7 +31,8 @@ public class ActionAddRow extends AbstractAction {
 			//int nextID = Database.dict.getRowCount() + 1;
 			//row.setId(nextID);
 			row.setTimestamp(SharedConstants.DTF_YYMMDD.format(LocalDate.now()));
-			row.setWordClass("default");
+			
+			
 			
 			Database.dict.addRow(row);
 			Database.dict.sort();

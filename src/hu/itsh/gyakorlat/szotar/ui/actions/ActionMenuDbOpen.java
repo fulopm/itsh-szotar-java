@@ -64,14 +64,18 @@ public class ActionMenuDbOpen extends AbstractAction {
 				}
 			});
 
-			mySwingWorker.execute();
-			dialog.setVisible(true);
+		mySwingWorker.execute();
+		dialog.setVisible(true);
+		
+		Database.dict.sort();
+		Database.dict.recalculateIDs();
 			
 		}else{
 			UIUtil.showErrorDialog("NGP.xlsx nem található. Kérem helyezze be a gyökér könyvtárba.");
 			System.exit(0);
 		}
 	
+
 	
 
 	}

@@ -83,9 +83,12 @@ public class WindowDbTable extends InternalWindow implements ChangeListener {
 		fieldSearchMenuLanguage = new JLabel("Keresési nyelv:");
 
 		fieldSearchMenuLangEng = new JRadioButtonMenuItem("Angol");
+		fieldSearchMenuLangEng.setSelected(true);
 		fieldSearchMenuLangEng.addChangeListener(this);
+		
 		fieldSearchMenuLangHun = new JRadioButtonMenuItem("Magyar");
 		fieldSearchMenuLangHun.addChangeListener(this);
+		
 		languageButtonGroup = new ButtonGroup();
 		languageButtonGroup.add(fieldSearchMenuLangEng);
 		languageButtonGroup.add(fieldSearchMenuLangHun);
@@ -141,7 +144,6 @@ public class WindowDbTable extends InternalWindow implements ChangeListener {
 
 	private void newFilter(String searchString, boolean isHungarian, boolean inExampleAndExplain, boolean inForms) {
 		RowFilter<String, String> rf = null;
-		// If current expression doesn't parse, don't update.
 		try {
 			rf = new RowFilter<String, String>() {
 

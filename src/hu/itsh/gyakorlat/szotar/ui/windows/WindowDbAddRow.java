@@ -12,6 +12,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import hu.itsh.gyakorlat.szotar.SharedConstants;
+import hu.itsh.gyakorlat.szotar.Util;
 import hu.itsh.gyakorlat.szotar.spell.SpellChecking;
 import hu.itsh.gyakorlat.szotar.ui.UIUtil;
 import hu.itsh.gyakorlat.szotar.ui.actions.ActionAddRow;
@@ -109,7 +110,7 @@ public class WindowDbAddRow extends WindowDbRow {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (fieldLevel.getText().length() < 1 || (Integer.getInteger(fieldLevel.getText(), -1) == -1)) {
+				if (fieldLevel.getText().length() < 1 || Util.parseInt(fieldLevel.getText()) == -1) {
 					UIUtil.showErrorDialog("A szint mezo tartalma nem lehet ures, es csak szamot tartalmazhat!");
 					return;
 				} else if (fieldLang.getText().length() != 1) {
@@ -117,21 +118,21 @@ public class WindowDbAddRow extends WindowDbRow {
 					return;
 				} else {
 
-					row.setPrefix(fieldPrefix.getText());
-					row.setWord(fieldWord.getText());
-					row.setSuffix(fieldSuffix.getText());
-					row.setEngExplain(fieldEngExplain.getText());
-					row.setEngExample(fieldEngExample.getText());
+					row.setPrefix(Util.escape(fieldPrefix.getText()));
+					row.setWord(Util.escape(fieldWord.getText()));
+					row.setSuffix(Util.escape(fieldSuffix.getText()));
+					row.setEngExplain(Util.escape(fieldEngExplain.getText()));
+					row.setEngExample(Util.escape(fieldEngExample.getText()));
 					row.setLevel(Integer.parseInt(fieldLevel.getText()));
 					row.setLang(fieldLang.getText().charAt(0));
-					row.setHun0(fieldHun0.getText());
-					row.setHun1(fieldHun1.getText());
-					row.setHunExplain(fieldHunExplain.getText());
-					row.setHunExample(fieldHunExample.getText());
-					row.setForm0(fieldForm0.getText());
-					row.setForm1(fieldForm1.getText());
-					row.setForm2(fieldForm2.getText());
-					row.setForm3(fieldForm3.getText());
+					row.setHun0(Util.escape(fieldHun0.getText()));
+					row.setHun1(Util.escape(fieldHun1.getText()));
+					row.setHunExplain(Util.escape(fieldHunExplain.getText()));
+					row.setHunExample(Util.escape(fieldHunExample.getText()));
+					row.setForm0(Util.escape(fieldForm0.getText()));
+					row.setForm1(Util.escape(fieldForm1.getText()));
+					row.setForm2(Util.escape(fieldForm2.getText()));
+					row.setForm3(Util.escape(fieldForm3.getText()));
 					new ActionAddRow(row).actionPerformed(e);
 					WindowDbAddRow.this.dispose();
 				}
