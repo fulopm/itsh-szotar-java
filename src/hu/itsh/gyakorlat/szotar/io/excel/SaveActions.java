@@ -150,6 +150,11 @@ public class SaveActions {
 			line = reader.readNext();
 			
 		}
+		
+		reader.close();
+		File csv = new File("table.csv");
+		csv.delete();
+		
 		saveToXLSX();
 		
 		}catch(Exception e){
