@@ -2,6 +2,7 @@ package hu.itsh.gyakorlat.szotar;
 
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
+import java.util.regex.Pattern;
 
 import hu.itsh.gyakorlat.szotar.dictionaries.Database;
 
@@ -22,4 +23,6 @@ public class SharedConstants {
 
 	public static final DateTimeFormatter DTF_YYMMDD = DateTimeFormatter.ofPattern("uuuu-MM-dd");
 
+	
+	public static Pattern REGEX_SPECIAL_CHARS = Pattern.compile("\\`|\\~|\\@|\\#|\\$|\\^|\\&|\\*|\\'|\\<|\\>|\\\"");	
 }

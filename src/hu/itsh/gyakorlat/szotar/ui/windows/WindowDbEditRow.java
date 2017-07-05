@@ -1,35 +1,22 @@
 package hu.itsh.gyakorlat.szotar.ui.windows;
 
 import java.awt.Dimension;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import java.beans.PropertyVetoException;
 import java.util.Arrays;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import javax.swing.JLayeredPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import com.inet.jortho.FileUserDictionary;
-import com.inet.jortho.SpellChecker;
-import com.inet.jortho.SpellCheckerOptions;
-
-import javax.swing.JPopupMenu;
-import com.inet.jortho.PopupListener;
-
 import hu.itsh.gyakorlat.szotar.SharedConstants;
-import hu.itsh.gyakorlat.szotar.dictionaries.Database;
+import hu.itsh.gyakorlat.szotar.Util;
 import hu.itsh.gyakorlat.szotar.io.excel.ds.Row;
 import hu.itsh.gyakorlat.szotar.spell.SpellChecking;
 import hu.itsh.gyakorlat.szotar.ui.UIUtil;
 import hu.itsh.gyakorlat.szotar.ui.actions.ActionSaveRowState;
-import net.java.dev.designgridlayout.DesignGridLayout;
 import net.java.dev.designgridlayout.Tag;
 
 public class WindowDbEditRow extends WindowDbRow {
@@ -47,7 +34,7 @@ public class WindowDbEditRow extends WindowDbRow {
 		layoutHelper.row().grid(labelLevel).add(fieldLevel);
 		layoutHelper.row().grid(labelLang).add(fieldLang);
 		layoutHelper.row().grid(labelForms).add(fieldForm0).add(fieldForm1).add(fieldForm2).add(fieldForm3);
-		
+
 		SpellChecking sp = new SpellChecking();
 		sp.check(fieldPrefix);
 		sp.check(fieldWord);
@@ -58,8 +45,7 @@ public class WindowDbEditRow extends WindowDbRow {
 		sp.check(fieldForm1);
 		sp.check(fieldForm2);
 		sp.check(fieldForm3);
-		
-		
+
 		layoutHelper.row().bar().add(buttonSave, Tag.OK);
 		setMinimumSize(new Dimension(810, 380));
 		setSize(810, 410);
@@ -97,7 +83,7 @@ public class WindowDbEditRow extends WindowDbRow {
 
 		labelHunExample = new JLabel("Magyar példa:");
 		fieldHunExample = new JTextArea(row.getHunExample());
-		
+
 		labelWordClass = new JLabel("Szófaj:");
 		fieldWordClass = new JComboBox<String>(SharedConstants.wordClasses);
 		fieldWordClass.setSelectedIndex(Arrays.asList(SharedConstants.wordClasses).indexOf(row.getWordClass()));
@@ -120,28 +106,28 @@ public class WindowDbEditRow extends WindowDbRow {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (fieldLevel.getText().length() < 1 || (Integer.getInteger(fieldLevel.getText(), -1) == -1)) {
+				if (fieldLevel.getText().length() < 1 || Util.parseInt(fieldLevel.getText()) == -1) {
 					UIUtil.showErrorDialog("A szint mezo tartalma nem lehet ures, es csak szamot tartalmazhat!");
 					return;
 				} else if (fieldLang.getText().length() != 1) {
 					UIUtil.showErrorDialog("A nyelv mezonek egy karaktert kell tartalmaznia!");
 					return;
-				}else {
-					row.setPrefix(fieldPrefix.getText());
-					row.setWord(fieldWord.getText());
-					row.setSuffix(fieldSuffix.getText());
-					row.setEngExplain(fieldEngExplain.getText());
-					row.setEngExample(fieldEngExample.getText());
+				} else {
+					row.setPrefix(Util.escape(fieldPrefix.getText()));
+					row.setWord(Util.escape(fieldWord.getText()));
+					row.setSuffix(Util.escape(fieldSuffix.getText()));
+					row.setEngExplain(Util.escape(fieldEngExplain.getText()));
+					row.setEngExample(Util.escape(fieldEngExample.getText()));
 					row.setLevel(Integer.parseInt(fieldLevel.getText()));
 					row.setLang(fieldLang.getText().charAt(0));
-					row.setHun0(fieldHun0.getText());
-					row.setHun1(fieldHun1.getText());
-					row.setHunExplain(fieldHunExplain.getText());
-					row.setHunExample(fieldHunExample.getText());
-					row.setForm0(fieldForm0.getText());
-					row.setForm1(fieldForm1.getText());
-					row.setForm2(fieldForm2.getText());
-					row.setForm3(fieldForm3.getText());
+					row.setHun0(Util.escape(fieldHun0.getText()));
+					row.setHun1(Util.escape(fieldHun1.getText()));
+					row.setHunExplain(Util.escape(fieldHunExplain.getText()));
+					row.setHunExample(Util.escape(fieldHunExample.getText()));
+					row.setForm0(Util.escape(fieldForm0.getText()));
+					row.setForm1(Util.escape(fieldForm1.getText()));
+					row.setForm2(Util.escape(fieldForm2.getText()));
+					row.setForm3(Util.escape(fieldForm3.getText()));
 					new ActionSaveRowState(row).actionPerformed(e);
 					WindowDbEditRow.this.dispose();
 				}

@@ -62,7 +62,8 @@ public class ActionMenuDbOpen extends AbstractAction {
 		mySwingWorker.execute();
 		dialog.setVisible(true);
 		
-	
+		Database.dict.sort();
+		Database.dict.recalculateIDs();
 	
 
 	}
