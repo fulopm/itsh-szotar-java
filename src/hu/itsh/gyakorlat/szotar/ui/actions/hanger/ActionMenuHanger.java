@@ -1,4 +1,4 @@
-package hu.itsh.gyakorlat.szotar.ui.actions;
+package hu.itsh.gyakorlat.szotar.ui.actions.hanger;
 
 import java.awt.event.ActionEvent;
 

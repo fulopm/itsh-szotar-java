@@ -18,6 +18,7 @@ import hu.itsh.gyakorlat.szotar.ui.actions.ActionMenuTestSelect;
 import hu.itsh.gyakorlat.szotar.ui.actions.ActionMenuTestType;
 import hu.itsh.gyakorlat.szotar.ui.actions.ActionMenuTranslate;
 import hu.itsh.gyakorlat.szotar.ui.actions.ActionSaveDb;
+import hu.itsh.gyakorlat.szotar.ui.actions.hanger.ActionMenuHanger;
 import hu.itsh.gyakorlat.szotar.ui.windows.InternalWindow;
 
 public class MainFrame extends JFrame{
@@ -40,11 +41,14 @@ public class MainFrame extends JFrame{
 	JMenu menuPractice;
 	JMenuItem menuItemTestsSelectTest;
 	JMenuItem menuItemTestsListeningTest;
+	JMenuItem menuItemTestsHanger;
 	
 	JMenuItem menuItemStatistics;
 	
 	JMenu menuTranslate;
 	JMenuItem menuWordBook;
+	
+	
 
 	JMenu menuHelp;
 	JMenuItem menuItemHelpAbout;
@@ -93,6 +97,9 @@ public class MainFrame extends JFrame{
 		menuItemTestsSelectTest = new JMenuItem("Valasztos teszt");
 		menuItemTestsSelectTest.setAction(new ActionMenuTestSelect(contentPane));
 		
+		menuItemTestsHanger = new JMenuItem("Akasztofa");
+		menuItemTestsHanger.setAction(new ActionMenuHanger(contentPane));
+		
 		menuItemStatistics = new JMenuItem("Statisztika");
 		menuItemStatistics.setAction(new ActionMenuStatistics(contentPane));
 		
@@ -100,6 +107,8 @@ public class MainFrame extends JFrame{
 		menuPractice.add(menuItemTestsSelectTest);
 		menuPractice.addSeparator();
 		menuPractice.add(menuItemStatistics);
+		menuPractice.addSeparator();
+		menuPractice.add(menuItemTestsHanger);
 		
 		menuTranslate = new JMenu("Forditas");
 		menuWordBook = new JMenuItem("Szoszedet, mondatforditas");
