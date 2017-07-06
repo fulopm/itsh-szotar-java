@@ -5,14 +5,14 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class StatisticsReader {
 
 	static final String typeFilename = "statsType.txt";
 	static final String selectionFilename = "statsSelection.txt";
-	
-	
+
 	public static int[] readTypeStatistics() {
 		try (Scanner sc = new Scanner(new File(typeFilename))) {
 			if (sc.hasNextLine()) {
@@ -23,12 +23,25 @@ public class StatisticsReader {
 				return ret;
 			}
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			
+			try {
+				new File(typeFilename).createNewFile();
+				FileWriter newStatFile1fw = new FileWriter(typeFilename);
+				BufferedWriter newStatFile1bw = new BufferedWriter(newStatFile1fw);
+				newStatFile1bw.write("0;0");
+
+				newStatFile1bw.close();
+				newStatFile1fw.close();
+				readTypeStatistics();
+				
+			}catch (Exception e1) {
+				// TODO: handle exception
+				e1.printStackTrace();
+			}
 		}
 		return null;
 	}
-	
+
 	public static int[] readSelectionStatistics() {
 		try (Scanner sc = new Scanner(new File(selectionFilename))) {
 			if (sc.hasNextLine()) {
@@ -39,12 +52,23 @@ public class StatisticsReader {
 				return ret;
 			}
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+
+			try {
+				FileWriter newStatFile2fw = new FileWriter(selectionFilename);
+				BufferedWriter newStatFile2bw = new BufferedWriter(newStatFile2fw);
+				newStatFile2bw.write("0;0");
+
+				newStatFile2bw.close();
+				newStatFile2fw.close();
+				readSelectionStatistics();
+			} catch (IOException e2) {
+				// TODO Auto-generated catch block
+				e2.printStackTrace();
+			}
 		}
 		return null;
 	}
-	
+
 	public static void reset() {
 		try {
 
@@ -68,5 +92,5 @@ public class StatisticsReader {
 			System.out.println("Hiba: " + e);
 		}
 	}
-	
+
 }
