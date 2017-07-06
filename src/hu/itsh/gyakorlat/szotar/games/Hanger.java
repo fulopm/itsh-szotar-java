@@ -2,6 +2,7 @@ package hu.itsh.gyakorlat.szotar.games;
 
 import javax.swing.JOptionPane;
 
+import hu.itsh.gyakorlat.szotar.ui.UIUtil;
 import hu.itsh.gyakorlat.szotar.ui.windows.InternalWindow;
 
 public class Hanger 
@@ -64,7 +65,7 @@ public class Hanger
 			}
 			  if (status.toCharArray() == wd)
 			  {
-				JOptionPane.showMessageDialog(InternalWindow.mainContentPane, "Kitalaltad, gratulalok!");
+				UIUtil.showInformationDialog("Kitalaltad, gratulalok!");
 			  }
 		return String.copyValueOf(wd);
 		
