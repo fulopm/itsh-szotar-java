@@ -10,7 +10,8 @@ public class SharedConstants {
 	public static String[] APP_DEVS = { "Fulop Mark", "Beviz Mark", "Peter Benjamin", "Sovago David", "Pusztai Csaba",
 			"Gaal Csaba", "Major Csaba" };
 
-	public static final String SEPARATOR = "~";
+	public static final String SEPARATOR_WAVE = "~";
+	public static final String SEPARATOR_DOLLAR = "$";
 	public static final SimpleDateFormat FORMAT_YYMMDD = new SimpleDateFormat("yyyy-MM-dd");
 
 	public static final String[] wordClasses = { "névelö", "rövidítés", "mondat", "vt", "kifejezés", "fönév",
@@ -22,5 +23,9 @@ public class SharedConstants {
 	public static final DateTimeFormatter DTF_YYMMDD = DateTimeFormatter.ofPattern("uuuu-MM-dd");
 
 	
-	public static Pattern REGEX_SPECIAL_CHARS = Pattern.compile("\\`|\\~|\\@|\\#|\\$|\\^|\\&|\\*|\\'|\\<|\\>|\\\"");	
+	public static Pattern REGEX_SPECIAL_CHARS = Pattern.compile("\\`|\\~|\\@|\\#|\\$|\\^|\\&|\\*|\\'|\\<|\\>|\\\"");
+	
+	
+	public static final String FILENAME_NGP = "NGP.xlsx";
+	public static final String FILENAME_TEMP_CSV = "table.csv";
 }

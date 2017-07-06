@@ -2,21 +2,18 @@ package hu.itsh.gyakorlat.szotar.dictionaries;
 
 import java.io.File;
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Observable;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import hu.itsh.gyakorlat.szotar.SharedConstants;
+import hu.itsh.gyakorlat.szotar.Util;
 import hu.itsh.gyakorlat.szotar.io.excel.ExcelBase;
 import hu.itsh.gyakorlat.szotar.io.excel.ds.Row;
 
-public class Database extends Observable {
-	public static Dictionary dict;
+public class Database {
+	public static final Dictionary dict;
 
 	static {
 		dict = new Dictionary();
@@ -33,74 +30,68 @@ public class Database extends Observable {
 	}
 
 	public static void loadDictionary(XSSFWorkbook workbook) {
+		
 		dict.clear();
 		ExcelBase reader = new ExcelBase(workbook);
 		List<String> rowsRaw = null;
 		try {
-		 rowsRaw = reader.getRows(SharedConstants.SEPARATOR);
+		 rowsRaw = reader.getRows(SharedConstants.SEPARATOR_WAVE);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-		System.out.println(rowsRaw.size());
 
 		for (String rowRaw : rowsRaw) {
-			String[] cut = rowRaw.split(SharedConstants.SEPARATOR);
+			String[] tokens = rowRaw.split(SharedConstants.SEPARATOR_WAVE);
 
-			// System.out.println(Arrays.toString(cut));
-			Row row = new Row();
+			Row parsedRow = new Row();
 
-			System.out.println(Arrays.toString(cut));
-			try {
-				row.setId(Integer.parseInt(cut[0]));
-				row.setTimestamp(cut[1]);
-				row.setPrefix(cut[2].toLowerCase());
-				row.setWord(cut[3].toLowerCase());
-				row.setSuffix(cut[4].toLowerCase());
-				row.setEngExplain(cut[5]);
-				row.setEngExample(cut[6]);
-				row.setHun0(cut[7]);
-				row.setHun1(cut[8]);
-				row.setHunExplain(cut[9]);
-				row.setHunExample(cut[10]);
-				row.setLevel(Integer.parseInt(cut[11]));
-				row.setLang(cut[12].charAt(0));
-				row.setWordClass(cut[13]);
-				switch (cut.length) {
+				parsedRow.setId(Util.parseInt(tokens[0]));
+				parsedRow.setTimestamp(tokens[1]);
+				parsedRow.setPrefix(tokens[2].toLowerCase());
+				parsedRow.setWord(tokens[3].toLowerCase());
+				parsedRow.setSuffix(tokens[4].toLowerCase());
+				parsedRow.setEngExplain(tokens[5]);
+				parsedRow.setEngExample(tokens[6]);
+				parsedRow.setHun0(tokens[7]);
+				parsedRow.setHun1(tokens[8]);
+				parsedRow.setHunExplain(tokens[9]);
+				parsedRow.setHunExample(tokens[10]);
+				parsedRow.setLevel(Util.parseInt(tokens[11]));
+				parsedRow.setLang(tokens[12].charAt(0));
+				parsedRow.setWordClass(tokens[13]);
+				switch (tokens.length) {
 				case 14:
-					row.setForm0(null);
-					row.setForm1(null);
-					row.setForm2(null);
-					row.setForm3(null);
+					parsedRow.setForm0(null);
+					parsedRow.setForm1(null);
+					parsedRow.setForm2(null);
+					parsedRow.setForm3(null);
 					break;
 				case 15:
-					row.setForm0(cut[14]);
-					row.setForm1(null);
-					row.setForm2(null);
-					row.setForm3(null);
+					parsedRow.setForm0(tokens[14]);
+					parsedRow.setForm1(null);
+					parsedRow.setForm2(null);
+					parsedRow.setForm3(null);
 					break;
 				case 16:
-					row.setForm0(cut[14]);
-					row.setForm1(cut[15]);
-					row.setForm2(null);
-					row.setForm3(null);
+					parsedRow.setForm0(tokens[14]);
+					parsedRow.setForm1(tokens[15]);
+					parsedRow.setForm2(null);
+					parsedRow.setForm3(null);
 					break;
 				case 17:
-					row.setForm0(cut[14]);
-					row.setForm1(cut[15]);
-					row.setForm2(cut[16]);
-					row.setForm3(null);
+					parsedRow.setForm0(tokens[14]);
+					parsedRow.setForm1(tokens[15]);
+					parsedRow.setForm2(tokens[16]);
+					parsedRow.setForm3(null);
 					break;
 				case 18:
-					row.setForm0(cut[14]);
-					row.setForm1(cut[15]);
-					row.setForm2(cut[16]);
-					row.setForm3(cut[17]);
+					parsedRow.setForm0(tokens[14]);
+					parsedRow.setForm1(tokens[15]);
+					parsedRow.setForm2(tokens[16]);
+					parsedRow.setForm3(tokens[17]);
 				}
 
-			} catch (Exception ex) {
-				ex.printStackTrace();
-			}
-			dict.addRow(row);
+			dict.addRow(parsedRow);
 
 		}
 		
