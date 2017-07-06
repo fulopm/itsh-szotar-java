@@ -1,5 +1,7 @@
 package hu.itsh.gyakorlat.szotar.ui;
 
+import java.awt.Dimension;
+
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -56,6 +58,7 @@ public class MainFrame extends JFrame{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setExtendedState(getExtendedState()|JFrame.MAXIMIZED_BOTH);
 		setTitle(SharedConstants.APP_NAME + " - " + SharedConstants.APP_VERSION);
+		setMinimumSize(new Dimension(800,600));
 		new ActionMenuDbOpen(contentPane).actionPerformed(null);
 	}
 
