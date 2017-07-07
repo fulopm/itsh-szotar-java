@@ -3,12 +3,14 @@ package hu.itsh.gyakorlat.szotar.ui;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Image;
+import java.awt.Ige;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JComponent;
+
+import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -28,6 +30,7 @@ import hu.itsh.gyakorlat.szotar.ui.actions.ActionMenuTestSelect;
 import hu.itsh.gyakorlat.szotar.ui.actions.ActionMenuTestType;
 import hu.itsh.gyakorlat.szotar.ui.actions.ActionMenuTranslate;
 import hu.itsh.gyakorlat.szotar.ui.actions.ActionSaveDb;
+import hu.itsh.gyakorlat.szotar.ui.actions.hanger.ActionMenuHanger;
 import hu.itsh.gyakorlat.szotar.ui.windows.InternalWindow;
 
 public class MainFrame extends JFrame {
@@ -51,10 +54,18 @@ public class MainFrame extends JFrame {
 	JMenuItem menuItemTestsSelectTest;
 	JMenuItem menuItemTestsListeningTest;
 
+
 	JMenuItem menuItemStatistics;
 
 	JMenu menuTranslate;
 	JMenuItem menuWordBook;
+	JMenuItem menuItemTestsHanger;
+	
+	JMenuItem menuItemStatistics;
+	
+	JMenu menuTranslate;
+	JMenuItem menuWordBook;
+	
 
 	JMenu menuHelp;
 	JMenuItem menuItemHelpAbout;
@@ -66,6 +77,7 @@ public class MainFrame extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setExtendedState(getExtendedState() | JFrame.MAXIMIZED_BOTH);
 		setTitle(SharedConstants.APP_NAME + " - " + SharedConstants.APP_VERSION);
+		setMinimumSize(new Dimension(800,600));
 		new ActionMenuDbOpen(contentPane).actionPerformed(null);
 
 		setLaF();
@@ -100,7 +112,9 @@ public class MainFrame extends JFrame {
 
 		menuItemTestsSelectTest = new JMenuItem("Valasztos teszt");
 		menuItemTestsSelectTest.setAction(new ActionMenuTestSelect(contentPane));
-
+		menuItemTestsHanger = new JMenuItem("Akasztofa");
+		menuItemTestsHanger.setAction(new ActionMenuHanger(contentPane));
+		
 		menuItemStatistics = new JMenuItem("Statisztika");
 		menuItemStatistics.setAction(new ActionMenuStatistics(contentPane));
 
@@ -108,6 +122,8 @@ public class MainFrame extends JFrame {
 		menuPractice.add(menuItemTestsSelectTest);
 		menuPractice.addSeparator();
 		menuPractice.add(menuItemStatistics);
+		menuPractice.addSeparator();
+		menuPractice.add(menuItemTestsHanger);
 
 		menuTranslate = new JMenu("Forditas");
 		menuWordBook = new JMenuItem("Szoszedet, mondatforditas");
