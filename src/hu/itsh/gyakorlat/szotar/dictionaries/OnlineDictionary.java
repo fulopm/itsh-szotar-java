@@ -8,6 +8,8 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import hu.itsh.gyakorlat.szotar.ui.UIUtil;
+
 
 public class OnlineDictionary
 {
@@ -15,8 +17,8 @@ public class OnlineDictionary
 	public static final int HUNGARIAN = 2;
 	
 	public ArrayList<String> meanings;
-	public String sourceWord;
-	public String wordClass;
+	private String sourceWord;
+	private String wordClass;
 	
 	public ArrayList<OnlineWord> words;
 	
@@ -36,22 +38,31 @@ public class OnlineDictionary
         int i = 0;
         for (Element classes : quickResultOption)
         {
-        	sourceWord = classes.text().split("\\s+")[0];
-        	wordClass = classes.text().split("\\s+")[1];
-        	for (Element wd : liS.get(i).select("li"))
+        	try
         	{
-        		if (!wd.text().equals(""))
-        		{
-        			meanings.add(wd.text());
-        		}
-        		
-        	}       	words.add(new OnlineWord(wordClass, sourceWord, meanings.toArray()));
-        	meanings.clear();
-        	i++;
+	        	sourceWord = classes.text().split("\\s+")[0];
+	        	wordClass = classes.text().split("\\s+")[1];
+	        	for (Element wd : liS.get(i).select("li"))
+	        	{
+	        		if (!wd.text().equals(""))
+	        		{
+	        			meanings.add(wd.text());
+	        		}
+	        		
+	        	}       	words.add(new OnlineWord(sourceWord, wordClass, meanings.toArray()));
+	        	meanings.clear();
+	        	i++;
+        	}
+        	catch (Exception e)
+        	{
+        		UIUtil.showErrorDialog("Nem talaltam semmit online!");;
+        	}
         	
         }
         for (OnlineWord wd : words)
-			System.out.println("wd: " + wd.meaningsToString());
+        {
+			System.out.println("szo: "+wd.getWordClass()+"\nszofaj: "+wd.getSourceWord()+"\nwords: " + wd.meaningsToString() + "\n----------------------------------");
+        }
 
     	
     }

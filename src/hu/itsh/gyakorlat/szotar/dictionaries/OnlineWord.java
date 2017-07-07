@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 import hu.itsh.gyakorlat.szotar.SharedConstants;
 
-class OnlineWord 
+public class OnlineWord 
 {
 	private String sourceWord;
 	private String wordClass;

@@ -1,6 +1,7 @@
 package hu.itsh.gyakorlat.szotar.ui.windows;
 
 import java.awt.event.ActionEvent;
+
 import java.awt.Cursor;
 
 import java.awt.event.ActionListener;
@@ -9,8 +10,10 @@ import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
@@ -21,19 +24,28 @@ import org.jsoup.select.Elements;
 
 import hu.itsh.gyakorlat.szotar.dictionaries.Database;
 import hu.itsh.gyakorlat.szotar.dictionaries.OnlineDictionary;
+import hu.itsh.gyakorlat.szotar.dictionaries.OnlineWord;
 import hu.itsh.gyakorlat.szotar.io.excel.ds.Row;
 import hu.itsh.gyakorlat.szotar.io.user.WordBook;
+import hu.itsh.gyakorlat.szotar.ui.UIUtil;
 import net.java.dev.designgridlayout.DesignGridLayout;
 
 public class WindowWorkBook extends InternalWindow
 {
+	
 	private JTextArea textInput;
 	private JButton organize;
 	private JButton clear;
 	private JTable words;
+	
+	private ButtonGroup add;
+	private ArrayList<JRadioButton> rButtons;
+	
+	
 	private DefaultTableModel tableModel;
 	private final String[] columnNames = {"Eredeti", "Forditott"};
 	private final String[] buttonNames = {"Online kereses", "Szotarhoz adas", "Megsem"};
+	private String onlineMessage = "";
 	
 	public WindowWorkBook()
 	{
@@ -81,6 +93,11 @@ public class WindowWorkBook extends InternalWindow
 						try
 						{
 							OnlineDictionary od = new OnlineDictionary(tableModel.getValueAt(row, col).toString(), OnlineDictionary.ENGLISH);
+							for (OnlineWord wd : od.words)
+							{
+								onlineMessage += "<html><b>"+wd.getSourceWord()+"</b>"+" {"+wd.getWordClass()+"} " + wd.meaningsToString() + "<br>";
+							}
+							UIUtil.showInformationDialog(onlineMessage);
 							
 							
 						} catch (IOException e1)
