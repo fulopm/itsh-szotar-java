@@ -63,7 +63,7 @@ public class ExcelBase {
 						rowStringBuilder.append(new SimpleDateFormat(SharedConstants.FORMAT_YYMMDD).format(date));
 						rowStringBuilder.append(separator);
 					} else {
-						rowStringBuilder.append(nextCell.getNumericCellValue());
+						rowStringBuilder.append((int)nextCell.getNumericCellValue());
 						rowStringBuilder.append(separator);
 					}
 

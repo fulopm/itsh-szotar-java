@@ -167,7 +167,7 @@ java.awt.Dimension dimension = java.awt.Toolkit.getDefaultToolkit().getScreenSiz
 		private Image image;
 		{
 			try {
-				image = ImageIO.read(new File("ITSH.png"));
+				image = ImageIO.read(new File("ITSH1.png"));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
