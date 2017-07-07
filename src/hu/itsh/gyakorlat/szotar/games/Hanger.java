@@ -34,6 +34,10 @@ public class Hanger
 		return word.toCharArray();		
 	}
 	
+	public String getWord() {
+		return word;
+	}
+	
 	public int getWordLength()
 	{
 		return word.length();

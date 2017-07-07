@@ -166,7 +166,7 @@ public class WindowHanger extends InternalWindow implements ActionListener {
 				} else {
 					hangObjects.add(body[9]);
 					panelHang.repaint();
-					UIUtil.showErrorDialog("Vesztettél!\nEz volt a szó: " + labelWord.getText());
+					UIUtil.showErrorDialog("<html>Vesztettél!<br>Ez volt a szó: <b>" +game.getWord()+"</b></html>" );
 					for (JButton btn : abcButtons)
 						btn.setEnabled(false);
 
