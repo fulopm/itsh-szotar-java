@@ -90,14 +90,23 @@ public class ActionMenuDbOpen extends AbstractAction {
 			FileNameExtensionFilter fileFilter = new FileNameExtensionFilter("Excel xlsx", "xlsx");
 			
 			dbChooser.setFileFilter(fileFilter);
+			dbChooser.setDialogTitle("File select");
 			dbChooser.showOpenDialog(parent);
 			
 			parent.add(dbChooser);
-			f = dbChooser.getSelectedFile();
-			System.out.println(dbChooser.getSelectedFile().getName());
 			
-			parent.remove(dbChooser);
-			new ActionMenuDbOpen(parent).actionPerformed(null);
+			
+			if(dbChooser.getSelectedFile() != null){
+				f = dbChooser.getSelectedFile();
+				System.out.println(dbChooser.getSelectedFile().getName());
+				
+				parent.remove(dbChooser);
+				new ActionMenuDbOpen(parent).actionPerformed(null);
+			
+			}else{
+				System.exit(0);
+			}
+			
 		}
 	
 
