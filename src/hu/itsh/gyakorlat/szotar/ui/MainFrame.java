@@ -54,7 +54,6 @@ public class MainFrame extends JFrame {
 	JMenuItem menuItemTestsSelectTest;
 	JMenuItem menuItemTestsListeningTest;
 
-
 	JMenuItem menuItemStatistics;
 
 	JMenu menuTranslate;
@@ -70,10 +69,8 @@ public class MainFrame extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setExtendedState(getExtendedState() | JFrame.MAXIMIZED_BOTH);
 		setTitle(SharedConstants.APP_NAME + " - " + SharedConstants.APP_VERSION);
-		setMinimumSize(new Dimension(800,600));
+		setMinimumSize(new Dimension(800, 600));
 		new ActionMenuDbOpen(contentPane).actionPerformed(null);
-
-		setLaF();
 	}
 
 	void initComponents() {
@@ -107,7 +104,7 @@ public class MainFrame extends JFrame {
 		menuItemTestsSelectTest.setAction(new ActionMenuTestSelect(contentPane));
 		menuItemTestsHanger = new JMenuItem("Akasztofa");
 		menuItemTestsHanger.setAction(new ActionMenuHanger(contentPane));
-		
+
 		menuItemStatistics = new JMenuItem("Statisztika");
 		menuItemStatistics.setAction(new ActionMenuStatistics(contentPane));
 
@@ -139,18 +136,6 @@ public class MainFrame extends JFrame {
 	}
 
 	public static void setLaF() {
-		UIManager.put("DesktopPane[Enabled].backgroundPainter", new DesktopPainter());
-		UIManager.put("nimbusSelection", new Color(139,41,142));
-		UIManager.put("nimbusBlueGrey", new Color(169,176,190));
-		UIManager.put("nimbusSelectionBackground", new Color(139,41,142));
-		UIManager.put("MenuBar:Menu[Selected].backgroundPainter",
-                new FillPainter(new Color(139,41,142)));
-
-		
-		
-		
-		
-
 		for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
 			if (info.getName().contains("Nimbus")) {
 				try {
@@ -161,9 +146,14 @@ public class MainFrame extends JFrame {
 				}
 			}
 		}
+		
+		UIManager.getLookAndFeelDefaults().put("DesktopPane[Enabled].backgroundPainter", new DesktopPainter());
+		UIManager.getLookAndFeelDefaults().put("nimbusSelection", new Color(139, 41, 142));
+		UIManager.getLookAndFeelDefaults().put("nimbusBlueGrey", new Color(169, 176, 190));
+		UIManager.getLookAndFeelDefaults().put("nimbusSelectionBackground", new Color(139, 41, 142));
+		UIManager.getLookAndFeelDefaults().put("MenuBar:Menu[Selected].backgroundPainter", new FillPainter(new Color(139, 41, 142)));
 	}
 
-	
 	static class DesktopPainter implements Painter<JComponent> {
 
 		private Image image;
@@ -215,23 +205,22 @@ public class MainFrame extends JFrame {
 		        }
 		        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		        g.drawImage(image, x1, y1, x2, y2, 0, 0, imgWidth, imgHeight, null);
-
 		}
 
 	}
-	
+
 	static class FillPainter implements Painter<JComponent> {
 
-	    private final Color color;
+		private final Color color;
 
-	    FillPainter(Color c) {
-	        color = c;
-	    }
+		FillPainter(Color c) {
+			color = c;
+		}
 
-	    @Override
-	    public void paint(Graphics2D g, JComponent object, int width, int height) {
-	        g.setColor(color);
-	        g.fillRect(0, 0, width, height);
-	    }
+		@Override
+		public void paint(Graphics2D g, JComponent object, int width, int height) {
+			g.setColor(color);
+			g.fillRect(0, 0, width, height);
+		}
 	}
 }
