@@ -22,5 +22,9 @@ public class SharedConstants {
 	public static final DateTimeFormatter DTF_YYMMDD = DateTimeFormatter.ofPattern("uuuu-MM-dd");
 
 	
-	public static Pattern REGEX_SPECIAL_CHARS = Pattern.compile("\\`|\\~|\\@|\\#|\\$|\\^|\\&|\\*|\\'|\\<|\\>|\\\"");	
+	public static Pattern REGEX_SPECIAL_CHARS = Pattern.compile("\\`|\\~|\\@|\\#|\\$|\\^|\\&|\\*|\\'|\\<|\\>|\\\"");
+	
+	public static final String[] onlineWordClassShortenEng = {"{noun}", "{vb}", "{adj.}", "{conj.}", "{pron.}", "{adv.}", "{prp.}"};
+	
+	public static final String[] onlineWordClassShortenHun = {"főnév", "ige", "melléknév", "kötőszó", "névmás", "határozószó", "viszonyszó"};
 }

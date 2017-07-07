@@ -80,42 +80,8 @@ public class WindowWorkBook extends InternalWindow
 							
 						try
 						{
-							contentPane.setCursor(new Cursor(Cursor.WAIT_CURSOR));
+							OnlineDictionary od = new OnlineDictionary(tableModel.getValueAt(row, col).toString(), OnlineDictionary.ENGLISH);
 							
-							Elements onlineWords = OnlineDictionary.translate(tableModel.getValueAt(row, col).toString(), OnlineDictionary.HUNGARIAN);
-							String meanings = "<html>";
-							String[] line;
-							boolean isSource = true;
-							String craft = "<b>";
-							for (Element wordSet : onlineWords)
-							{
-								if (wordSet.text().contains("HU") || wordSet.text().contains("EN"))
-								{
-									line = wordSet.text().split("\\s+");
-									for (String wd : line)
-									{
-										if (!wd.contains("{"))
-										{
-											if (wd.equals("HU") || wd.equals("EN"))
-											{
-												isSource = false;
-												meanings += craft + "</b>";
-												craft = "<b>";
-											}
-											else if (isSource)
-												craft += wd + " ";
-											else if (!isSource && !wd.equals("HU") && !wd.equals("EN"))
-												meanings += wd + " ";
-										 }
-									}
-								}
-								isSource = true;
-								meanings +=  "<br>";
-							}
-							meanings += "</html>";
-							System.out.println(meanings);
-							contentPane.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-							JOptionPane.showMessageDialog(new WindowWorkBook(), meanings, "Lehetséges jelentések", JOptionPane.OK_CANCEL_OPTION);
 							
 						} catch (IOException e1)
 						{
