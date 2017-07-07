@@ -1,16 +1,14 @@
 package hu.itsh.gyakorlat.szotar.ui;
 
 import java.awt.Color;
-import java.awt.Graphics;
+import java.awt.Dimension;
 import java.awt.Graphics2D;
-import java.awt.Ige;
+import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JComponent;
-
-import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -60,12 +58,6 @@ public class MainFrame extends JFrame {
 	JMenu menuTranslate;
 	JMenuItem menuWordBook;
 	JMenuItem menuItemTestsHanger;
-	
-	JMenuItem menuItemStatistics;
-	
-	JMenu menuTranslate;
-	JMenuItem menuWordBook;
-	
 
 	JMenu menuHelp;
 	JMenuItem menuItemHelpAbout;
@@ -175,7 +167,7 @@ java.awt.Dimension dimension = java.awt.Toolkit.getDefaultToolkit().getScreenSiz
 		private Image image;
 		{
 			try {
-				image = ImageIO.read(new File("ITSH1.png"));
+				image = ImageIO.read(new File("ITSH.png"));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

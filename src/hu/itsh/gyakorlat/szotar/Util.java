@@ -1,5 +1,6 @@
 package hu.itsh.gyakorlat.szotar;
 
+import java.io.File;
 import java.util.regex.Pattern;
 
 public class Util {
@@ -23,6 +24,20 @@ public class Util {
 		} catch (NumberFormatException x) {
 			return -1;
 		}
+		
+	}
+	
+	public static String getExtension(File f){
+		
+		String ext = null;
+		String fileName = f.getName();
+		int dotInd = fileName.lastIndexOf('.');
+		
+		if(dotInd > 0 && dotInd < fileName.length() -1){
+			ext = fileName.substring(dotInd+1).toLowerCase();
+		}
+		
+		return ext;
 		
 	}
 	

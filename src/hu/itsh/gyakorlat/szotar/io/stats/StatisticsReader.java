@@ -43,7 +43,6 @@ public class StatisticsReader {
 		return new int[] {0,0};
 	}
 
-	public static void reset() {
 
 
 	public static void writeSelectionStatistics(int right, int wrong) {
