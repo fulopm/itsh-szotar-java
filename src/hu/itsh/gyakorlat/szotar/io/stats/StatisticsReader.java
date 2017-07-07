@@ -19,7 +19,7 @@ public class StatisticsReader {
 				String line = sc.nextLine();
 				ret[0] = Integer.parseInt(line.split(";")[0]);
 				ret[1] = Integer.parseInt(line.split(";")[1]);
-			
+				return ret;
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -29,13 +29,11 @@ public class StatisticsReader {
 	public static int[] readSelectionStatistics() {
 		int ret[] = new int[2];
 		try (Scanner sc = new Scanner(new File(selectionFilename))) {
-			if (sc.hasNextLine()) {
 				if (!sc.hasNextLine()) return new int[] {0,0};
 				String line = sc.nextLine();
 				ret[0] = Integer.parseInt(line.split(";")[0]);
 				ret[1] = Integer.parseInt(line.split(";")[1]);
 				return ret;
-			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 
