@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 public class SharedConstants {
 	public static final String APP_NAME = "NGP";
-	public static final String APP_VERSION = "v0.5";
+	public static final String APP_VERSION = "v1.0";
 	public static String[] APP_DEVS = { "Fulop Mark", "Beviz Mark", "Peter Benjamin", "Sovago David", "Pusztai Csaba",
 			"Gaal Csaba", "Major Csaba" };
 

@@ -3,7 +3,7 @@ package hu.itsh.gyakorlat.szotar.ui;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
-import java.awt.Image;
+import java.awt.Image;	
 import java.io.File;
 import java.io.IOException;
 
@@ -58,7 +58,7 @@ public class MainFrame extends JFrame {
 	JMenu menuTranslate;
 	JMenuItem menuWordBook;
 	JMenuItem menuItemTestsHanger;
-
+  
 	JMenu menuHelp;
 	JMenuItem menuItemHelpAbout;
 
