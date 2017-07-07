@@ -3,7 +3,7 @@ package hu.itsh.gyakorlat.szotar.ui;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Ige;
+import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
 
@@ -16,6 +16,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.Painter;
+import javax.swing.UIDefaults;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -60,13 +61,6 @@ public class MainFrame extends JFrame {
 	JMenu menuTranslate;
 	JMenuItem menuWordBook;
 	JMenuItem menuItemTestsHanger;
-	
-	JMenuItem menuItemStatistics;
-	
-	JMenu menuTranslate;
-	JMenuItem menuWordBook;
-	
-
 	JMenu menuHelp;
 	JMenuItem menuItemHelpAbout;
 
@@ -147,10 +141,15 @@ public class MainFrame extends JFrame {
 
 	public static void setLaF() {
 		UIManager.put("DesktopPane[Enabled].backgroundPainter", new DesktopPainter());
-		
-		UIManager.put("nimbusBase", new Color(139, 41, 142));
+		UIManager.put("nimbusSelection", new Color(139,41,142));
 		UIManager.put("nimbusBlueGrey", new Color(169,176,190));
 		UIManager.put("nimbusSelectionBackground", new Color(139,41,142));
+		UIManager.put("MenuBar:Menu[Selected].backgroundPainter",
+                new FillPainter(new Color(139,41,142)));
+		UIManager.put("InternalFrameTitlePane.background", new Color(139,41,142));
+
+		
+		
 		
 		
 
@@ -166,12 +165,9 @@ public class MainFrame extends JFrame {
 		}
 	}
 
-
+	
 	static class DesktopPainter implements Painter<JComponent> {
-java.awt.Dimension dimension = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        int x = (int) ((dimension.getWidth() - contentPane.getWidth()) / 2);
-        int y = (int) ((dimension.getHeight() - contentPane.getHeight()) / 2);
-        
+
 		private Image image;
 		{
 			try {
@@ -186,5 +182,20 @@ java.awt.Dimension dimension = java.awt.Toolkit.getDefaultToolkit().getScreenSiz
 
 		}
 
+	}
+	
+	static class FillPainter implements Painter<JComponent> {
+
+	    private final Color color;
+
+	    FillPainter(Color c) {
+	        color = c;
+	    }
+
+	    @Override
+	    public void paint(Graphics2D g, JComponent object, int width, int height) {
+	        g.setColor(color);
+	        g.fillRect(0, 0, width, height);
+	    }
 	}
 }
