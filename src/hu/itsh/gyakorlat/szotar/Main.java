@@ -13,7 +13,7 @@ public class Main {
 		MainFrame frame = new MainFrame();
 		frame.setVisible(true);
 		// ITSH PROXY HOST + USER + PW TO CONNECT TO PROGRAM ARGUMENTS NEEDED
-		//setSystemProxy(args[0], Integer.parseInt(args[1]), args[2], args[3]);
+		setSystemProxy(args[0], Integer.parseInt(args[1]), args[2], args[3]);
 
 	}
 

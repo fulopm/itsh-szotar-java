@@ -28,6 +28,8 @@ import hu.itsh.gyakorlat.szotar.SharedConstants;
 import hu.itsh.gyakorlat.szotar.dictionaries.Database;
 import hu.itsh.gyakorlat.szotar.dictionaries.Dictionary;
 import hu.itsh.gyakorlat.szotar.io.excel.ds.Row;
+import hu.itsh.gyakorlat.szotar.ui.actions.ActionMenuDbOpen;
+import hu.itsh.gyakorlat.szotar.ui.actions.ActionSaveDb;
 
 public class SaveActions {
 
@@ -36,7 +38,7 @@ public class SaveActions {
 
 	public SaveActions() throws InvalidFormatException, IOException {
 		this.dict = Database.dict;
-		wb = new XSSFWorkbook(new File("NGP.xlsx"));
+		wb = new XSSFWorkbook(ActionMenuDbOpen.f);
 	}
 
 	public void saveAsCSV() throws IOException {
@@ -150,7 +152,7 @@ public class SaveActions {
 
 	public void saveToXLSX() throws InvalidFormatException, IOException {
 		XSSFWorkbook saveWB = wb;
-		try (FileOutputStream fos = new FileOutputStream(SharedConstants.FILENAME_NGP, true)) {
+		try (FileOutputStream fos = new FileOutputStream(ActionMenuDbOpen.f, true)) {
 			saveWB.write(fos);
 			saveWB.close();
 		}

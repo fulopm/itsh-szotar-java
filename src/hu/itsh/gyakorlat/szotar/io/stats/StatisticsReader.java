@@ -3,7 +3,6 @@ package hu.itsh.gyakorlat.szotar.io.stats;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
@@ -14,82 +13,62 @@ public class StatisticsReader {
 	static final String selectionFilename = "statsSelection.txt";
 
 	public static int[] readTypeStatistics() {
+		int ret[] = new int[2];
 		try (Scanner sc = new Scanner(new File(typeFilename))) {
-			if (sc.hasNextLine()) {
+				if (!sc.hasNextLine()) return new int[] {0,0};
 				String line = sc.nextLine();
-				int ret[] = new int[2];
 				ret[0] = Integer.parseInt(line.split(";")[0]);
 				ret[1] = Integer.parseInt(line.split(";")[1]);
 				return ret;
-			}
 		} catch (FileNotFoundException e) {
-			
-			try {
-				new File(typeFilename).createNewFile();
-				FileWriter newStatFile1fw = new FileWriter(typeFilename);
-				BufferedWriter newStatFile1bw = new BufferedWriter(newStatFile1fw);
-				newStatFile1bw.write("0;0");
-
-				newStatFile1bw.close();
-				newStatFile1fw.close();
-				readTypeStatistics();
-				
-			}catch (Exception e1) {
-				// TODO: handle exception
-				e1.printStackTrace();
-			}
+			e.printStackTrace();
 		}
-		return null;
+		return new int[] {0,0};
 	}
 
 	public static int[] readSelectionStatistics() {
+		int ret[] = new int[2];
 		try (Scanner sc = new Scanner(new File(selectionFilename))) {
-			if (sc.hasNextLine()) {
+				if (!sc.hasNextLine()) return new int[] {0,0};
 				String line = sc.nextLine();
-				int ret[] = new int[2];
 				ret[0] = Integer.parseInt(line.split(";")[0]);
 				ret[1] = Integer.parseInt(line.split(";")[1]);
 				return ret;
-			}
 		} catch (FileNotFoundException e) {
+			e.printStackTrace();
 
-			try {
-				FileWriter newStatFile2fw = new FileWriter(selectionFilename);
-				BufferedWriter newStatFile2bw = new BufferedWriter(newStatFile2fw);
-				newStatFile2bw.write("0;0");
-
-				newStatFile2bw.close();
-				newStatFile2fw.close();
-				readSelectionStatistics();
-			} catch (IOException e2) {
-				// TODO Auto-generated catch block
-				e2.printStackTrace();
-			}
 		}
-		return null;
+		return new int[] {0,0};
+	}
+
+
+	public static void writeSelectionStatistics(int right, int wrong) {
+		try (BufferedWriter bw1 = new BufferedWriter(new FileWriter(selectionFilename, false))) {
+			bw1.write(right + ";" + wrong);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static void writeTypeStatistics(int right, int wrong) {
+		try (BufferedWriter bw1 = new BufferedWriter(new FileWriter(typeFilename, false))) {
+			bw1.write(right + ";" + wrong);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public static void reset() {
-		try {
-
-			FileWriter fw1 = new FileWriter(typeFilename, false);
-			BufferedWriter bw1 = new BufferedWriter(fw1);
-
+		try (BufferedWriter bw1 = new BufferedWriter(new FileWriter(typeFilename, false))) {
 			bw1.write("0;0");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
-			bw1.close();
-			fw1.close();
-
-			FileWriter fw2 = new FileWriter(selectionFilename, false);
-			BufferedWriter bw2 = new BufferedWriter(fw2);
-
+		try (BufferedWriter bw2 = new BufferedWriter(new FileWriter(selectionFilename, false))) {
 			bw2.write("0;0");
-
-			bw2.close();
-			fw2.close();
-
-		} catch (Exception e) {
-			System.out.println("Hiba: " + e);
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 

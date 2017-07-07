@@ -1,5 +1,6 @@
 package hu.itsh.gyakorlat.szotar.io.excel;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -59,10 +60,10 @@ public class ExcelBase {
 				case NUMERIC:
 					if (DateUtil.isCellDateFormatted(nextCell)) {
 						Date date = DateUtil.getJavaDate(nextCell.getNumericCellValue());
-						rowStringBuilder.append(SharedConstants.FORMAT_YYMMDD.format(date));
+						rowStringBuilder.append(new SimpleDateFormat(SharedConstants.FORMAT_YYMMDD).format(date));
 						rowStringBuilder.append(separator);
 					} else {
-						rowStringBuilder.append((int) nextCell.getNumericCellValue());
+						rowStringBuilder.append((int)nextCell.getNumericCellValue());
 						rowStringBuilder.append(separator);
 					}
 
