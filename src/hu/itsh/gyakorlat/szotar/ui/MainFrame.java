@@ -146,7 +146,6 @@ public class MainFrame extends JFrame {
 		UIManager.put("nimbusSelectionBackground", new Color(139,41,142));
 		UIManager.put("MenuBar:Menu[Selected].backgroundPainter",
                 new FillPainter(new Color(139,41,142)));
-		UIManager.put("InternalFrameTitlePane.background", new Color(139,41,142));
 
 		
 		
