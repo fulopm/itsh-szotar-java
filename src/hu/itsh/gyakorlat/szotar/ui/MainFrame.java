@@ -3,7 +3,8 @@ package hu.itsh.gyakorlat.szotar.ui;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
-import java.awt.Image;	
+import java.awt.Image;
+import java.awt.RenderingHints;
 import java.io.File;
 import java.io.IOException;
 
@@ -175,7 +176,45 @@ public class MainFrame extends JFrame {
 		}
 
 		public void paint(Graphics2D g, JComponent object, int width, int height) {
-			g.drawImage(image, 0, 0, 1600, 970, null);
+			  int imgWidth = image.getWidth(null);
+		        int imgHeight = image.getHeight(null);
+
+		        double imgAspect = (double) imgHeight / imgWidth;
+
+		        int canvasWidth = object.getWidth();
+		        int canvasHeight = object.getHeight();
+
+		        double canvasAspect = (double) canvasHeight / canvasWidth;
+
+		        int x1 = 0; // top left X position
+		        int y1 = 0; // top left Y position
+		        int x2 = 0; // bottom right X position
+		        int y2 = 0; // bottom right Y position
+
+		        if (imgWidth < canvasWidth && imgHeight < canvasHeight) {
+		            // the image is smaller than the canvas
+		            x1 = (canvasWidth - imgWidth)  / 2;
+		            y1 = (canvasHeight - imgHeight) / 2;
+		            x2 = imgWidth + x1;
+		            y2 = imgHeight + y1;
+
+		        } else {
+		            if (canvasAspect > imgAspect) {
+		                y1 = canvasHeight;
+		                // keep image aspect ratio
+		                canvasHeight = (int) (canvasWidth * imgAspect);
+		                y1 = (y1 - canvasHeight) / 2;
+		            } else {
+		                x1 = canvasWidth;
+		                // keep image aspect ratio
+		                canvasWidth = (int) (canvasHeight / imgAspect);
+		                x1 = (x1 - canvasWidth) / 2;
+		            }
+		            x2 = canvasWidth + x1;
+		            y2 = canvasHeight + y1;
+		        }
+		        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		        g.drawImage(image, x1, y1, x2, y2, 0, 0, imgWidth, imgHeight, null);
 
 		}
 
