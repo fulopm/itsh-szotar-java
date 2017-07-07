@@ -10,6 +10,7 @@ import hu.itsh.gyakorlat.szotar.ui.MainFrame;
 public class Main {
 
 	public static void main(String[] args) throws URISyntaxException, IOException {
+		MainFrame.setLaF();
 		MainFrame frame = new MainFrame();
 		frame.setVisible(true);
 		// ITSH PROXY HOST + USER + PW TO CONNECT TO PROGRAM ARGUMENTS NEEDED
