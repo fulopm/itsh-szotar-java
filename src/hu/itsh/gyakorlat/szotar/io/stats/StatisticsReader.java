@@ -38,9 +38,13 @@ public class StatisticsReader {
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
+
 		}
 		return new int[] {0,0};
 	}
+
+	public static void reset() {
+
 
 	public static void writeSelectionStatistics(int right, int wrong) {
 		try (BufferedWriter bw1 = new BufferedWriter(new FileWriter(selectionFilename, false))) {
