@@ -35,14 +35,24 @@ public class OnlineDictionary
         Elements liS = content.select("div.quick-result-overview ul.sense-group-results");
         
         meanings = new ArrayList<>();
-        int i = 0;
+        int j = 0;
         for (Element classes : quickResultOption)
         {
         	try
         	{
-	        	sourceWord = classes.text().split("\\s+")[0];
-	        	wordClass = classes.text().split("\\s+")[1];
-	        	for (Element wd : liS.get(i).select("li"))
+        		sourceWord = "";
+        		
+        		for (int i = 0; i < classes.text().split("\\s+").length; i++)
+        		{
+        			if (i == classes.text().split("\\s+").length-1)
+        			{
+        	        	wordClass = classes.text().split("\\s+")[i];
+        			}
+        			else
+        				sourceWord += " " +classes.text().split("\\s+")[i];
+        		}
+        		
+	        	for (Element wd : liS.get(j).select("li"))
 	        	{
 	        		if (!wd.text().equals(""))
 	        		{
@@ -51,7 +61,7 @@ public class OnlineDictionary
 	        		
 	        	}       	words.add(new OnlineWord(sourceWord, wordClass, meanings.toArray()));
 	        	meanings.clear();
-	        	i++;
+	        	j++;
         	}
         	catch (Exception e)
         	{

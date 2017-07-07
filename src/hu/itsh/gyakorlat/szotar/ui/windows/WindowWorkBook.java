@@ -46,6 +46,8 @@ public class WindowWorkBook extends InternalWindow
 	private final String[] columnNames = {"Eredeti", "Forditott"};
 	private final String[] buttonNames = {"Online kereses", "Szotarhoz adas", "Megsem"};
 	private String onlineMessage = "";
+	private ArrayList<String> onlineWords;
+	private OnlineDictionary od;
 	
 	public WindowWorkBook()
 	{
@@ -92,12 +94,17 @@ public class WindowWorkBook extends InternalWindow
 							
 						try
 						{
-							OnlineDictionary od = new OnlineDictionary(tableModel.getValueAt(row, col).toString(), OnlineDictionary.ENGLISH);
+							onlineWords = new ArrayList<>();
+							od = new OnlineDictionary(tableModel.getValueAt(row, col).toString(), OnlineDictionary.ENGLISH);
 							for (OnlineWord wd : od.words)
 							{
-								onlineMessage += "<html><b>"+wd.getSourceWord()+"</b>"+" {"+wd.getWordClass()+"} " + wd.meaningsToString() + "<br>";
+								//onlineMessage += "<html><b>"+wd.getSourceWord()+"</b>"+" {"+wd.getWordClass()+"} " + wd.meaningsToString() + "<br>";
+								
 							}
+							od.words.clear();
+							
 							UIUtil.showInformationDialog(onlineMessage);
+							onlineMessage = "";
 							
 							
 						} catch (IOException e1)
