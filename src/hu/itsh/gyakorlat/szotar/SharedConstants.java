@@ -1,6 +1,5 @@
 package hu.itsh.gyakorlat.szotar;
 
-import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.regex.Pattern;
 
@@ -12,7 +11,7 @@ public class SharedConstants {
 
 	public static final String SEPARATOR_WAVE = "~";
 	public static final String SEPARATOR_DOLLAR = "$";
-	public static final SimpleDateFormat FORMAT_YYMMDD = new SimpleDateFormat("yyyy-MM-dd");
+	public static final String FORMAT_YYMMDD = "yyyy-MM-dd";
 
 	public static final String[] wordClasses = { "névelö", "rövidítés", "mondat", "vt", "kifejezés", "fönév",
 			"melléknév", "elöljáró", "határozó", "definició", "vi-sz", "vt-sz", "vt/vi", "kötöszó", "névmás",
@@ -28,4 +27,6 @@ public class SharedConstants {
 	
 	public static final String FILENAME_NGP = "NGP.xlsx";
 	public static final String FILENAME_TEMP_CSV = "table.csv";
+	
+	
 }
