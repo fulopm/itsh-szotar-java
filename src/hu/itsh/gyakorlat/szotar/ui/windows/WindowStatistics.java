@@ -5,22 +5,14 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JTable;
-import javax.swing.table.AbstractTableModel;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
-import javax.swing.table.TableModel;
 
-import hu.itsh.gyakorlat.szotar.ui.ds.StatisticsTableModel;
 import hu.itsh.gyakorlat.szotar.io.stats.StatisticsReader;
 import hu.itsh.gyakorlat.szotar.statistics.Statistics;
+import hu.itsh.gyakorlat.szotar.ui.ds.StatisticsTableModel;
 
 public class WindowStatistics extends InternalWindow implements ActionListener {
 
