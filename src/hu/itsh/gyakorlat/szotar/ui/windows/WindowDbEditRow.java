@@ -124,6 +124,7 @@ public class WindowDbEditRow extends WindowDbRow {
 					row.setHun1(Util.escape(fieldHun1.getText()));
 					row.setHunExplain(Util.escape(fieldHunExplain.getText()));
 					row.setHunExample(Util.escape(fieldHunExample.getText()));
+					row.setWordClass((String)fieldWordClass.getSelectedItem());
 					row.setForm0(Util.escape(fieldForm0.getText()));
 					row.setForm1(Util.escape(fieldForm1.getText()));
 					row.setForm2(Util.escape(fieldForm2.getText()));
