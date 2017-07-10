@@ -63,7 +63,7 @@ public class ActionAutoFillForms extends AbstractAction {
 		System.out.println(word);
 		System.out.println(wordClass);
 		switch (wordClass) {
-		case "fönév":
+		case "főnév":
 			boolean ES = lastOne(word) == 's' || lastTwo(word).equals("sh") || lastTwo(word).equals("ch")
 					|| lastOne(word) == 'x' || lastOne(word) == 'z';
 			if (ES) {
@@ -104,6 +104,7 @@ public class ActionAutoFillForms extends AbstractAction {
 
 			break;
 		case "ige":
+			
 			break;
 
 		default:
