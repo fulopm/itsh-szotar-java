@@ -49,7 +49,7 @@ public class Util {
 	
 	public static String lastTwo(String string) {
 		if (string.length() == 0) return "\0";
-		return string.substring(string.length()-2, string.length()-1);
+		return string.substring(string.length()-2, string.length());
 	}
 	
 	public static String trimStr(String word){

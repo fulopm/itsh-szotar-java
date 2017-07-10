@@ -24,6 +24,9 @@ public class SharedConstants {
 	
 	public static Pattern REGEX_SPECIAL_CHARS = Pattern.compile("\\`|\\~|\\@|\\#|\\$|\\^|\\&|\\*|\\'|\\<|\\>|\\\"");
 	
+	public static final String[] onlineWordClassShortenEng = {"{noun}", "{vb}", "{adj.}", "{conj.}", "{pron.}", "{adv.}", "{prp.}"};
+	
+	public static final String[] onlineWordClassShortenHun = {"főnév", "ige", "melléknév", "kötőszó", "névmás", "határozószó", "viszonyszó"};
 	
 	public static final String FILENAME_NGP = "NGP.xlsx";
 	public static final String FILENAME_TEMP_CSV = "table.csv";

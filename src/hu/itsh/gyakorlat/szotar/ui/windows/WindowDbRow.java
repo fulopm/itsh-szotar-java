@@ -46,7 +46,7 @@ public abstract class WindowDbRow extends InternalWindow {
 	JTextArea fieldHunExample;
 
 	JLabel labelWordClass;
-	JComboBox fieldWordClass;
+	JComboBox<String> fieldWordClass;
 		
 	JLabel labelLevel;
 	JTextField fieldLevel;
