@@ -41,5 +41,16 @@ public class Util {
 		
 	}
 	
+	public static char lastOne(String string) {
+		if (string.length() == 0) return '\0';
+		return string.charAt(string.length()-1);
+	}
+	
+	
+	public static String lastTwo(String string) {
+		if (string.length() == 0) return "\0";
+		return string.substring(string.length()-2, string.length()-1);
+	}
+	
 }
  
