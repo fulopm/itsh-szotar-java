@@ -52,5 +52,26 @@ public class Util {
 		return string.substring(string.length()-2, string.length()-1);
 	}
 	
+	public static String trimStr(String word){
+		char currentChar;
+		int firstInd = -1;
+		int lastInd = -1;
+		for (int i = 0; i < word.length()-1; i++) {
+			currentChar = word.charAt(i);
+			if(currentChar == ' ' && firstInd == -1){
+				continue;
+			}else if(currentChar != ' ' && firstInd == -1){
+				firstInd = i;
+			}
+			if(currentChar == ' ' && word.charAt(i+1) == ' '){
+				lastInd = i-1;
+			}
+			if(i == word.length()-2 && lastInd == -1 && currentChar != ' '){
+				lastInd = word.length();
+				}
+		}
+		return word.substring(firstInd, lastInd);
+	}
+	
 }
  
