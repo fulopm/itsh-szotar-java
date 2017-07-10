@@ -85,8 +85,8 @@ public class WindowDbEditRow extends WindowDbRow {
 		fieldHunExample = new JTextArea(row.getHunExample());
 
 		labelWordClass = new JLabel("Szófaj:");
-		fieldWordClass = new JComboBox<String>(SharedConstants.wordClasses);
-		fieldWordClass.setSelectedIndex(Arrays.asList(SharedConstants.wordClasses).indexOf(row.getWordClass()));
+		fieldWordClass = new JComboBox<String>(SharedConstants.onlineWordClassShortenHun);
+		fieldWordClass.setSelectedIndex(Arrays.asList(SharedConstants.onlineWordClassShortenHun).indexOf(row.getWordClass()));
 
 		labelLevel = new JLabel("Szint:");
 		fieldLevel = new JTextField(Integer.toString(row.getLevel()));

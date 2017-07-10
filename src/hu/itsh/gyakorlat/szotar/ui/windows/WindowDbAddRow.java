@@ -102,7 +102,7 @@ public class WindowDbAddRow extends WindowDbRow {
 		fieldHunExample = new JTextArea();
 
 		labelWordClass = new JLabel("Szófaj:");
-		fieldWordClass = new JComboBox<String>(SharedConstants.wordClasses);
+		fieldWordClass = new JComboBox<String>(SharedConstants.onlineWordClassShortenHun);
 
 		labelLevel = new JLabel("Szint:");
 		fieldLevel = new JTextField();
