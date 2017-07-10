@@ -118,21 +118,21 @@ public class WindowDbAddRow extends WindowDbRow {
 					return;
 				} else {
 
-					row.setPrefix(Util.escape(fieldPrefix.getText()));
-					row.setWord(Util.escape(fieldWord.getText()));
-					row.setSuffix(Util.escape(fieldSuffix.getText()));
+					row.setPrefix(Util.escape(fieldPrefix.getText()).trim());
+					row.setWord(Util.escape(fieldWord.getText()).trim());
+					row.setSuffix(Util.escape(fieldSuffix.getText()).trim());
 					row.setEngExplain(Util.escape(fieldEngExplain.getText()));
 					row.setEngExample(Util.escape(fieldEngExample.getText()));
 					row.setLevel(Integer.parseInt(fieldLevel.getText()));
 					row.setLang(fieldLang.getText().charAt(0));
-					row.setHun0(Util.escape(fieldHun0.getText()));
-					row.setHun1(Util.escape(fieldHun1.getText()));
+					row.setHun0(Util.escape(fieldHun0.getText()).trim());
+					row.setHun1(Util.escape(fieldHun1.getText()).trim());
 					row.setHunExplain(Util.escape(fieldHunExplain.getText()));
 					row.setHunExample(Util.escape(fieldHunExample.getText()));
-					row.setForm0(Util.escape(fieldForm0.getText()));
-					row.setForm1(Util.escape(fieldForm1.getText()));
-					row.setForm2(Util.escape(fieldForm2.getText()));
-					row.setForm3(Util.escape(fieldForm3.getText()));
+					row.setForm0(Util.escape(fieldForm0.getText()).trim());
+					row.setForm1(Util.escape(fieldForm1.getText()).trim());
+					row.setForm2(Util.escape(fieldForm2.getText()).trim());
+					row.setForm3(Util.escape(fieldForm3.getText()).trim());
 					new ActionAddRow(row).actionPerformed(e);
 					WindowDbAddRow.this.dispose();
 				}
