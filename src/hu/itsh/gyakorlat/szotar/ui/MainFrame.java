@@ -25,6 +25,7 @@ import hu.itsh.gyakorlat.szotar.ui.actions.ActionMenuDbOpen;
 import hu.itsh.gyakorlat.szotar.ui.actions.ActionMenuDbShow;
 import hu.itsh.gyakorlat.szotar.ui.actions.ActionMenuExit;
 import hu.itsh.gyakorlat.szotar.ui.actions.ActionMenuOpenHelpAbout;
+import hu.itsh.gyakorlat.szotar.ui.actions.ActionMenuOpenUserDocument;
 import hu.itsh.gyakorlat.szotar.ui.actions.ActionMenuStatistics;
 import hu.itsh.gyakorlat.szotar.ui.actions.ActionMenuTestSelect;
 import hu.itsh.gyakorlat.szotar.ui.actions.ActionMenuTestType;
@@ -61,6 +62,7 @@ public class MainFrame extends JFrame {
 	JMenuItem menuItemTestsHanger;
 	JMenu menuHelp;
 	JMenuItem menuItemHelpAbout;
+	JMenuItem menuItemUserDocument;
 
 	public MainFrame() {
 		initComponents();
@@ -124,9 +126,12 @@ public class MainFrame extends JFrame {
 
 		menuHelp = new JMenu("Segitseg");
 		menuItemHelpAbout = new JMenuItem("A programrol");
+		menuItemUserDocument = new JMenuItem("Felhasznaloi dokumentacio");
 		menuItemHelpAbout.setAction(new ActionMenuOpenHelpAbout(contentPane));
 		menuHelp.add(menuItemHelpAbout);
-
+		menuItemUserDocument.setAction(new ActionMenuOpenUserDocument(contentPane));
+		menuHelp.add(menuItemUserDocument);
+		
 		menuBarMain.add(menuPractice);
 
 		menuBarMain.add(menuTranslate);
@@ -148,9 +153,9 @@ public class MainFrame extends JFrame {
 		}
 		
 		UIManager.getLookAndFeelDefaults().put("DesktopPane[Enabled].backgroundPainter", new DesktopPainter());
-		UIManager.getLookAndFeelDefaults().put("nimbusSelection", new Color(139, 41, 142));
+		UIManager.put("nimbusSelection", new Color(139, 41, 142));
 		UIManager.getLookAndFeelDefaults().put("nimbusBlueGrey", new Color(169, 176, 190));
-		UIManager.getLookAndFeelDefaults().put("nimbusSelectionBackground", new Color(139, 41, 142));
+		UIManager.put("nimbusSelectionBackground", new Color(139, 41, 142));
 		UIManager.getLookAndFeelDefaults().put("MenuBar:Menu[Selected].backgroundPainter", new FillPainter(new Color(139, 41, 142)));
 	}
 
