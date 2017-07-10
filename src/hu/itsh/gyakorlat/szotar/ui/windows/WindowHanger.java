@@ -44,11 +44,11 @@ public class WindowHanger extends InternalWindow implements ActionListener {
 	private List<Object> hangObjects;
 
 	private final Object[] body = {
-			
+
 			new Line(650, 60, 650, 450), // akasztofa
 			// fuggoleges
 			new Line(570, 60, 650, 140), // tamaszto (x-60,
-															// y+60)
+											// y+60)
 			new Line(350, 60, 650, 60), // akasztofa vizszintes
 			new Line(350, 60, 350, 160), // kotel
 			Head.head, new Line(350, 160 + Head.head.wh, 350, (160 + Head.head.wh) + (2 * Head.head.wh)), // test
@@ -124,7 +124,7 @@ public class WindowHanger extends InternalWindow implements ActionListener {
 			@Override
 			protected void paintComponent(Graphics g) {
 				super.paintComponent(g);
-				Graphics2D g2 = (Graphics2D) g;	
+				Graphics2D g2 = (Graphics2D) g;
 				g2.setStroke(new BasicStroke(2f));
 				g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 				for (Object o : hangObjects) {
@@ -166,7 +166,7 @@ public class WindowHanger extends InternalWindow implements ActionListener {
 				} else {
 					hangObjects.add(body[9]);
 					panelHang.repaint();
-					UIUtil.showErrorDialog("Vesztettél!!!!!");
+					UIUtil.showErrorDialog("<html>Vesztettél!<br>Ez volt a szó: <b>" +game.getWord()+"</b></html>" );
 					for (JButton btn : abcButtons)
 						btn.setEnabled(false);
 
@@ -218,6 +218,7 @@ public class WindowHanger extends InternalWindow implements ActionListener {
 		final int y2;
 		final Color color = Color.BLACK;
 		boolean drawn = false;
+
 		public Line(int x1, int y1, int x2, int y2) {
 			this.x1 = x1;
 			this.y1 = y1;
@@ -228,14 +229,13 @@ public class WindowHanger extends InternalWindow implements ActionListener {
 
 	private static class Head {
 
-		int x;
-		int y;
-		int wh;
-		Color color = Color.BLACK;
+		final int x;
+		final int y;
+		final int wh;
+		final Color color = Color.BLACK;
 		static Head head = new Head(325, 160, 50); // fej
 
 		public Head(int x, int y, int wh) {
-			super();
 			this.x = x;
 			this.y = y;
 			this.wh = wh;

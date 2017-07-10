@@ -1,6 +1,9 @@
 package hu.itsh.gyakorlat.szotar.games;
 
+import java.util.Arrays;
+
 import javax.swing.JOptionPane;
+import javax.swing.text.html.HTMLDocument.HTMLReader.HiddenAction;
 
 import hu.itsh.gyakorlat.szotar.ui.UIUtil;
 import hu.itsh.gyakorlat.szotar.ui.windows.InternalWindow;
@@ -8,21 +11,22 @@ import hu.itsh.gyakorlat.szotar.ui.windows.InternalWindow;
 public class Hanger 
 {
 	String word;
-	String modified_word;
+	String modifiedWord;
 	private final String WORD_SEPARATOR = "     ";
 	
 	public Hanger(String word)
 	{
 		this.word = word;
-		this.modified_word = "";
-		for (char c : word.toCharArray())
+		StringBuilder modifiedStringBuilder = new StringBuilder();
+		for (char c : toCharArray())
 		{
 			if (c == ' ')
-				this.modified_word += this.WORD_SEPARATOR;
+				modifiedStringBuilder.append(this.WORD_SEPARATOR);
 			else
-				this.modified_word += " " + c;
+				modifiedStringBuilder.append(" ").append(c);
 				
 		}
+		modifiedWord = modifiedStringBuilder.toString();
 	}
 	
 	public char[] toCharArray()
@@ -30,36 +34,37 @@ public class Hanger
 		return word.toCharArray();		
 	}
 	
+	public String getWord() {
+		return word;
+	}
+	
 	public int getWordLength()
 	{
-		return toCharArray().length;
+		return word.length();
 	}
 	
 	public String toHidden()
 	{
-		String hidden = "";
-		
+		StringBuilder hiddenStringBuilder = new StringBuilder();
 		for (int i = 0; i < getWordLength(); i++)
 		{
 			if (word.charAt(i) == ' ')
-				hidden += WORD_SEPARATOR;
+				hiddenStringBuilder.append(WORD_SEPARATOR);
 			else
-				hidden += " _";
+				hiddenStringBuilder.append(" _");
 		}
-		//System.out.println("DEBUG WITH WORD SIZE " + getWordLength() + ": [" + hidden + "]");
-		//System.out.println("DEBUG WITH WORD SIZE " + getWordLength() + ": [" + modified_word + "]");
-		return hidden;
+		return  hiddenStringBuilder.toString();
 	}
 	
 	public String checkAndUpdateWord(String status, char inp)
 	{
-		char[] wd = status.toCharArray();
-			System.out.println("DEBUG [" + modified_word + "]");
-			System.out.println("DEBUG [" + String.copyValueOf(wd) + "]");
+			char[] wd = status.toCharArray();
+			System.out.println("DEBUG [" + modifiedWord + "]");
+			System.out.println("DEBUG [" + String.valueOf(wd) + "]");
 			
 			for (int i = 0; i < status.length(); i++)
 			{
-				if (inp == modified_word.charAt(i))
+				if (inp == modifiedWord.charAt(i))
 					wd[i] = inp;
 					
 			}
@@ -67,7 +72,7 @@ public class Hanger
 			  {
 				UIUtil.showInformationDialog("Kitalaltad, gratulalok!");
 			  }
-		return String.copyValueOf(wd);
+		return String.valueOf(wd);
 		
 	}
 	

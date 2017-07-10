@@ -17,7 +17,7 @@ public class Dictionary {
 	}
 
 	public Dictionary() {
-		this.rows = new ArrayList<>();
+		this.rows = Collections.synchronizedList(new ArrayList<>(5000));
 	}
 	
 	public void clear(){
@@ -89,10 +89,6 @@ public class Dictionary {
 
 	public void sort() {
 		Collections.sort(rows);
-	}
-
-	Iterator<Row> getRowIterator() {
-		return rows.iterator();
 	}
 
 	public void recalculateIDs() {

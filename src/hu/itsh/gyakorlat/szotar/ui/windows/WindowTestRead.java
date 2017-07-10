@@ -17,6 +17,7 @@ import com.sun.glass.ui.MenuItem;
 
 import hu.itsh.gyakorlat.szotar.SharedConstants;
 import hu.itsh.gyakorlat.szotar.dictionaries.Database;
+import hu.itsh.gyakorlat.szotar.io.stats.StatisticsReader;
 import hu.itsh.gyakorlat.szotar.statistics.Statistics;
 import hu.itsh.gyakorlat.szotar.tts.TTS;
 
@@ -116,35 +117,14 @@ public class WindowTestRead extends InternalWindow implements ActionListener {
 			if (this.gameNo > 10) {
 				JOptionPane.showMessageDialog(null, "Vege a jateknak!\nEredmenyed: " + this.score + "/10", "Eredmeny",
 						JOptionPane.INFORMATION_MESSAGE);
-				try {
-					FileReader fr = new FileReader("statsType.txt");
-					BufferedReader br = new BufferedReader(fr);
 
-					String line = br.readLine();
+				int[] result = StatisticsReader.readTypeStatistics();
+				int right = result[0];
+				int wrong = result[1];
+				right += this.score;
+				wrong += 10 - this.score;
 
-					String[] data = line.split(";");
-					int right = Integer.parseInt(data[0]);
-					int wrong = Integer.parseInt(data[1]);
-					
-					right += this.score;
-					wrong += 10-this.score;
-					
-					br.close();
-					fr.close();
-					
-					FileWriter fw = new FileWriter("statsType.txt",false);
-					BufferedWriter bw = new BufferedWriter(fw);
-					
-					Statistics s1 = new Statistics(right,wrong);
-					
-					bw.write(s1.getHelyes() + ";" + s1.getHelytelen());
-					
-					bw.close();
-					fw.close();
-					
-				} catch (Exception e) {
-					System.out.println("Hiba: " + e);
-				}
+				StatisticsReader.writeTypeStatistics(right, wrong);
 
 				this.gameNo = 0;
 				this.score = 0;
