@@ -1,6 +1,7 @@
 package hu.itsh.gyakorlat.szotar.ui.windows;
 
 import java.awt.event.ActionEvent;
+
 import java.awt.Cursor;
 
 import java.awt.event.ActionListener;
@@ -9,8 +10,10 @@ import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
@@ -21,19 +24,31 @@ import org.jsoup.select.Elements;
 
 import hu.itsh.gyakorlat.szotar.dictionaries.Database;
 import hu.itsh.gyakorlat.szotar.dictionaries.OnlineDictionary;
+import hu.itsh.gyakorlat.szotar.dictionaries.OnlineWord;
 import hu.itsh.gyakorlat.szotar.io.excel.ds.Row;
 import hu.itsh.gyakorlat.szotar.io.user.WordBook;
+import hu.itsh.gyakorlat.szotar.ui.UIUtil;
 import net.java.dev.designgridlayout.DesignGridLayout;
 
 public class WindowWorkBook extends InternalWindow
 {
+	
 	private JTextArea textInput;
 	private JButton organize;
 	private JButton clear;
 	private JTable words;
+	
+	private ButtonGroup add;
+	private ArrayList<JRadioButton> rButtons;
+	
+	
 	private DefaultTableModel tableModel;
 	private final String[] columnNames = {"Eredeti", "Forditott"};
 	private final String[] buttonNames = {"Online kereses", "Szotarhoz adas", "Megsem"};
+	private String onlineMessage = "";
+	private ArrayList<String> onlineWords;
+	private OnlineDictionary od;
+	private WindowOnlineResult results;
 	
 	public WindowWorkBook()
 	{
@@ -80,42 +95,12 @@ public class WindowWorkBook extends InternalWindow
 							
 						try
 						{
-							contentPane.setCursor(new Cursor(Cursor.WAIT_CURSOR));
+							onlineWords = new ArrayList<>();
+							od = new OnlineDictionary(tableModel.getValueAt(row, col).toString(), OnlineDictionary.ENGLISH);
+							results = new WindowOnlineResult(od.words);
+							mainContentPane.add(results);
 							
-							Elements onlineWords = OnlineDictionary.translate(tableModel.getValueAt(row, col).toString(), OnlineDictionary.HUNGARIAN);
-							String meanings = "<html>";
-							String[] line;
-							boolean isSource = true;
-							String craft = "<b>";
-							for (Element wordSet : onlineWords)
-							{
-								if (wordSet.text().contains("HU") || wordSet.text().contains("EN"))
-								{
-									line = wordSet.text().split("\\s+");
-									for (String wd : line)
-									{
-										if (!wd.contains("{"))
-										{
-											if (wd.equals("HU") || wd.equals("EN"))
-											{
-												isSource = false;
-												meanings += craft + "</b>";
-												craft = "<b>";
-											}
-											else if (isSource)
-												craft += wd + " ";
-											else if (!isSource && !wd.equals("HU") && !wd.equals("EN"))
-												meanings += wd + " ";
-										 }
-									}
-								}
-								isSource = true;
-								meanings +=  "<br>";
-							}
-							meanings += "</html>";
-							System.out.println(meanings);
-							contentPane.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-							JOptionPane.showMessageDialog(new WindowWorkBook(), meanings, "Lehetséges jelentések", JOptionPane.OK_CANCEL_OPTION);
+							
 							
 						} catch (IOException e1)
 						{

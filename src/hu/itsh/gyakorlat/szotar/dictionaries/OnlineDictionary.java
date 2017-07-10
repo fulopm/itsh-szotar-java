@@ -8,6 +8,8 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import hu.itsh.gyakorlat.szotar.ui.UIUtil;
+
 
 public class OnlineDictionary
 {
@@ -15,22 +17,74 @@ public class OnlineDictionary
 	public static final int HUNGARIAN = 2;
 	
 	public ArrayList<String> meanings;
+	private String sourceWord;
+	private String wordClass;
 	
-	public static Elements translate(String word, int destLanguage) throws IOException
-	{
+	public ArrayList<OnlineWord> words;
+	
+    
+    public OnlineDictionary(String word, int destLanguage) throws IOException
+    {
+    	words = new ArrayList<>();
+    	
+    	System.out.println("TEST");
         Document doc = Jsoup.connect("http://en.bab.la/dictionary/" + (destLanguage == 1 ? "english-hungarian" : "hungarian-english") + "/" + word).get();
-        Elements quickResultOption = doc.getElementsByClass("quick-result-entry");
-        Elements quickResultEntry = doc.getElementsByClass("quick-result-option");
+       // Elements content = doc.getElementsByClass("quick-results container");
+        Element content = doc.select("div.quick-results.container").first(); // DO NOT TOUCH
+        Elements quickResultOption = content.select("div.quick-result-option"); // DO NOT TOUCH 2
+        Elements liS = content.select("div.quick-result-overview ul.sense-group-results");
         
-        ArrayList<String> eng_words = new ArrayList<>();
-        
+        meanings = new ArrayList<>();
+        int j = 0;
         for (Element classes : quickResultOption)
         {
-        	if (!classes.text().contains("HU") && !classes.text().contains("EN") && !classes.text().contains("{"))
-        		eng_words.add(classes.text());
+        	try
+        	{
+        		sourceWord = "";
+        		
+        		for (int i = 0; i < classes.text().split("\\s+").length; i++)
+        		{
+        			if (i == classes.text().split("\\s+").length-1)
+        			{
+        	        	wordClass = classes.text().split("\\s+")[i];
+        			}
+        			else
+        				sourceWord += " " +classes.text().split("\\s+")[i];
+        		}
+        		
+	        	for (Element wd : liS.get(j).select("li"))
+	        	{
+	        		if (!wd.text().equals(""))
+	        		{
+	        			meanings.add(wd.text());
+	        		}
+	        		
+	        	}       	words.add(new OnlineWord(sourceWord, wordClass, meanings.toArray()));
+	        	meanings.clear();
+	        	j++;
+        	}
+        	catch (Exception e)
+        	{
+        		UIUtil.showErrorDialog("Nem talaltam semmit online!");;
+        	}
+        	
         }
-        return quickResultOption;
-	}	
+        for (OnlineWord wd : words)
+        {
+			System.out.println("szo: "+wd.getWordClass()+"\nszofaj: "+wd.getSourceWord()+"\nwords: " + wd.meaningsToString() + "\n----------------------------------");
+        }
+
+    	
+    }
+	
+	private void translate()
+	{
+	}
+	
+	private void translate2()
+	{
+		
+	}
 }
 
 
