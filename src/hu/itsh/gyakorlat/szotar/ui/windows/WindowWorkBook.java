@@ -48,6 +48,7 @@ public class WindowWorkBook extends InternalWindow
 	private String onlineMessage = "";
 	private ArrayList<String> onlineWords;
 	private OnlineDictionary od;
+	private WindowOnlineResult results;
 	
 	public WindowWorkBook()
 	{
@@ -96,15 +97,9 @@ public class WindowWorkBook extends InternalWindow
 						{
 							onlineWords = new ArrayList<>();
 							od = new OnlineDictionary(tableModel.getValueAt(row, col).toString(), OnlineDictionary.ENGLISH);
-							for (OnlineWord wd : od.words)
-							{
-								//onlineMessage += "<html><b>"+wd.getSourceWord()+"</b>"+" {"+wd.getWordClass()+"} " + wd.meaningsToString() + "<br>";
-								
-							}
-							od.words.clear();
+							results = new WindowOnlineResult(od.words);
+							mainContentPane.add(results);
 							
-							UIUtil.showInformationDialog(onlineMessage);
-							onlineMessage = "";
 							
 							
 						} catch (IOException e1)
