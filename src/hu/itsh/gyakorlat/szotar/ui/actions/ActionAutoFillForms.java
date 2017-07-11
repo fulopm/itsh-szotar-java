@@ -2,6 +2,7 @@ package hu.itsh.gyakorlat.szotar.ui.actions;
 
 import static hu.itsh.gyakorlat.szotar.Util.lastOne;
 import static hu.itsh.gyakorlat.szotar.Util.lastTwo;
+import static hu.itsh.gyakorlat.szotar.Util.isVowel;
 
 import java.awt.event.ActionEvent;
 
@@ -62,24 +63,24 @@ public class ActionAutoFillForms extends AbstractAction {
 		this.wordClass =(String) wordClassComboBox.getSelectedItem();
 		switch (wordClass) {
 		case "főnév":
-			boolean ES = lastOne(word) == 's' || lastTwo(word).equals("sh") || lastTwo(word).equals("ch")
+			boolean NOUN_1 = lastOne(word) == 's' || lastTwo(word).equals("sh") || lastTwo(word).equals("ch")
 					|| lastOne(word) == 'x' || lastOne(word) == 'z';
-			if (ES) {
+			if (NOUN_1) {
 				form0.setText(word + "es");
 				return;
 			}
 
 
-			boolean IES = lastOne(word) == 'y' && !lastTwo(word).equals("ay") && !lastTwo(word).equals("ey")
+			boolean NOUN_2 = lastOne(word) == 'y' && !lastTwo(word).equals("ay") && !lastTwo(word).equals("ey")
 					&& !lastTwo(word).equals("oy");
-			if (IES) {
+			if (NOUN_2) {
 				form0.setText(word.substring(0, word.length() - 1) + "ies");
 				return;
 			}
 
-			boolean VES = lastOne(word) == 'f' || lastTwo(word).equals("fe");
+			boolean NOUN_3 = lastOne(word) == 'f' || lastTwo(word).equals("fe");
 
-			if (VES) {
+			if (NOUN_3) {
 				if (lastOne(word) == 'f')
 					form0.setText(word.substring(0, word.length() - 1) + "ves");
 				else
@@ -92,6 +93,54 @@ public class ActionAutoFillForms extends AbstractAction {
 
 			break;
 		case "ige":
+			
+			// FORM0
+			boolean VERB_F0_1 =  lastTwo(word).equals("ss")
+			|| lastTwo(word).equals("sh")
+			|| lastTwo(word).equals("ch")
+			|| lastOne(word) == 'x';
+			
+			if (VERB_F0_1)
+				form0.setText(word+"es");
+			else
+				form0.setText(word+"s");
+			
+			
+			// FORM1
+			if (lastOne(word) == 'e') {
+				form1.setText(word+"d");
+				form2.setText(form1.getText());
+			} else if (!isVowel(lastTwo(word).charAt(0)) && lastOne(word) == 'y') {
+				form1.setText(word.substring(0, word.length()-2)+"ied");
+				form2.setText(form1.getText());
+			} else {
+				form1.setText(word+"ed");
+			}
+			
+			
+			
+			
+			// FORM2
+			
+			form2.setText(form1.getText());
+				
+			
+			// FORM3
+	
+			
+			
+			if (lastTwo(word).equals("ie")) {
+				form3.setText(word.substring(0, word.length()-2)+"ying");
+			} else if (lastOne(word) == 'e') {
+				form3.setText(word.substring(0,  word.length()-1)+"ing");
+			} else {
+				form3.setText(word+"ing");
+			}
+				
+			
+			
+			
+	
 			
 			break;
 
