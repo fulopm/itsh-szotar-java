@@ -216,6 +216,11 @@ public class WindowDbTable extends InternalWindow implements ChangeListener {
 			fieldSearchMenuForms.setSelected(false);
 			fieldSearchMenuForms.setEnabled(false);
 		}
+		
+		if (fieldSearchMenuLangEng.isSelected()) {
+			fieldSearchMenuForms.setEnabled(true);
+			
+		}
 
 		newFilter(fieldSearch.getText().toLowerCase(), fieldSearchMenuLangHun.isSelected(), fieldSearchMenuExplainAndExample.isSelected(),
 				fieldSearchMenuForms.isSelected());
