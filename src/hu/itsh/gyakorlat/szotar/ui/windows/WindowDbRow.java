@@ -12,6 +12,7 @@ import javax.swing.JTextField;
 import hu.itsh.gyakorlat.szotar.SharedConstants;
 import hu.itsh.gyakorlat.szotar.dictionaries.Database;
 import hu.itsh.gyakorlat.szotar.io.excel.ds.Row;
+import hu.itsh.gyakorlat.szotar.ui.actions.ActionAutoFillForms;
 import net.java.dev.designgridlayout.DesignGridLayout;
 
 public abstract class WindowDbRow extends InternalWindow {
@@ -60,6 +61,10 @@ public abstract class WindowDbRow extends InternalWindow {
 	JTextField fieldForm2;
 	JTextField fieldForm3;
 
+	JButton buttonAutoFill;
+	
+	ActionAutoFillForms actionAutoFillForms;
+	
 	JButton buttonSave;
 
 	DesignGridLayout layoutHelper;

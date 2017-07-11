@@ -28,9 +28,7 @@ import net.java.dev.designgridlayout.Tag;
 
 public class WindowDbAddRow extends WindowDbRow {
 
-	JButton buttonAutoFill;
 	
-	ActionAutoFillForms actionAutoFillForms;
 
 	public WindowDbAddRow() {
 		super();
@@ -105,10 +103,10 @@ public class WindowDbAddRow extends WindowDbRow {
 		fieldWordClass = new JComboBox<String>(SharedConstants.onlineWordClassShortenHun);
 
 		labelLevel = new JLabel("Szint:");
-		fieldLevel = new JTextField();
+		fieldLevel = new JTextField("1");
 
 		labelLang = new JLabel("Nyelv:");
-		fieldLang = new JTextField();
+		fieldLang = new JTextField("a");
 
 		labelForms = new JLabel("Szótári alakok:");
 		fieldForm0 = new JTextField();
@@ -131,6 +129,7 @@ public class WindowDbAddRow extends WindowDbRow {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				System.out.println("MENTES ACTION!");
 				if (fieldLevel.getText().length() < 1 || Util.parseInt(fieldLevel.getText()) == -1) {
 					UIUtil.showErrorDialog("A szint mezo tartalma nem lehet ures, es csak szamot tartalmazhat!");
 					return;

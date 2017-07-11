@@ -28,20 +28,18 @@ public class ActionAddRow extends AbstractAction {
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		if (UIUtil.showYesNoDialog("Biztosan hozzáadja a megadott adatokkal a sort?")) {
-			//int nextID = Database.dict.getRowCount() + 1;
-			//row.setId(nextID);
+			// int nextID = Database.dict.getRowCount() + 1;
+			// row.setId(nextID);
 			row.setTimestamp(SharedConstants.DTF_YYMMDD.format(LocalDate.now()));
-			
-			
-			
+			System.out.println("ACTIONADDROW ROW STATE: " + row);
 			Database.dict.addRow(row);
 			Database.dict.sort();
 			Database.dict.recalculateIDs();
-			
-			
-			
-			ActionMenuDbShow.window.getTableModel().fireTableDataChanged();
-			ActionMenuDbShow.window.getTable().repaint();
+
+			if (ActionMenuDbShow.window != null) {
+				ActionMenuDbShow.window.getTableModel().fireTableDataChanged();
+				ActionMenuDbShow.window.getTable().repaint();
+			}
 
 		}
 	}

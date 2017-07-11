@@ -238,6 +238,16 @@ public class Row implements Comparable<Row>{
 	}
 	
 	
+	public void trim() {
+		this.prefix = prefix.trim();
+		this.word = word.trim();
+		this.suffix = suffix.trim();
+		this.engExplain = engExplain.trim();
+		this.engExample = engExample.trim();
+		this.hun0 = hun0.trim();
+		this.hun1 = hun1.trim();
+	}
+	
 	
 
 }
