@@ -18,15 +18,19 @@ import javax.swing.JTextField;
 
 import hu.itsh.gyakorlat.szotar.SharedConstants;
 import hu.itsh.gyakorlat.szotar.Util;
+import hu.itsh.gyakorlat.szotar.dictionaries.Database;
 import hu.itsh.gyakorlat.szotar.io.excel.ds.Row;
 import hu.itsh.gyakorlat.szotar.spell.SpellChecking;
 import hu.itsh.gyakorlat.szotar.ui.UIUtil;
 import hu.itsh.gyakorlat.szotar.ui.actions.ActionAutoFillForms;
+import hu.itsh.gyakorlat.szotar.ui.actions.ActionMenuDbShow;
 import hu.itsh.gyakorlat.szotar.ui.actions.ActionSaveRowState;
 import net.java.dev.designgridlayout.Tag;
 
 public class WindowDbEditRow extends WindowDbRow {
-
+	
+	private JButton buttonDel;
+	
 	public WindowDbEditRow(Row row) {
 		super(row);
 
@@ -52,7 +56,7 @@ public class WindowDbEditRow extends WindowDbRow {
 		sp.check(fieldForm2);
 		sp.check(fieldForm3);
 
-		layoutHelper.row().bar().add(buttonSave, Tag.OK);
+		layoutHelper.row().bar().add(buttonSave, Tag.OK).add(buttonDel, Tag.CANCEL);
 		setMinimumSize(new Dimension(810, 380));
 		setSize(new Dimension((int) Toolkit.getDefaultToolkit().getScreenSize().getWidth() / 2, 420 ));
 		setVisible(true);
@@ -147,6 +151,22 @@ public class WindowDbEditRow extends WindowDbRow {
 					row.setForm3(Util.escape(fieldForm3.getText()));
 					new ActionSaveRowState(row).actionPerformed(e);
 					WindowDbEditRow.this.dispose();
+				}
+			}
+		});
+		
+		buttonDel = new JButton("Törlés");
+		buttonDel.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Database.dict.removeRow(row.getId()-1);
+				WindowDbEditRow.this.dispose();
+				Database.dict.sort();
+				Database.dict.recalculateIDs();
+				if (ActionMenuDbShow.window != null) {
+					ActionMenuDbShow.window.getTableModel().fireTableDataChanged();
+					ActionMenuDbShow.window.getTable().repaint();
 				}
 			}
 		});
