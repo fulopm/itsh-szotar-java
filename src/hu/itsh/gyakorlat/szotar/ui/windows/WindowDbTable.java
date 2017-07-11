@@ -2,14 +2,18 @@ package hu.itsh.gyakorlat.szotar.ui.windows;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
+import javax.swing.Box;
 import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JLabel;
@@ -30,7 +34,6 @@ import hu.itsh.gyakorlat.szotar.SharedConstants;
 import hu.itsh.gyakorlat.szotar.dictionaries.Database;
 import hu.itsh.gyakorlat.szotar.ui.ds.DatabaseTableModel;
 import hu.itsh.gyakorlat.szotar.ui.listeners.DbTableMouseAdapter;
-import net.java.balloontip.BalloonTip;
 
 public class WindowDbTable extends InternalWindow implements ChangeListener {
 
@@ -38,7 +41,6 @@ public class WindowDbTable extends InternalWindow implements ChangeListener {
 	DatabaseTableModel tableModel;
 	TableRowSorter tableSorter;
 	JTextField fieldSearch;
-	BalloonTip fieldSearchBalloon;
 
 	JPopupMenu fieldSearchMenu;
 	JLabel fieldSearchMenuLanguage;
@@ -73,14 +75,12 @@ public class WindowDbTable extends InternalWindow implements ChangeListener {
 
 	void initComponents() {
 
-		fieldSearch = new JTextField();
+		fieldSearch = new JTextField(50);
 
-		fieldSearch.setToolTipText("Keresés");
-		fieldSearchBalloon = new BalloonTip(fieldSearch,
-				"Kattintson a mezore jobb klikkel, ha szeretne modositani hogy mely mezokben keressunk!");
+		fieldSearch.setToolTipText("Kattintson jobb gombbal a keresesi feltetelek megvaltoztatasahoz!");
 		fieldSearchMenu = new JPopupMenu();
 
-		fieldSearchMenuLanguage = new JLabel("Keresési nyelv:");
+		fieldSearchMenuLanguage = new JLabel("	Keresési nyelv:");
 
 		fieldSearchMenuLangEng = new JRadioButtonMenuItem("Angol");
 		fieldSearchMenuLangEng.setSelected(true);
@@ -93,7 +93,7 @@ public class WindowDbTable extends InternalWindow implements ChangeListener {
 		languageButtonGroup.add(fieldSearchMenuLangEng);
 		languageButtonGroup.add(fieldSearchMenuLangHun);
 
-		fieldSearchMenuTitle = new JLabel("Keresés a következő mezőkben:");
+		fieldSearchMenuTitle = new JLabel("	Keresés a következő mezőkben:");
 		fieldSearchMenuExplainAndExample = new JCheckBoxMenuItem("Magyarázat és példa");
 		fieldSearchMenuExplainAndExample.addChangeListener(this);
 		fieldSearchMenuForms = new JCheckBoxMenuItem("Szótári alakokban");
@@ -108,6 +108,7 @@ public class WindowDbTable extends InternalWindow implements ChangeListener {
 		fieldSearchMenu.add(fieldSearchMenuForms);
 
 		fieldSearch.setComponentPopupMenu(fieldSearchMenu);
+		fieldSearch.setBounds(0, 0, 100, 15);
 
 		tableModel = new DatabaseTableModel(Database.dict);
 		tableSorter = new TableRowSorter<DatabaseTableModel>(tableModel);
@@ -126,6 +127,10 @@ public class WindowDbTable extends InternalWindow implements ChangeListener {
 		});
 
 		buttonAddWord = new JButton("H.ad");
+		buttonAddWord.setBounds(120, 0, 70, 10);
+		try {
+			buttonAddWord.setIcon(new ImageIcon(ImageIO.read(new File("add.png"))));
+		} catch (IOException e1) {}
 		buttonAddWord.addActionListener(new ActionListener() {
 
 			@Override
@@ -135,10 +140,15 @@ public class WindowDbTable extends InternalWindow implements ChangeListener {
 				mainContentPane.cascade();
 			}
 		});
+		
+		
+		
 
-		panelUserActions = new JPanel(new GridLayout(1, 2));
+		panelUserActions = new JPanel();
 		panelUserActions.add(fieldSearch);
 		panelUserActions.add(buttonAddWord);
+
+		
 
 	}
 
