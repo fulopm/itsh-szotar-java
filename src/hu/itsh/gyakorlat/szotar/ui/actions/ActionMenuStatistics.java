@@ -25,7 +25,7 @@ public class ActionMenuStatistics extends AbstractAction{
 		
 		
 		WindowStatistics ws = new WindowStatistics(statType, statSelection, "Statisztika");
-		panel.add(ws);
+		panel.addInternalWindow(ws);
 	}
 
 }

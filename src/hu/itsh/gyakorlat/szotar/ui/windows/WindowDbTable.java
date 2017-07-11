@@ -132,7 +132,7 @@ public class WindowDbTable extends InternalWindow implements ChangeListener {
 			public void actionPerformed(ActionEvent e) {
 				WindowDbAddRow addRowWindow = new WindowDbAddRow(fieldSearch.getText());
 				mainContentPane.add(addRowWindow);
-				mainContentPane.cascade();
+				//mainContentPane.cascade();
 			}
 		});
 

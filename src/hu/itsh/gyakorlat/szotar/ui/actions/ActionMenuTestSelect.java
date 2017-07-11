@@ -20,7 +20,7 @@ public class ActionMenuTestSelect extends AbstractAction{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		WindowTestSelection st = new WindowTestSelection();
-		parent.add(st);
+		parent.addInternalWindow(st);
 	}
 
 }

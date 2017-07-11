@@ -35,7 +35,7 @@ public class DbTableMouseAdapter extends MouseAdapter {
 			WindowDbEditRow editWindow = new WindowDbEditRow(Database.dict.searchByID(id));
 			if (!Arrays.asList(InternalWindow.mainContentPane.getAllFrames()).contains(editWindow)) {
 				InternalWindow.mainContentPane.add(editWindow);
-				InternalWindow.mainContentPane.cascade();
+				//InternalWindow.mainContentPane.cascade();
 			}
 
 		}

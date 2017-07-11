@@ -22,7 +22,6 @@ public class ActionSaveDb extends AbstractAction {
 	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-			System.out.println("a");
 //			Database.dict.recalculateIDs();
 //			ActionMenuDbShow.window.getTableModel().fireTableDataChanged();
 //			ActionMenuDbShow.window.getTable().repaint();

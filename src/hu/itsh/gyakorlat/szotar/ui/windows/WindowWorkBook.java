@@ -111,7 +111,7 @@ public class WindowWorkBook extends InternalWindow
 										if (!od.isEmpty)
 										{
 											results = new WindowOnlineResult(od.words);
-											mainContentPane.add(results);
+											mainContentPane.addInternalWindow(results);
 										}
 										else
 										{

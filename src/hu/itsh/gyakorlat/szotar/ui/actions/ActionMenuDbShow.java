@@ -30,14 +30,14 @@ public class ActionMenuDbShow extends AbstractAction {
 		}
 		if (window == null) {
 			window = new WindowDbTable();
-			parent.add(window);
-			parent.cascade();
+			parent.addInternalWindow(window);
+			//parent.cascade();
 		} else {
 			window.dispose();
 			parent.remove(window);
 			window = new WindowDbTable();
-			parent.add(window);
-			parent.cascade();
+			parent.addInternalWindow(window);
+			//parent.cascade();
 		}
 
 	}

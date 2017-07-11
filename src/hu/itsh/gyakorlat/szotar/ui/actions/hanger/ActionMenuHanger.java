@@ -19,7 +19,7 @@ public class ActionMenuHanger extends AbstractAction
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		parent.add(new WindowHanger());
+		parent.addInternalWindow(new WindowHanger());
 		
 	}
 	

@@ -30,7 +30,7 @@ public class ActionMenuTestType extends AbstractAction {
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		WindowTestRead tf = new WindowTestRead();
-		parent.add(tf);
+		parent.addInternalWindow(tf);
 	
 		
 
