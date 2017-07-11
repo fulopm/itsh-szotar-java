@@ -17,6 +17,7 @@ public class OnlineDictionary
 	public static final int HUNGARIAN = 2;
 	
 	public ArrayList<String> meanings;
+	public boolean isEmpty;
 	private String sourceWord;
 	private String wordClass;
 	
@@ -59,19 +60,16 @@ public class OnlineDictionary
 	        			meanings.add(wd.text());
 	        		}
 	        		
-	        	}       	words.add(new OnlineWord(sourceWord, wordClass, meanings.toArray()));
+	        	}       	
+	        	words.add(new OnlineWord(sourceWord, wordClass, meanings.toArray()));
 	        	meanings.clear();
 	        	j++;
         	}
         	catch (Exception e)
         	{
-        		UIUtil.showErrorDialog("Nem talaltam semmit online!");;
+        		isEmpty = true;
         	}
         	
-        }
-        for (OnlineWord wd : words)
-        {
-			System.out.println("szo: "+wd.getWordClass()+"\nszofaj: "+wd.getSourceWord()+"\nwords: " + wd.meaningsToString() + "\n----------------------------------");
         }
 
     	

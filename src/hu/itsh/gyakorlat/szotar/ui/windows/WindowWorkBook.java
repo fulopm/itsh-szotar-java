@@ -7,6 +7,8 @@ import java.awt.Cursor;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -17,6 +19,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
+import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
 
 import org.jsoup.nodes.Element;
@@ -27,6 +30,7 @@ import hu.itsh.gyakorlat.szotar.dictionaries.OnlineDictionary;
 import hu.itsh.gyakorlat.szotar.dictionaries.OnlineWord;
 import hu.itsh.gyakorlat.szotar.io.excel.ds.Row;
 import hu.itsh.gyakorlat.szotar.io.user.WordBook;
+import hu.itsh.gyakorlat.szotar.ui.PleaseWaitDialog;
 import hu.itsh.gyakorlat.szotar.ui.UIUtil;
 import net.java.dev.designgridlayout.DesignGridLayout;
 
@@ -93,20 +97,65 @@ public class WindowWorkBook extends InternalWindow
 					{
 						case (JOptionPane.YES_OPTION):
 							
-						try
-						{
-							onlineWords = new ArrayList<>();
+						//try
+						//{
+							PleaseWaitDialog dialog = new PleaseWaitDialog();
+							SwingWorker<Void, Void> mySwingWorker = new SwingWorker<Void, Void>() {
+								@Override
+								protected Void doInBackground()
+								{
+									try
+									{
+										onlineWords = new ArrayList<>();
+										od = new OnlineDictionary(tableModel.getValueAt(row, col).toString(), OnlineDictionary.ENGLISH);
+										if (!od.isEmpty)
+										{
+											results = new WindowOnlineResult(od.words);
+											mainContentPane.add(results);
+										}
+										else
+										{
+											dialog.setVisible(false);
+							        		UIUtil.showErrorDialog("Nem talaltam semmit online!");
+										}
+									} catch (IOException e)
+									{
+										dialog.setVisible(false);
+										UIUtil.showErrorDialog("Nem sikerult csatlakozni az internethez.");
+									}
+									
+									return null;
+								}
+							};
+
+							mySwingWorker.addPropertyChangeListener(new PropertyChangeListener() {
+
+								@Override
+								public void propertyChange(PropertyChangeEvent evt) {
+									if (evt.getPropertyName().equals("state")) {
+										if (evt.getNewValue() == SwingWorker.StateValue.DONE) {
+											dialog.dispose();
+											
+										}
+									}
+								}
+							});
+
+						mySwingWorker.execute();
+						dialog.setVisible(true);
+							
+							/*onlineWords = new ArrayList<>();
 							od = new OnlineDictionary(tableModel.getValueAt(row, col).toString(), OnlineDictionary.ENGLISH);
 							results = new WindowOnlineResult(od.words);
-							mainContentPane.add(results);
+							mainContentPane.add(results);*/
 							
 							
 							
-						} catch (IOException e1)
-						{
-							JOptionPane.showInternalMessageDialog(contentPane, "Nem sikerult csatlakozni az internethez.");
-							contentPane.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-						}
+						//} catch (IOException e1)
+						//{
+						//	JOptionPane.showInternalMessageDialog(contentPane, "Nem sikerult csatlakozni az internethez.");
+						//	contentPane.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+						//}
 						break;
 						case (JOptionPane.NO_OPTION):
 							WindowDbAddRow addRow = new WindowDbAddRow(tableModel.getValueAt(row, col).toString());
