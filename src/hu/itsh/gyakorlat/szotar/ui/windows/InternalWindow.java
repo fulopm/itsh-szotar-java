@@ -1,6 +1,7 @@
 package hu.itsh.gyakorlat.szotar.ui.windows;
 
 import java.awt.LayoutManager;
+import java.beans.PropertyVetoException;
 
 import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
@@ -17,7 +18,6 @@ public abstract class InternalWindow extends JInternalFrame {
 		super(title, true, true, true, true);
 		contentPane = (JPanel) this.getContentPane();
 		setContentPane(contentPane);
-		
 	}
 	
 	public InternalWindow(String title, LayoutManager layout) {
@@ -31,6 +31,5 @@ public abstract class InternalWindow extends JInternalFrame {
 		super(title, true, true, true, true);
 		this.contentPane = contentPane;
 		setContentPane(contentPane);
-
 	}
 }
