@@ -51,6 +51,14 @@ public class Util {
 		if (string.length() == 0) return "\0";
 		return string.substring(string.length()-2, string.length());
 	}
+	public static String lastThree(String string) {
+		if (string.length() == 0) return "\0";
+		return string.substring(string.length()-3, string.length());
+	}
+	
+	public static boolean isVowel(char c) {
+		  return "AEIOUaeiou".indexOf(c) != -1;
+		}
 	
 }
  
