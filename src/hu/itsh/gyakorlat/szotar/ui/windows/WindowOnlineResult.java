@@ -58,7 +58,7 @@ public class WindowOnlineResult extends InternalWindow implements ActionListener
 		
 		for (int i = 0; i < words.size(); i++)
 		{
-			resultSel.add(new JRadioButton(words.get(i).getWordClass() + " " + words.get(i).getSourceWord() + ": " + words.get(i).meaningsToString()));
+			resultSel.add(new JRadioButton("[" + words.get(i).getWordClass() + "] " + words.get(i).getSourceWord() + ": " + words.get(i).meaningsToString()));
 		}
 		close = new JButton("Bezaras");	
 		close.addActionListener(new ActionListener()
