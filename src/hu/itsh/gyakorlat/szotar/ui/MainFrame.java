@@ -208,7 +208,7 @@ public class MainFrame extends JFrame {
 		            x2 = canvasWidth + x1;
 		            y2 = canvasHeight + y1;
 		        }
-		        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		        g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
 		        g.drawImage(image, x1, y1, x2, y2, 0, 0, imgWidth, imgHeight, null);
 		}
 
