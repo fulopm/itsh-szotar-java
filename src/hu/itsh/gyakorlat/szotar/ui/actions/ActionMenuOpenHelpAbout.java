@@ -19,7 +19,7 @@ public class ActionMenuOpenHelpAbout extends AbstractAction{
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		parent.add(new WindowHelpAbout());
+		parent.addInternalWindow(new WindowHelpAbout());
 		
 	}
 

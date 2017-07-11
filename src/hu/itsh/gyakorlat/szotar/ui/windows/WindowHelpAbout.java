@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.beans.PropertyChangeListener;
+import java.beans.PropertyVetoException;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -29,6 +30,7 @@ public class WindowHelpAbout extends InternalWindow {
 		
 		contentPane.add(labelAppTitle);
 		contentPane.add(fieldCredits);
+		
 		pack();
 		setVisible(true);
 

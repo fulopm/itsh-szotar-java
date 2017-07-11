@@ -20,7 +20,7 @@ public class ActionMenuTranslate extends AbstractAction
 	public void actionPerformed(ActionEvent arg0)
 	{
 		WindowWorkBook wb = new WindowWorkBook();
-		parent.add(wb);
+		parent.addInternalWindow(wb);
 		
 	}
 
