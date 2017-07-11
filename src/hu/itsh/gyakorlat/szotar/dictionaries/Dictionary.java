@@ -3,7 +3,6 @@ package hu.itsh.gyakorlat.szotar.dictionaries;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Iterator;
 import java.util.List;
 
 import hu.itsh.gyakorlat.szotar.io.excel.ds.Row;
@@ -25,6 +24,7 @@ public class Dictionary {
 	}
 	
 	public boolean addRow(Row e) {
+		e.trim();
 		return this.rows.add(e);
 	}
 
@@ -77,6 +77,7 @@ public class Dictionary {
 	}
 
 	public void setRow(int index, Row newRow) {
+		newRow.trim();
 		rows.set(index, newRow);
 	}
 

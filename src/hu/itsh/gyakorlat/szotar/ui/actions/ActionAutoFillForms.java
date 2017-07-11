@@ -60,8 +60,6 @@ public class ActionAutoFillForms extends AbstractAction {
 	public void actionPerformed(ActionEvent arg0) {
 		this.word = wordField.getText();
 		this.wordClass =(String) wordClassComboBox.getSelectedItem();
-		System.out.println(word);
-		System.out.println(wordClass);
 		switch (wordClass) {
 		case "főnév":
 			boolean ES = lastOne(word) == 's' || lastTwo(word).equals("sh") || lastTwo(word).equals("ch")
@@ -71,14 +69,6 @@ public class ActionAutoFillForms extends AbstractAction {
 				return;
 			}
 
-			/*
-			 * boolean YS = lastTwo(word).equals("ay") ||
-			 * lastTwo(word).equals("ey") || lastTwo(word).equals("oy");
-			 * 
-			 * if (YS) {
-			 * 
-			 * }
-			 */
 
 			boolean IES = lastOne(word) == 'y' && !lastTwo(word).equals("ay") && !lastTwo(word).equals("ey")
 					&& !lastTwo(word).equals("oy");
@@ -88,8 +78,6 @@ public class ActionAutoFillForms extends AbstractAction {
 			}
 
 			boolean VES = lastOne(word) == 'f' || lastTwo(word).equals("fe");
-			System.out.println(lastOne(word));
-			System.out.println(lastTwo(word));
 
 			if (VES) {
 				if (lastOne(word) == 'f')

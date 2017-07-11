@@ -1,10 +1,15 @@
 package hu.itsh.gyakorlat.szotar.ui.windows;
 
 import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -16,6 +21,7 @@ import hu.itsh.gyakorlat.szotar.Util;
 import hu.itsh.gyakorlat.szotar.io.excel.ds.Row;
 import hu.itsh.gyakorlat.szotar.spell.SpellChecking;
 import hu.itsh.gyakorlat.szotar.ui.UIUtil;
+import hu.itsh.gyakorlat.szotar.ui.actions.ActionAutoFillForms;
 import hu.itsh.gyakorlat.szotar.ui.actions.ActionSaveRowState;
 import net.java.dev.designgridlayout.Tag;
 
@@ -33,7 +39,7 @@ public class WindowDbEditRow extends WindowDbRow {
 		layoutHelper.row().grid(labelWordClass).add(fieldWordClass);
 		layoutHelper.row().grid(labelLevel).add(fieldLevel);
 		layoutHelper.row().grid(labelLang).add(fieldLang);
-		layoutHelper.row().grid(labelForms).add(fieldForm0).add(fieldForm1).add(fieldForm2).add(fieldForm3);
+		layoutHelper.row().grid(labelForms).add(fieldForm0).add(fieldForm1).add(fieldForm2).add(fieldForm3).add(buttonAutoFill);
 
 		SpellChecking sp = new SpellChecking();
 		sp.check(fieldPrefix);
@@ -48,7 +54,7 @@ public class WindowDbEditRow extends WindowDbRow {
 
 		layoutHelper.row().bar().add(buttonSave, Tag.OK);
 		setMinimumSize(new Dimension(810, 380));
-		setSize(810, 410);
+		setSize(new Dimension((int) Toolkit.getDefaultToolkit().getScreenSize().getWidth() / 2, 420 ));
 		setVisible(true);
 
 	}
@@ -100,6 +106,16 @@ public class WindowDbEditRow extends WindowDbRow {
 		fieldForm2 = new JTextField(row.getForm2());
 		fieldForm3 = new JTextField(row.getForm3());
 
+		buttonAutoFill = new JButton("Automatikus kitoltes");
+		actionAutoFillForms = new ActionAutoFillForms(fieldWord, fieldWordClass, fieldForm0, fieldForm1, fieldForm2, fieldForm3);
+		buttonAutoFill.setAction(actionAutoFillForms);
+		try {
+			buttonAutoFill.setIcon(new ImageIcon(ImageIO.read(new File("pencil.png"))));
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+		
+		
 		buttonSave = new JButton("Mentés");
 		// buttonSave.setAction(new ActionSaveRowState(row));
 		buttonSave.addActionListener(new ActionListener() {
