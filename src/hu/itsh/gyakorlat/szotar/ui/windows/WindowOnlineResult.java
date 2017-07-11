@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 
 import hu.itsh.gyakorlat.szotar.dictionaries.OnlineWord;
+import hu.itsh.gyakorlat.szotar.ui.actions.ActionAddRow;
 import net.java.dev.designgridlayout.DesignGridLayout;
 
 public class WindowOnlineResult extends InternalWindow implements ActionListener
@@ -72,16 +73,19 @@ public class WindowOnlineResult extends InternalWindow implements ActionListener
 		addDict = new JButton("Hozzaadas a szotarhoz");
 		addDict.addActionListener(new ActionListener()
 		{
+			
+			
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
 				dispose();
-				WindowDbAddRow addR = new WindowDbAddRow();
+				WindowDbAddRow addR = new WindowDbAddRow();			
 				mainContentPane.add(addR);
 				addR.fieldWord.setText(words.get(selected).getSourceWord());
 				addR.fieldHun0.setText(words.get(selected).meaningsToString());
 				addR.fieldWordClass.setSelectedItem(words.get(selected).getWordClass());
+				
 				
 			}});
 		addDict.setEnabled(false);
