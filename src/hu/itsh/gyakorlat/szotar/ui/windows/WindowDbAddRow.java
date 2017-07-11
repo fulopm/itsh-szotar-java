@@ -125,6 +125,11 @@ public class WindowDbAddRow extends WindowDbRow {
 		
 
 		buttonSave = new JButton("Mentés");
+		try {
+			buttonSave.setIcon(new ImageIcon(ImageIO.read(new File("tick.png"))));
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
 		buttonSave.addActionListener(new ActionListener() {
 
 			@Override

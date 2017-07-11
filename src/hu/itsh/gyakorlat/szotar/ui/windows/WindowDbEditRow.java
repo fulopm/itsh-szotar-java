@@ -121,7 +121,11 @@ public class WindowDbEditRow extends WindowDbRow {
 		
 		
 		buttonSave = new JButton("Mentés");
-		// buttonSave.setAction(new ActionSaveRowState(row));
+		try {
+			buttonSave.setIcon(new ImageIcon(ImageIO.read(new File("tick.png"))));
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
 		buttonSave.addActionListener(new ActionListener() {
 
 			@Override
@@ -156,6 +160,11 @@ public class WindowDbEditRow extends WindowDbRow {
 		});
 		
 		buttonDel = new JButton("Törlés");
+		try {
+			buttonDel.setIcon(new ImageIcon(ImageIO.read(new File("x.png"))));
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
 		buttonDel.addActionListener(new ActionListener() {
 			
 			@Override
