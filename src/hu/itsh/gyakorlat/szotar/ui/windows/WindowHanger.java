@@ -191,11 +191,12 @@ public class WindowHanger extends InternalWindow implements ActionListener {
 	private void startGame() {
 		hangObjects.clear();
 		panelHang.repaint();
+		boolean isAbrdigment = true;
 		String gen_word = "";
 		do {
 			gen_word = Database.dict.getRow((int) new Random().nextInt(Database.dict.getRowCount()) + 1).getWord();
 			System.out.println("GENERATED WORD: " + gen_word);
-		} while (gen_word.length() >= 20);
+		} while (gen_word.length() >= 20 || gen_word.length() <= 4);
 
 		game = new Hanger(gen_word.replaceAll("[-+.^:,?!()/]", ""));
 		labelWord.setText(game.toHidden());
