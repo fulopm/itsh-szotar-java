@@ -12,11 +12,13 @@ public class Hanger
 {
 	String word;
 	String modifiedWord;
+	String wordMeaning;
 	private final String WORD_SEPARATOR = "     ";
 	
-	public Hanger(String word)
+	public Hanger(String word, String wordMeaning)
 	{
 		this.word = word;
+		this.wordMeaning = wordMeaning;
 		StringBuilder modifiedStringBuilder = new StringBuilder();
 		for (char c : toCharArray())
 		{
@@ -27,6 +29,8 @@ public class Hanger
 				
 		}
 		modifiedWord = modifiedStringBuilder.toString();
+		
+		
 	}
 	
 	public char[] toCharArray()
@@ -36,6 +40,10 @@ public class Hanger
 	
 	public String getWord() {
 		return word;
+	}
+	
+	public String getWordMeaning() {
+		return this.wordMeaning;
 	}
 	
 	public int getWordLength()
