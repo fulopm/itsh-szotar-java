@@ -28,7 +28,6 @@ public class OnlineDictionary
     {
     	words = new ArrayList<>();
     	
-    	System.out.println("TEST");
         Document doc = Jsoup.connect("http://en.bab.la/dictionary/" + (destLanguage == 1 ? "english-hungarian" : "hungarian-english") + "/" + word).get();
        // Elements content = doc.getElementsByClass("quick-results container");
         Element content = doc.select("div.quick-results.container").first(); // DO NOT TOUCH

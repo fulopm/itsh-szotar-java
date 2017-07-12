@@ -21,10 +21,10 @@ public class WordBook
 		}
 		sortedWords.sort(String.CASE_INSENSITIVE_ORDER);
 		
-		for (String word : sortedWords)
+		/*for (String word : sortedWords)
 		{
 			System.out.println("szo: " + word);
-		}
+		}*/
 		
 		return sortedWords;
 	}

@@ -60,13 +60,10 @@ public class WindowOnlineResult extends InternalWindow implements ActionListener
 		
 		for (int i = 0; i < words.size(); i++)
 		{
-			
-			//sb.append(words.get(i).meaningsToString());
 			for (char c : words.get(i).meaningsToString().toCharArray())
 			{
 				if (c == '/')
 				{
-					//sb.append(c);
 					perCounter++;
 				}
 				if (perCounter  >= 8)
