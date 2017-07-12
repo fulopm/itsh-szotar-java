@@ -126,7 +126,7 @@ public class WindowDbTable extends InternalWindow implements ChangeListener {
 
 		});
 
-		buttonAddWord = new JButton("H.ad");
+		buttonAddWord = new JButton("Hozzáadás");
 		buttonAddWord.setBounds(120, 0, 70, 10);
 		try {
 			buttonAddWord.setIcon(new ImageIcon(ImageIO.read(new File("add.png"))));
