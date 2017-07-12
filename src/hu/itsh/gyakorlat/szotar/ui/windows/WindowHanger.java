@@ -14,6 +14,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -166,7 +167,7 @@ public class WindowHanger extends InternalWindow implements ActionListener {
 				} else {
 					hangObjects.add(body[9]);
 					panelHang.repaint();
-					UIUtil.showErrorDialog("<html>Vesztettél!<br>Ez volt a szó: <b>" +game.getWord()+"</b></html>" );
+					UIUtil.showInformationDialog("<html>Sajnos vesztettél!<br>Ez volt a szó: <b>" +game.getWord()+"</b><br>Jelentése: "+game.getWordMeaning()+"</html>" );
 					for (JButton btn : abcButtons)
 						btn.setEnabled(false);
 
@@ -184,7 +185,7 @@ public class WindowHanger extends InternalWindow implements ActionListener {
 				for (JButton btn : abcButtons)
 					btn.setEnabled(false);
 				
-				JOptionPane.showInternalMessageDialog(InternalWindow.mainContentPane, "Gratulalok, kitalaltad!");
+				UIUtil.showInformationDialog("<html>Gratulálok, kitaláltad!<br>Ez volt a szó: <b>" +game.getWord()+"</b><br>Jelentése: "+game.getWordMeaning()+"</html>" );
 			}
 		}
 	}
@@ -193,13 +194,21 @@ public class WindowHanger extends InternalWindow implements ActionListener {
 		hangObjects.clear();
 		panelHang.repaint();
 		boolean isAbrdigment = true;
-		String gen_word = "";
+		String wordGenerated = "";
+		String wordMeaning;
+		int randIndex = ThreadLocalRandom.current().nextInt(Database.dict.getRowCount()+1);
 		do {
-			gen_word = Database.dict.getRow((int) new Random().nextInt(Database.dict.getRowCount()) + 1).getWord();
-			System.out.println("GENERATED WORD: " + gen_word);
-		} while (gen_word.length() >= 20 || gen_word.length() <= 4);
+			
+			wordGenerated = Database.dict.getRow(randIndex).getWord();
+			wordMeaning = Database.dict.getRow(randIndex).getHun0();
+			System.out.println("GENERATED WORD: " + wordGenerated);
+			
+			randIndex = ThreadLocalRandom.current().nextInt(Database.dict.getRowCount()+1);
+		} while (wordGenerated.length() >= 20 || wordGenerated.length() <= 4);
 
-		game = new Hanger(gen_word.replaceAll("[-+.^:,?!()/]", ""));
+		
+		
+		game = new Hanger(wordGenerated.replaceAll("[-+.^:,?!()/]", ""), wordMeaning);
 		labelWord.setText(game.toHidden());
 		labelWord.setHorizontalAlignment(JLabel.CENTER);
 		labelWord.setVerticalAlignment(JLabel.CENTER);
