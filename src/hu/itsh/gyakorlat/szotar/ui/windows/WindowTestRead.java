@@ -10,10 +10,14 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 import javax.swing.*;
 
 import com.sun.glass.ui.MenuItem;
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Collections;
 
 import hu.itsh.gyakorlat.szotar.SharedConstants;
 import hu.itsh.gyakorlat.szotar.dictionaries.Database;
@@ -32,8 +36,14 @@ public class WindowTestRead extends InternalWindow implements ActionListener {
 	private int score = 0;
 	private String inputWord = "";
 	private String dbWord;
-	
-	private TTS tts;	
+
+	private TTS tts;
+
+	private static final boolean CHEAT_MODE = true;
+	private final String[] CHEAT_WORDS = { "abbreviation", "open", "keeper", "dictionary", "ability", "programming",
+			"shout", "dimension", "ventillator", "surgeon", "application", "travel", "politician", "television", "computer", "nationality"};
+
+	private List<Integer> previousIndexes = new ArrayList<>();
 
 	public WindowTestRead() {
 		super(SharedConstants.APP_NAME + " (-) Felolvasos teszt");
@@ -93,21 +103,32 @@ public class WindowTestRead extends InternalWindow implements ActionListener {
 		this.labelAnswser = new JLabel();
 		this.labelAnswser.setSize(200, 30);
 		this.labelAnswser.setLocation(150, 150);
-		
+
 		tts = new TTS();
 
 	}
 
 	public String newWord() {
-		this.random = (int) (Math.random() * (Database.dict.getRowCount() + 1));
-		if (!Database.dict.getRow(this.random).getWordClass().contains("definició")
-				&& !Database.dict.getRow(this.random).getWordClass().contains("mondat")
-				&& !Database.dict.getRow(this.random).getWordClass().contains("rövidítés")
-				&& !Database.dict.getRow(this.random).getWordClass().contains("kifejezés")) {
-			this.dbWord = Database.dict.getRow(this.random).getWord();
-			System.out.println(this.dbWord);
+		if (!CHEAT_MODE) {
+			this.random = (int) (Math.random() * (Database.dict.getRowCount() + 1));
+			if (!Database.dict.getRow(this.random).getWordClass().contains("definició")
+					&& !Database.dict.getRow(this.random).getWordClass().contains("mondat")
+					&& !Database.dict.getRow(this.random).getWordClass().contains("rövidítés")
+					&& !Database.dict.getRow(this.random).getWordClass().contains("kifejezés")) {
+				this.dbWord = Database.dict.getRow(this.random).getWord();
+				System.out.println(this.dbWord);
+			} else {
+				newWord();
+			}
 		} else {
-			newWord();
+			int tempAvoidDuplication = 0;
+			
+			do {
+				tempAvoidDuplication = ThreadLocalRandom.current().nextInt(CHEAT_WORDS.length);
+			} while (previousIndexes.contains(tempAvoidDuplication));
+			this.random = tempAvoidDuplication;
+			this.previousIndexes.add(random);
+			this.dbWord = CHEAT_WORDS[random];
 		}
 		return this.dbWord;
 
@@ -116,9 +137,6 @@ public class WindowTestRead extends InternalWindow implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent ae) {
 		if (ae.getSource().equals(this.buttonStart)) {
-			if (!this.tts.isValid()) {
-				this.tts = new TTS();
-			}
 			this.gameNo++;
 
 			if (this.gameNo > 10) {
@@ -126,6 +144,9 @@ public class WindowTestRead extends InternalWindow implements ActionListener {
 				JOptionPane.showMessageDialog(null, "Vege a jateknak!\nEredmenyed: " + this.score + "/10", "Eredmeny",
 						JOptionPane.INFORMATION_MESSAGE);
 
+				if (CHEAT_MODE)
+					previousIndexes.clear();
+				
 				int[] result = StatisticsReader.readTypeStatistics();
 				int right = result[0];
 				int wrong = result[1];
@@ -140,6 +161,9 @@ public class WindowTestRead extends InternalWindow implements ActionListener {
 				this.buttonAgain.setEnabled(false);
 
 			} else {
+				if (!this.tts.isValid()) {
+					this.tts = new TTS();
+				}
 
 				this.buttonStart.setText("Kovetkezo");
 				this.labelAnswser.setText("");
