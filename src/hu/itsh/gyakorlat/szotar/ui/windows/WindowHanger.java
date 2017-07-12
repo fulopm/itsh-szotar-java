@@ -183,6 +183,7 @@ public class WindowHanger extends InternalWindow implements ActionListener {
 			if (game.checkWord(labelWord.getText())) {
 				for (JButton btn : abcButtons)
 					btn.setEnabled(false);
+				
 				JOptionPane.showInternalMessageDialog(InternalWindow.mainContentPane, "Gratulalok, kitalaltad!");
 			}
 		}
