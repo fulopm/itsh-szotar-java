@@ -32,6 +32,8 @@ public class WindowTestRead extends InternalWindow implements ActionListener {
 	private int score = 0;
 	private String inputWord = "";
 	private String dbWord;
+	
+	private TTS tts;	
 
 	public WindowTestRead() {
 		super(SharedConstants.APP_NAME + " (-) Felolvasos teszt");
@@ -91,6 +93,8 @@ public class WindowTestRead extends InternalWindow implements ActionListener {
 		this.labelAnswser = new JLabel();
 		this.labelAnswser.setSize(200, 30);
 		this.labelAnswser.setLocation(150, 150);
+		
+		tts = new TTS();
 
 	}
 
@@ -112,9 +116,13 @@ public class WindowTestRead extends InternalWindow implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent ae) {
 		if (ae.getSource().equals(this.buttonStart)) {
+			if (!this.tts.isValid()) {
+				this.tts = new TTS();
+			}
 			this.gameNo++;
 
 			if (this.gameNo > 10) {
+				this.tts.deallocate();
 				JOptionPane.showMessageDialog(null, "Vege a jateknak!\nEredmenyed: " + this.score + "/10", "Eredmeny",
 						JOptionPane.INFORMATION_MESSAGE);
 
@@ -142,10 +150,10 @@ public class WindowTestRead extends InternalWindow implements ActionListener {
 				this.textEnglishWord.requestFocus();
 				this.labelCheck.setText(this.gameNo + "/10");
 
-				new TTS(newWord());
+				this.tts.speak(newWord());
 			}
 		} else if (ae.getSource().equals(this.buttonAgain)) {
-			new TTS(this.dbWord);
+			this.tts.speak(this.dbWord);
 		} else if (ae.getSource().equals(this.buttonCheck)) {
 			this.inputWord = this.textEnglishWord.getText();
 
