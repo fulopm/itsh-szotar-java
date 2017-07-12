@@ -97,7 +97,15 @@ public class WindowOnlineResult extends InternalWindow implements ActionListener
 				dispose();
 				WindowDbAddRow addR = new WindowDbAddRow();			
 				mainContentPane.addInternalWindow(addR);
-				addR.fieldWord.setText(words.get(selected).getSourceWord());
+				if (words.get(selected).getSourceWord().trim().split("\\s+").length > 1)
+				{
+					addR.fieldPrefix.setText(words.get(selected).getSourceWord().trim().split("\\s+")[0]);
+					System.out.println("SPLIT " + words.get(selected).getSourceWord().split("\\s+")[0]);
+					addR.fieldWord.setText(words.get(selected).getSourceWord().trim().split("\\s+")[1]);
+					System.out.println("SPLIT " + words.get(selected).getSourceWord().trim().split("\\s+")[1]);
+				}
+				else
+					addR.fieldWord.setText(words.get(selected).getSourceWord());
 				addR.fieldHun0.setText(words.get(selected).meaningsToString());
 				addR.fieldWordClass.setSelectedItem(words.get(selected).getWordClass());
 				
