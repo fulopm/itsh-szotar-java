@@ -17,5 +17,6 @@ A fejlesztésben részt vettek / Participants through the development process:
 * Fülöp Márk (developer)
 * Gaál Csaba (tester)
 * Pusztai Csaba (tester)
+* Major Csaba (tester)
 * és a kávégép/and the coffee machine
 
