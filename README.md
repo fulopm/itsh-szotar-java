@@ -1,7 +1,7 @@
 # NGP
 Nyelvtanulást segítő szótár program. Készült az IT Services Hungary által szervezett szakmai gyakorlaton, 4 hét alatt, 2017-ben.
 
-###### This application is intended to help you learning foreign words. Made by 4 high school students, under our summer vocational practice at IT Services Hungary Kft (which is a subsidiary company of Deutsche Telekom AG) in 2017.
+###### This application is intended to help you learning foreign words. Made by 4 high school students, under our summer vocational practice at IT Services Hungary Kft (which is a subsidiary company of Deutsche Telekom AG and the biggest ICT employer of Hungary) in 2017.
 
 Habár az alkalmazás tesztelve lett, és működik, az IT Services Hungary Kft. és a készítők sem vállalnak semmilyen felelősséget az alkalmazás működésért.
 
